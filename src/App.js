@@ -1,10 +1,10 @@
-import './App.css';
+import {Typography} from "./design-system"
 
 function App() {
   return (
-    <div >
-      
-    </div>
+   <>
+   <Typography></Typography>
+   </>
   );
 }
 
