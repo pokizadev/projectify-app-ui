@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import "./Button.css";
+import { trimWhiteSpaces } from "../utils";
 
 type ButtonSize = "sm" | "md" | "lg";
 type ButtonShape = "rounded" | "circle";
@@ -14,6 +15,7 @@ type ButtonProps = {
     disabled?: boolean;
     className?: string;
     children: React.ReactNode;
+    onClick?: () => void;
 };
 
 const sizeClassNames = {
@@ -40,7 +42,7 @@ const variantClassNames = {
 };
 
 const Button: FC<ButtonProps> = (props) => {
-    const { size, shape, color, variant, disabled, className, children } =
+    const { size, shape, color, variant, disabled, className, children, onClick } =
         props;
 
     const sizeClassName = size !== undefined ? sizeClassNames[size] : "";
@@ -58,9 +60,9 @@ const Button: FC<ButtonProps> = (props) => {
 
     return (
         <button
-            className={finalClassNames}
+            className={trimWhiteSpaces(finalClassNames)}
             disabled={disabled}
-            onClick={() => alert("Hello")}
+            onClick={onClick}
         >
             {children}
         </button>
