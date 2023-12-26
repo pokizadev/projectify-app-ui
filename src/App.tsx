@@ -1,138 +1,69 @@
-import { Button, Typography } from "./design-system";
+import { useState, useId } from "react";
 
-function App() {
+import { Button, Typography, Input, Label } from "./design-system";
+
+const App = () => {
+    const [show, setShow] = useState(false);
+    const emailId = useId();
+
     return (
-      <div style={{ padding: "100px" }}>
-      <Typography variant="h5">Hello</Typography>
-      <div className="buttons">
-          <Button disabled>Button</Button>
-      </div>
-      <div className="buttons">
-          <Button color="primary">Button</Button>
-          <Button color="primary" disabled>
-              Button
-          </Button>
-          <Button color="primary" variant="outlined">
-              Button
-          </Button>
-          <Button color="primary" variant="outlined" disabled>
-              Button
-          </Button>
-          <Button color="primary" variant="text">
-              Button
-          </Button>
-          <Button color="primary" variant="text" disabled>
-              Button
-          </Button>
-      </div>
-      <div className="buttons">
-          <Button color="primary" shape="rounded">
-              Button
-          </Button>
-          <Button color="primary" disabled shape="rounded">
-              Button
-          </Button>
-          <Button color="primary" variant="outlined" shape="rounded">
-              Button
-          </Button>
-          <Button
-              color="primary"
-              variant="outlined"
-              disabled
-              shape="rounded"
-          >
-              Button
-          </Button>
-          <Button color="primary" variant="text" shape="rounded">
-              Button
-          </Button>
-          <Button color="primary" variant="text" disabled shape="rounded">
-              Button
-          </Button>
-      </div>
-      <div className="buttons">
-          <Button color="secondary" shape="rounded">
-              Button
-          </Button>
-          <Button color="secondary" disabled shape="rounded">
-              Button
-          </Button>
-          <Button color="secondary" variant="outlined" shape="rounded">
-              Button
-          </Button>
-          <Button
-              color="secondary"
-              variant="outlined"
-              disabled
-              shape="rounded"
-          >
-              Button
-          </Button>
-          <Button color="secondary" variant="text" shape="rounded">
-              Button
-          </Button>
-          <Button
-              color="secondary"
-              variant="text"
-              disabled
-              shape="rounded"
-          >
-              Button
-          </Button>
-      </div>
-      <div className="buttons">
-          <Button color="danger" shape="rounded">
-              Button
-          </Button>
-          <Button color="danger" disabled shape="rounded">
-              Button
-          </Button>
-          <Button color="danger" variant="outlined" shape="rounded">
-              Button
-          </Button>
-          <Button
-              color="danger"
-              variant="outlined"
-              disabled
-              shape="rounded"
-          >
-              Button
-          </Button>
-          <Button color="danger" variant="text" shape="rounded">
-              Button
-          </Button>
-          <Button color="danger" variant="text" disabled shape="rounded">
-              Button
-          </Button>
-      </div>
+        <div style={{ padding: "100px" }}>
+            <Typography variant="h5">Hello</Typography>
+            <div className="buttons">
+                <Button color="primary">Button</Button>
+                <Button color="primary" disabled>
+                    Button
+                </Button>
+                <Button color="primary" variant="outlined">
+                    Button
+                </Button>
+                <Button color="primary" variant="outlined" disabled>
+                    Button
+                </Button>
+                <Button color="primary" variant="text">
+                    Button
+                </Button>
+                <Button color="primary" variant="text" disabled>
+                    Button
+                </Button>
+            </div>
 
-      <div className="buttons">
-          <Button color="success" shape="rounded">
-              Button
-          </Button>
-          <Button color="success" disabled shape="rounded">
-              Button
-          </Button>
-          <Button color="success" variant="outlined" shape="rounded">
-              Button
-          </Button>
-          <Button
-              color="success"
-              variant="outlined"
-              disabled
-              shape="rounded"
-          >
-              Button
-          </Button>
-          <Button color="success" variant="text" shape="rounded">
-              Button
-          </Button>
-          <Button color="success" variant="text" disabled shape="rounded">
-              Button
-          </Button>
-      </div>
-  </div>
+            <form onSubmit={() => alert("submitted")}>
+                <Input
+                    type="email"
+                    placeholder="Email"
+                    size="md"
+                    shape="rounded"
+                    labelText="Email"
+                />
+                <Input
+                    placeholder="First Name"
+                    size="md"
+                    shape="rounded"
+                    labelText="First Name"
+                />
+                <Input
+                    placeholder="Last Name"
+                    size="md"
+                    shape="rounded"
+                    labelText="Last Name"
+                />
+                <Input
+                    placeholder="About You"
+                    size="lg"
+                    type="textarea"
+                    shape="rounded"
+                    labelText="Tell us about yourself"
+                    hintMessage="This is for your password"
+                />
+
+                <Button>Submit</Button>
+            </form>
+
+            {show && <p>Hello</p>}
+        </div>
     );
-}
+};
+<button type="submit"></button>;
 
 export { App };
