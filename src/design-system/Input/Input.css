@@ -8,6 +8,7 @@
     color: var(--jaguar-900);
     width: 100%;
     display: block;
+    transition: all 0.3s;
 }
 
 .input-textarea {
