@@ -15,7 +15,7 @@ const shapeClassNames = {
 };
 
 type InputProps = {
-    type?: "email" | "password" | "tel" | "textarea";
+    type?: "text" |"email" | "password" | "tel" | "textarea";
     disabled?: boolean;
     placeholder: string;
     className?: string;
@@ -26,6 +26,9 @@ type InputProps = {
     size?: "sm" | "md" | "lg";
     hintMessage?: string;
     labelText?: string;
+
+    onChange: (value: string) => void;
+    value: string;
 };
 const Input: React.FC<InputProps> = (props) => {
     const {
@@ -39,6 +42,8 @@ const Input: React.FC<InputProps> = (props) => {
         labelText,
         className,
         id,
+        onChange,
+        value
     } = props;
 
     const sizeClassName = size !== undefined ? sizeClassNames[size] : "";
@@ -54,10 +59,19 @@ const Input: React.FC<InputProps> = (props) => {
         } ${sizeClassName} ${shapeClassName} ${errorClassName} ${textareaClassName}`
     );
 
-    const hintMessageClass = trimWhiteSpaces(error ? `hint-message-error` : "")
+    const hintMessageClass = trimWhiteSpaces(`hint-message ${error ? "hint-message--error" : ""}`);
+
+    const handleOnChange = (
+        e:
+            | React.ChangeEvent<HTMLTextAreaElement>
+            | React.ChangeEvent<HTMLInputElement>
+    ) => {
+        onChange(e.target.value);
+    };
+
 
     return (
-        <div className="input-wrapper">
+        <div className={`input-wrapper ${className || ""} `}>
             {labelText ? (
                 <Label htmlFor={id} disabled={disabled} error={error}>
                     {labelText}
@@ -69,6 +83,8 @@ const Input: React.FC<InputProps> = (props) => {
                     className={finalClassNames}
                     disabled={disabled}
                     id={id}
+                    onChange={handleOnChange}
+                    value={value}
                 />
             ) : (
                 <input
@@ -77,6 +93,8 @@ const Input: React.FC<InputProps> = (props) => {
                     placeholder={placeholder}
                     disabled={disabled}
                     id={id}
+                    onChange={handleOnChange}
+                    value={value}
                 />
             )}
 
