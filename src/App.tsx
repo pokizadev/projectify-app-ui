@@ -1,8 +1,8 @@
-import {Login} from "./pages"
+import { UpdatePassword } from "./pages";
  
 const App = () => {
     return (
-            <Login/>
+            <UpdatePassword/>
     );
 };
 
