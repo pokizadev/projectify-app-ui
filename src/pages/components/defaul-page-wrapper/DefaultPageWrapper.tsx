@@ -1,7 +1,7 @@
-import { FC, ReactNode } from "react";
+import { FC } from "react";
 import { Typography, Button } from "../../../design-system";
 
-import "./DefaulPageWrapper.css"
+import "./DefaultPageWrapper.css"
 
 
 type DefaulPageWrapperProps = {
@@ -9,7 +9,7 @@ type DefaulPageWrapperProps = {
     pageTitle: string;
     btnText: string;
 }
-const DefaulPageWrapper: FC<DefaulPageWrapperProps> = ({ imagePath, pageTitle, btnText}) => {
+const DefaultPageWrapper: FC<DefaulPageWrapperProps> = ({ imagePath, pageTitle, btnText}) => {
     return (
         <div className="default-page-wrapper">
         <div className="default-page__content">
@@ -29,3 +29,5 @@ const DefaulPageWrapper: FC<DefaulPageWrapperProps> = ({ imagePath, pageTitle, b
     </div>
     )
 }
+
+export { DefaultPageWrapper };
