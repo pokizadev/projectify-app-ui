@@ -1,8 +1,10 @@
-import { UpdatePassword } from "./pages";
+import { MainLayout } from "./pages/components"; 
  
 const App = () => {
     return (
-            <UpdatePassword/>
+            <MainLayout>
+                <div></div>
+            </MainLayout>
     );
 };
 
