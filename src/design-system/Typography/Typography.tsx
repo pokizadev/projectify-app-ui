@@ -1,4 +1,5 @@
 import React from "react";
+import { trimWhiteSpaces } from "../utils";
 
 import {
     variantClassNames,
@@ -14,7 +15,13 @@ type TypographyVariant =
     | "h3"
     | "h4"
     | "h5"
-    | "h6";
+    | "h6"
+    | "paragraphLG"
+    | "paragraphMD"
+    | "paragraphSM"
+    | "subtitleLG"
+    | "subtitleMD"
+    | "subtitleSM"
 
 type TypographyWeight = "normal" | "medium" | "semibold" | "bold";
 
@@ -42,9 +49,9 @@ export const Typography: React.FC<TypographyProps> = ({
     const alignClassName = align !== undefined ? alignClassNames[align] : "";
 
     const finalClassName =
-        `${variantClassName} ${weightClassName} ${alignClassName} ${
+        trimWhiteSpaces(`${variantClassName} ${weightClassName} ${alignClassName} ${
             className || ""
-        }`.trim();
+        }`);
 
     if (
         variant === "displayLG" ||
