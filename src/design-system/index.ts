@@ -5,5 +5,6 @@ export * from "./Input"
 export * from "./Avatar"
 export * from "./Modal"
 export * from "./Logo"
+export * from "./Toggle"
 
 export * from "./utils"

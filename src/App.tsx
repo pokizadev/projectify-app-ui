@@ -1,10 +1,17 @@
-import { MainLayout } from "./pages/components"; 
+import { useState } from "react";
+import { Toggle } from "./design-system";
  
 const App = () => {
+
+    const [value, setValue] = useState<boolean>(false)
+
+    const handleOnToggle = (value: boolean) => {
+        setValue(value)
+    }
     return (
-            <MainLayout>
-                <div></div>
-            </MainLayout>
+            <div style={{padding: "150px"}}>
+                <Toggle value={value} onToggle={handleOnToggle}></Toggle>
+            </div>
     );
 };
 
