@@ -10,7 +10,7 @@ const App = () => {
     }
     return (
             <div style={{padding: "150px"}}>
-                <Toggle value={value} onToggle={handleOnToggle}></Toggle>
+                <Toggle className="rounded" value={value}  onToggle={handleOnToggle}></Toggle>
             </div>
     );
 };
