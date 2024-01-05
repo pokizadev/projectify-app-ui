@@ -22,6 +22,10 @@
     border-radius: var(--border-radius-20);
     background-color: var(--white);
     transition: all 0.2s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .toggle__thumb--round {
@@ -31,3 +35,4 @@
 .toggle__thumb--on {
     margin-left: 1.8rem;
 }
+
