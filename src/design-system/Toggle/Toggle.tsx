@@ -1,6 +1,7 @@
 import React from "react";
 import "./Toggle.css";
 import { trimWhiteSpaces } from "../utils";
+import checkmark from "./checkmark.svg"
 
 interface ToggleProps {
     value: boolean;
@@ -24,9 +25,16 @@ const Toggle: React.FC<ToggleProps> = ({ value, onToggle, rounded, className }) 
     );
     return (
         <div className={trackClassNames} onClick={handleOnClick}>
-            <div className={thumbClassNames}></div>
+            <div className={thumbClassNames}>
+                {value ? (
+                    <img className="checkmark"
+                    src={checkmark}
+                    alt="Checked Mark"/>
+                ) : null}
+            </div>
         </div>
     );
 };
 
 export { Toggle };
+
