@@ -4,9 +4,9 @@ import { AuthWrapper } from "../../components";
 
 import peopleDiscussing from "../../../assets/images/frame-1.png";
 
-import "./Signup.css";
+import "./AdminSignup.css";
 
-const Signup = () => {
+const AdminSignup = () => {
     const [firstName, setFirstName] = useState<string>("");
     const [lastName, setLastName] = useState<string>("");
     const [preferredName, setPreferredName] = useState<string>("");
@@ -116,4 +116,4 @@ const Signup = () => {
     );
 };
 
-export { Signup };
+export { AdminSignup };

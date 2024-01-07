@@ -3,9 +3,9 @@ import { AuthWrapper} from "../../components";
 import { Button, Input } from "../../../design-system";
 
 import peopleDiscussing from "../../../assets/images/frame-1.png"
-import "./Login.css"
+import "./AdminLogin.css"
 
-const Login = () => {
+const AdminLogin = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
@@ -58,4 +58,4 @@ const Login = () => {
 
 }
 
-export {Login}
+export {AdminLogin}

@@ -1,8 +1,8 @@
-import { UpdatePassword } from "./pages";
+import { AdminResetPassword } from "./pages";
  
 const App = () => {
     return (
-            <UpdatePassword/>
+            <AdminResetPassword/>
     );
 };
 
