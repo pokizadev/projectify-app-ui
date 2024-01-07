@@ -1,19 +1,10 @@
 import { useState } from "react";
-import { Toggle } from "./design-system";
+import { TeamMemberSignup } from "./pages/team-member-auth/team-member-sign-up/TeamMemberSignup";
 
 
-const App = () => { 
-
-    const [value, setValue] = useState<boolean>(false)
-
-const handleOnToggle = (value: boolean) => {
-    setValue(value)
-}
-
-    return (
-        <div style={{padding: "150px"}}>
-        <Toggle value={value} onToggle={handleOnToggle}/>
-        </div>
+const App = () => {
+   return (
+        <TeamMemberSignup />
     );
 };
 
