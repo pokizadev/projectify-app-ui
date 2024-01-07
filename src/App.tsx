@@ -1,10 +1,9 @@
-import { useState } from "react";
-import { TeamMemberSignup } from "./pages/team-member-auth/team-member-sign-up/TeamMemberSignup";
+import { TeamMemberLogin } from "./pages/team-member-auth/team-member-login/TeamMemberLogin";
 
 
 const App = () => {
    return (
-        <TeamMemberSignup />
+        <TeamMemberLogin />
     );
 };
 
