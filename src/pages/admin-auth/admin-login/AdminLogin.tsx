@@ -2,10 +2,10 @@ import { useState } from "react";
 import { AuthWrapper} from "../../components";
 import { Button, Input } from "../../../design-system";
 
-import peopleDiscussing from "../../../assets/images/frame-1.png"
-import "./Login.css"
+import meeting from "../../../assets/images/meeting.jpg"
+import "./AdminLogin.css"
 
-const Login = () => {
+const AdminLogin = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
@@ -23,7 +23,7 @@ const Login = () => {
     };
 
     return (
-        <AuthWrapper imageUrl={peopleDiscussing} pageTitle="Login">
+        <AuthWrapper imageUrl={meeting} pageTitle="Login">
              <form className="login" onSubmit={confirmLogin} noValidate>
                 <Input
                     type="email"
@@ -58,4 +58,4 @@ const Login = () => {
 
 }
 
-export {Login}
+export {AdminLogin}
