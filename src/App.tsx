@@ -1,9 +1,9 @@
-import { TeamMemberLogin } from "./pages/team-member-auth/team-member-login/TeamMemberLogin";
+import { TeamMemberForgotPassword } from "./pages/team-member-auth/team-member-forgot-password/TeamMemberForgotPassword";
 
 
 const App = () => {
    return (
-        <TeamMemberLogin />
+        <TeamMemberForgotPassword />
     );
 };
 
