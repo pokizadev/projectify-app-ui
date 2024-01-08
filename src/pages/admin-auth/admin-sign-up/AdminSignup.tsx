@@ -51,7 +51,7 @@ const AdminSignup = () => {
     };
 
     return (
-        <AuthWrapper imageUrl={peopleDiscussing} pageTitle="Sign Up">
+        <AuthWrapper imageUrl={peopleDiscussing} pageTitle="Sign Up" switchLayout>
             <form className="sign-up" onSubmit={createAccount}>
                 <Input
                     type="text"
