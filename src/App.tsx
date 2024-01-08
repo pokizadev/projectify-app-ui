@@ -1,8 +1,14 @@
-import { TeamMemberCreatePassword } from "./pages/team-member-auth/team-member-create-password/TeamMemberCreatePassword";
+import { Link } from "react-router-dom";
 
 const App = () => {
-   return (
-        <TeamMemberCreatePassword/>
+    return (
+        <>
+            <h1>You are at Home</h1>
+            <Link to="admin/signup">Sign Up</Link>
+            <Link to="admin/login">Login</Link>
+            <Link to="admin/forgot-password">Forgot Password</Link>
+            <Link to="admin/reset-password">Reset Password</Link>
+        </>
     );
 };
 
