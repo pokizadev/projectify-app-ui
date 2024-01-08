@@ -1,9 +1,9 @@
-import { AdminSignup } from "./pages/admin-auth/admin-sign-up/AdminSignup";
+import { AdminResetPassword } from "./pages/admin-auth/admin-reset-password/AdminResetPassword";
 
 
 const App = () => {
    return (
-        <AdminSignup />
+        <AdminResetPassword />
     );
 };
 

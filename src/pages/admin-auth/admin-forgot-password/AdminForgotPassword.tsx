@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { PasswordWrapper } from "../../components";
 import { Input, Button } from "../../../design-system";
 import forgotPassword from "../../../assets/images/forgotPassword.svg";
-import "./AdminForgotPassword.css";
 
 const Form = styled.form`
     width: 100%;
