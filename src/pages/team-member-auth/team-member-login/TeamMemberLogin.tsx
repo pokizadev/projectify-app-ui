@@ -1,30 +1,39 @@
 import { useState } from "react";
-import { AuthWrapper} from "../../components";
+import styled from "styled-components";
+import { AuthWrapper } from "../../components";
 import { Button, Input } from "../../../design-system";
 
-import teamWork from "../../../assets/images/teamWork.jpg"
-import "./TeamMemberLogin.css"
+import teamWork from "../../../assets/images/teamWork.jpg";
+
+const TeamMemberLoginForm = styled.form`
+    width: 100%;
+    display: grid;
+    gap: var(--space-20);
+`;
 
 const TeamMemberLogin = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
     const handleOnChangeEmail = (value: string) => {
-        setEmail(value)
-    }
+        setEmail(value);
+    };
 
     const handleOnChangePassword = (value: string) => {
-        setPassword(value)
-    }
+        setPassword(value);
+    };
 
     const confirmLogin = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(email, password)
+        console.log(email, password);
     };
 
     return (
         <AuthWrapper imageUrl={teamWork} pageTitle="Projectify App">
-             <form className="team-member-login" onSubmit={confirmLogin} noValidate>
+            <TeamMemberLoginForm
+                onSubmit={confirmLogin}
+                noValidate
+            >
                 <Input
                     type="email"
                     placeholder="Email"
@@ -32,7 +41,7 @@ const TeamMemberLogin = () => {
                     onChange={handleOnChangeEmail}
                     shape="rounded"
                     size="lg"
-                    className="login__email"
+                    
                 />
                 <Input
                     type="password"
@@ -41,21 +50,19 @@ const TeamMemberLogin = () => {
                     onChange={handleOnChangePassword}
                     shape="rounded"
                     size="lg"
-                    className="login__password"
+                    
                 />
 
                 <Button
                     color="primary"
                     size="lg"
                     shape="rounded"
-                    className="login__submit-button"
                 >
                     Login
                 </Button>
-            </form>
+            </TeamMemberLoginForm>
         </AuthWrapper>
-    )
+    );
+};
 
-}
-
-export {TeamMemberLogin}
+export { TeamMemberLogin };

@@ -1,30 +1,36 @@
 import { useState } from "react";
-import { AuthWrapper} from "../../components";
+import styled from "styled-components";
+import { AuthWrapper } from "../../components";
 import { Button, Input } from "../../../design-system";
 
-import meeting from "../../../assets/images/meeting.jpg"
-import "./AdminLogin.css"
+import meeting from "../../../assets/images/meeting.jpg";
+
+const LoginForm = styled.form`
+    width: 100%;
+    display: grid;
+    gap: var(--space-20);
+`;
 
 const AdminLogin = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
     const handleOnChangeEmail = (value: string) => {
-        setEmail(value)
-    }
+        setEmail(value);
+    };
 
     const handleOnChangePassword = (value: string) => {
-        setPassword(value)
-    }
+        setPassword(value);
+    };
 
     const confirmLogin = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(email, password)
+        console.log(email, password);
     };
 
     return (
-        <AuthWrapper imageUrl={meeting} pageTitle="Login">
-             <form className="login" onSubmit={confirmLogin} noValidate>
+        <AuthWrapper imageUrl={meeting} pageTitle="Projectify">
+            <LoginForm onSubmit={confirmLogin} noValidate>
                 <Input
                     type="email"
                     placeholder="Email"
@@ -52,10 +58,9 @@ const AdminLogin = () => {
                 >
                     Login
                 </Button>
-            </form>
+            </LoginForm>
         </AuthWrapper>
-    )
+    );
+};
 
-}
-
-export {AdminLogin}
+export { AdminLogin };

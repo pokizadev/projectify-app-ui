@@ -1,13 +1,25 @@
-import {useState} from "react";
+import { useState } from "react";
+import styled from "styled-components";
 import { Button, Input } from "../../../design-system";
 import { AuthWrapper } from "../../components";
 
-import teamWork from "../../../assets/images/teamWork.jpg"
+import teamWork from "../../../assets/images/teamWork.jpg";
 
+const TeamMemberCreatePasswordForm = styled.form`
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-20);
+`;
 
-import "./TeamMemberSignup.css";
+const StyledInput = styled(Input)`
+    grid-column: 1 / 3;
+`
 
-const TeamMemberSignup = () => {
+const StyledButton = styled(Button)`
+    grid-column: 1 / 3;
+`
+const TeamMemberCreatePassword = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
@@ -26,24 +38,20 @@ const TeamMemberSignup = () => {
 
     const createPassword = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(
-            password,
-            passwordConfirm,
-            email
-        );
+        console.log(password, passwordConfirm, email);
     };
 
     return (
         <AuthWrapper imageUrl={teamWork} pageTitle="Projectify App">
-            <form className="teamMember-sign-up" onSubmit={createPassword}>
-                <Input
+            <TeamMemberCreatePasswordForm onSubmit={createPassword}>
+                <StyledInput
                     type="email"
                     placeholder="Email"
                     value={email}
                     onChange={handleOnChangeEmail}
                     shape="rounded"
                     size="lg"
-                    className="sign-up__email"
+                    
                 />
                 <Input
                     type="password"
@@ -61,17 +69,17 @@ const TeamMemberSignup = () => {
                     shape="rounded"
                     size="lg"
                 />
-                <Button
+                <StyledButton
                     color="primary"
                     size="lg"
                     shape="rounded"
-                    className="sign-up__submit-button"
+                    
                 >
                     Create Password
-                </Button>
-            </form>
+                </StyledButton>
+            </TeamMemberCreatePasswordForm>
         </AuthWrapper>
     );
 };
 
-export { TeamMemberSignup };
+export { TeamMemberCreatePassword };

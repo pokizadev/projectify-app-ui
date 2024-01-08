@@ -1,9 +1,8 @@
-import { AdminLogin } from "./pages/admin-auth/admin-login/AdminLogin";
-
+import { TeamMemberCreatePassword } from "./pages/team-member-auth/team-member-create-password/TeamMemberCreatePassword";
 
 const App = () => {
    return (
-        <AdminLogin />
+        <TeamMemberCreatePassword/>
     );
 };
 

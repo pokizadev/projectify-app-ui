@@ -1,10 +1,23 @@
 import { useState } from "react";
+import styled from "styled-components";
 import { Button, Input } from "../../../design-system";
 import { AuthWrapper } from "../../components";
 
 import peopleDiscussing from "../../../assets/images/frame-1.png";
 
-import "./AdminSignup.css";
+const SignupForm = styled.form`
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-20);
+`;
+
+const StyledInput = styled(Input)`
+    grid-column: 1 / 3;
+`;
+const StyledButton = styled(Button)`
+    grid-column: 1 / 3;
+`;
 
 const AdminSignup = () => {
     const [firstName, setFirstName] = useState<string>("");
@@ -51,8 +64,12 @@ const AdminSignup = () => {
     };
 
     return (
-        <AuthWrapper imageUrl={peopleDiscussing} pageTitle="Sign Up">
-            <form className="sign-up" onSubmit={createAccount}>
+        <AuthWrapper
+            imageUrl={peopleDiscussing}
+            pageTitle="Projectify"
+            switchLayout
+        >
+            <SignupForm onSubmit={createAccount}>
                 <Input
                     type="text"
                     placeholder="First Name"
@@ -69,23 +86,21 @@ const AdminSignup = () => {
                     shape="rounded"
                     size="lg"
                 />
-                <Input
+                <StyledInput
                     type="text"
                     placeholder="Preferred First Name"
                     value={preferredName}
                     onChange={handleOnChangeName}
                     shape="rounded"
                     size="lg"
-                    className="sign-up__preferred-name"
                 />
-                <Input
+                <StyledInput
                     type="email"
                     placeholder="Email"
                     value={email}
                     onChange={handleOnChangeEmail}
                     shape="rounded"
                     size="lg"
-                    className="sign-up__email"
                 />
                 <Input
                     type="password"
@@ -103,15 +118,14 @@ const AdminSignup = () => {
                     shape="rounded"
                     size="lg"
                 />
-                <Button
+                <StyledButton
                     color="primary"
                     size="lg"
                     shape="rounded"
-                    className="sign-up__submit-button"
                 >
                     Sign Up
-                </Button>
-            </form>
+                </StyledButton>
+            </SignupForm>
         </AuthWrapper>
     );
 };
