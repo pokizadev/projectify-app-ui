@@ -7,5 +7,6 @@ export * from "./Modal"
 export * from "./Logo"
 export * from "./Toggle"
 export * from "./SideBar"
+export * from "./SideBarLinks"
 
 export * from "./utils"
