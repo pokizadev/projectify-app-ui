@@ -4,12 +4,15 @@ import { Button, Input } from "../../../design-system";
 import { AuthWrapper } from "../../components";
 
 import peopleDiscussing from "../../../assets/images/frame-1.png";
+import { Icon } from "../../../design-system/Icon/Icon";
 
 const SignupForm = styled.form`
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-20);
+
+
 `;
 
 const StyledInput = styled(Input)`
@@ -18,6 +21,7 @@ const StyledInput = styled(Input)`
 const StyledButton = styled(Button)`
     grid-column: 1 / 3;
 `;
+
 
 const AdminSignup = () => {
     const [firstName, setFirstName] = useState<string>("");
