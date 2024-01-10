@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react";
 import styled from "styled-components";
-import { Typography } from "../../../design-system";
+import { Typography } from "../../design-system";
 
 type PasswordWrapperProps = {
     pageTitle: string;
@@ -28,12 +28,14 @@ const PasswordContent = styled.div`
 
 const PasswordImageWrapper = styled.div`
     padding: var(--space-50);
-`
+`;
 
-const PasswordImage = styled.img.attrs({alt: "Projectify App | Update Password"})`
+const PasswordImage = styled.img.attrs({
+    alt: "Projectify App | Update Password"
+})`
     height: 24rem;
     width: auto;
-`
+`;
 
 const PasswordWrapper: FC<PasswordWrapperProps> = ({
     imageUrl,
@@ -46,9 +48,7 @@ const PasswordWrapper: FC<PasswordWrapperProps> = ({
                 <PasswordContent>
                     <Typography variant="h6">{pageTitle}</Typography>
                     <PasswordImageWrapper>
-                        <PasswordImage
-                            src={imageUrl}
-                        />
+                        <PasswordImage src={imageUrl} />
                     </PasswordImageWrapper>
                     {children}
                 </PasswordContent>
