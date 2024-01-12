@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { SideBar, SideBarLinks } from "../../design-system";
-import { AppContent, AppLayout, User } from "../components/";
+import { AppContent, AppLayout, User} from "../components";
+import user from "../../assets/images/user.jpg";
 
 const links = [
     {
@@ -9,24 +10,24 @@ const links = [
             {
                 linkText: "Project",
                 linkTo: "projects",
-                iconName: "projects"
+                iconName: "projects",
             },
             {
                 linkText: "Stories",
                 linkTo: "stories",
-                iconName: "stories"
+                iconName: "stories",
             },
             {
                 linkText: "Personal Tasks",
                 linkTo: "personal-tasks",
-                iconName: "tasks"
+                iconName: "tasks",
             },
             {
                 linkText: "Team Members",
                 linkTo: "team-members",
-                iconName: "members"
-            }
-        ]
+                iconName: "members",
+            },
+        ],
     },
     {
         title: "Settings",
@@ -34,23 +35,24 @@ const links = [
             {
                 linkText: "Settings",
                 linkTo: "settings",
-                iconName: "settings"
+                iconName: "settings",
             },
             {
                 linkText: "Support",
                 linkTo: "support",
-                iconName: "support"
-            }
-        ]
-    }
-]
+                iconName: "support",
+            },
+        ],
+    },
+];
 
 const Platform = () => {
     return (
         <AppLayout>
             <SideBar>
-                <User/>
-                <SideBarLinks links={links}/>
+                <User
+                />
+                <SideBarLinks links={links} loggedOutLink="/admin/sign-in" />
             </SideBar>
             <AppContent>
                 <Outlet />
@@ -59,4 +61,4 @@ const Platform = () => {
     );
 };
 
-export { Platform as AdminPlatform};
+export { Platform as AdminPlatform };

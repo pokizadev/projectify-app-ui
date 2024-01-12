@@ -1,8 +1,8 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Typography } from "../Typography";
 import { Icon } from "../Icon";
-import { Link } from "react-router-dom";
-
+import { NavLink } from "react-router-dom";
 type SideBarLink = {
     linkText: string;
     linkTo: string;
@@ -14,26 +14,46 @@ type SideBarLinksGroup = {
     links: SideBarLink[];
 };
 
-type SideBarLinksProps = {
-    links: SideBarLinksGroup[];
-};
+type SideBarLinksProps = { links: SideBarLinksGroup[]; loggedOutLink: string };
 
-const SideBarLinks: React.FC<SideBarLinksProps> = ({ links }) => {
+const SideBarLinks: React.FC<SideBarLinksProps> = ({
+    links,
+    loggedOutLink,
+}) => {
+    const navigate = useNavigate();
+    const logOut = () => {
+        localStorage.removeItem("authToken");
+        navigate(loggedOutLink);
+    };
     return (
-        <div>
-            {links.map((group) => {
+        <>
+            {links.map((group, idx) => {
                 return (
-                    <div>
-                        <Typography variant="subtitleMD" weight="semibold">
-                            {group.title}
+                    <div className="side-bar__link-group" key={idx}>
+                        <Typography
+                            variant="subtitleMD"
+                            weight="semibold"
+                            className="side-bar__link-group-title"
+                        >
+                            {group.title.toUpperCase()}
                         </Typography>
-                        <ul>
-                            {group.links.map((link) => {
+                        <ul className="side-bar__links">
+                            {group.links.map((link, idx) => {
                                 return (
-                                    <li>
-                                        <Link to={link.linkTo}>
-                                            <Icon iconName={link.iconName} /> {" "} {link.linkText}
-                                        </Link>
+                                    <li
+                                        className="side-bar__link-item"
+                                        key={idx}
+                                    >
+                                        <NavLink
+                                            to={link.linkTo}
+                                            className="side-bar__link"
+                                        >
+                                            <Icon
+                                                iconName={link.iconName}
+                                                className="side-bar__link-icon"
+                                            />
+                                            {link.linkText}
+                                        </NavLink>
                                     </li>
                                 );
                             })}
@@ -41,8 +61,15 @@ const SideBarLinks: React.FC<SideBarLinksProps> = ({ links }) => {
                     </div>
                 );
             })}
-        </div>
+
+            <div className="side-bar__log-out">
+                <Icon iconName="log-out" className="log-out-icon" />
+                <Link to="" className="side-bar__log-out-link" onClick={logOut}>
+                    Log Out
+                </Link>
+            </div>
+        </>
     );
 };
 
-export {SideBarLinks}
+export { SideBarLinks };
