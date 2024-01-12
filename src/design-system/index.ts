@@ -6,6 +6,7 @@ export * from "./Avatar"
 export * from "./Modal"
 export * from "./Logo"
 export * from "./Toggle"
+export * from "./Icon"
 export * from "./SideBar"
 export * from "./SideBarLinks"
 

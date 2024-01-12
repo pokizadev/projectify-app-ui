@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { SideBar, SideBarLinks } from "../../design-system";
-import { AppContent, AppLayout, User} from "../components";
-import user from "../../assets/images/user.jpg";
+import { AppContent, AppLayout, SideBarUser} from "../components";
+import user from "../../assets/images/user1.png"
 
 const links = [
     {
@@ -50,7 +50,7 @@ const Platform = () => {
     return (
         <AppLayout>
             <SideBar>
-                <User
+                <SideBarUser details={{firstName: "Sarah", lastName: "Smith", imageUrl: user, email: "123@example.com"}}
                 />
                 <SideBarLinks links={links} loggedOutLink="/admin/sign-in" />
             </SideBar>

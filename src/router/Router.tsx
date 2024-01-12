@@ -9,17 +9,16 @@ import {
     AdminLogin,
     AdminForgotPassword,
     AdminResetPassword,
-} from "../pages";
-
-import {
     TeamMemberCreatePassword,
     TeamMemberLogin,
     TeamMemberForgotPassword,
-    TeamMemberResetPassword
+    TeamMemberResetPassword,
+    AdminPlatform, 
+    AdminProjects,
 } from "../pages";
 
 
-import { AdminPlatform, AdminProjects} from "../pages";
+import { SideBar, SideBarLinks } from "../design-system";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -35,6 +34,8 @@ export const router = createBrowserRouter(
                 path="/admin/reset-password"
                 element={<AdminResetPassword />}
             />
+
+        
             <Route
                 path="/team-member/create-password"
                 element={<TeamMemberCreatePassword />}
