@@ -14,6 +14,7 @@ const CreateProjectModalTitle = styled(Typography)`
     margin-bottom: var(--space-24);
 `;
 
+
 const Inputs = styled.div`
     display: flex;
     flex-direction: column;
@@ -36,7 +37,7 @@ const Projects = () => {
             {!projects.length ? (
                 <NoDataPlaceholder
                     illustrationUrl={noProject}
-                    text="You don’t have any projects yet!"
+                    text="You don't have any projects yet!"
                     buttonText="Add a Project"
                     buttonAction={() => setShowCreateProjectModal(true)}
                 />
