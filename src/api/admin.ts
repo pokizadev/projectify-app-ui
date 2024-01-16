@@ -63,6 +63,27 @@ class Admin {
         }
     }
 
+    async forgotPassword(email: string) {
+        try {
+            const response = await fetch(`${this.url}/forgot-password`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email,
+                }),
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+
+            return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
     
 }
 
