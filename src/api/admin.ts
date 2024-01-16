@@ -10,7 +10,7 @@ type SignUpInput = {
     };
 };
 
-type SignInInput = {
+type loginInput = {
     email: string;
     password: string;
 };
@@ -37,6 +37,26 @@ class Admin {
                 const data = await response.json();
                 throw new Error(data.message);
             }
+            return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async login(input: loginInput): Promise<{ token: string }> {
+        try {
+            const response = await fetch(`${this.url}/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(input),
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+
             return response.json();
         } catch (error) {
             throw error;
