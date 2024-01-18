@@ -2,9 +2,10 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Button, Input } from "../../../design-system";
 import { AuthWrapper } from "../../components";
+import { admin } from "../../../api";
 
 import peopleDiscussing from "../../../assets/images/frame-1.png";
-import { Icon } from "../../../design-system/Icon/Icon";
+
 
 const SignupForm = styled.form`
     width: 100%;
@@ -28,8 +29,15 @@ const AdminSignup = () => {
     const [lastName, setLastName] = useState<string>("");
     const [preferredName, setPreferredName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
+    const [company, setCompany] = useState<string>("");
+    const [position, setPosition] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
+
+
+    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false)
+ 
+    const [isError, setIsError] = useState<boolean>(false)
 
     const handleOnChangeFirstName = (value: string) => {
         setFirstName(value);
@@ -47,6 +55,14 @@ const AdminSignup = () => {
         setEmail(value);
     };
 
+    const handleOnChangeCompany = (value: string) => {
+        setCompany(value)
+    }
+
+    const handleOnChangePosition = (value: string) => {
+        setPosition(value)
+    }
+
     const handleOnChangePassword = (value: string) => {
         setPassword(value);
     };
@@ -55,16 +71,24 @@ const AdminSignup = () => {
         setPasswordConfirm(value);
     };
 
-    const createAccount = (e: React.FormEvent<HTMLFormElement>) => {
+    const createAccount = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(
+       try {
+        setIsFormSubmitting(true)
+        await admin.signUp({
             firstName,
             lastName,
             preferredName,
-            password,
-            passwordConfirm,
-            email
-        );
+            email, password, 
+            company: {
+                name: "Turan Tech",
+                position: "engineer"
+            }
+        })
+        setIsFormSubmitting(false)
+       } catch (error) {
+         setIsError(true)
+       }
     };
 
     return (
@@ -81,6 +105,7 @@ const AdminSignup = () => {
                     onChange={handleOnChangeFirstName}
                     shape="rounded"
                     size="lg"
+                    disabled={isFormSubmitting}
                 />
                 <Input
                     type="text"
@@ -89,6 +114,7 @@ const AdminSignup = () => {
                     onChange={handleOnChangeLastName}
                     shape="rounded"
                     size="lg"
+                    disabled={isFormSubmitting}
                 />
                 <StyledInput
                     type="text"
@@ -97,6 +123,7 @@ const AdminSignup = () => {
                     onChange={handleOnChangeName}
                     shape="rounded"
                     size="lg"
+                    disabled={isFormSubmitting}
                 />
                 <StyledInput
                     type="email"
@@ -105,6 +132,25 @@ const AdminSignup = () => {
                     onChange={handleOnChangeEmail}
                     shape="rounded"
                     size="lg"
+                    disabled={isFormSubmitting}
+                />
+                <Input
+                    type="text"
+                    placeholder="Company Name"
+                    value={company}
+                    onChange={handleOnChangeCompany}
+                    shape="rounded"
+                    size="lg"
+                    disabled={isFormSubmitting}
+                />
+                <Input
+                    type="text"
+                    placeholder="Position"
+                    value={position}
+                    onChange={handleOnChangePosition}
+                    shape="rounded"
+                    size="lg"
+                    disabled={isFormSubmitting}
                 />
                 <Input
                     type="password"
@@ -113,6 +159,7 @@ const AdminSignup = () => {
                     onChange={handleOnChangePassword}
                     shape="rounded"
                     size="lg"
+                    disabled={isFormSubmitting}
                 />
                 <Input
                     type="password"
@@ -121,11 +168,14 @@ const AdminSignup = () => {
                     onChange={handleOnChangePasswordConfirm}
                     shape="rounded"
                     size="lg"
+                    disabled={isFormSubmitting}
                 />
+                
                 <StyledButton
                     color="primary"
                     size="lg"
                     shape="rounded"
+                    disabled={isFormSubmitting}
                 >
                     Sign Up
                 </StyledButton>
