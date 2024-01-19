@@ -3,11 +3,11 @@ type SignUpInput = {
     lastName: string;
     preferredName?: string;
     email: string;
+    company: string;
+    position: string;
     password: string;
-    company?: {
-        name: string;
-        position: string;
-    };
+    passwordConfirm: string;
+    
 };
 
 type loginInput = {
