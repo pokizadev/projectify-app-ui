@@ -6,7 +6,6 @@ import { admin } from "../../../api";
 
 import peopleDiscussing from "../../../assets/images/frame-1.png";
 
-
 const SignupForm = styled.form`
     width: 100%;
     display: grid;
@@ -36,7 +35,6 @@ const AdminSignup = () => {
 
 
     const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false)
- 
     const [isError, setIsError] = useState<boolean>(false)
 
     const handleOnChangeFirstName = (value: string) => {
@@ -79,14 +77,24 @@ const AdminSignup = () => {
             firstName,
             lastName,
             preferredName,
-            email, password, 
-            company: {
-                name: "Turan Tech",
-                position: "engineer"
-            }
+            email,
+            company, 
+            position,
+            password, 
+            passwordConfirm
+           
         })
         setIsFormSubmitting(false)
+        setFirstName("")
+        setLastName("")
+        setPreferredName("")
+        setEmail("")
+        setCompany("")
+        setPosition("")
+        setPassword("")
+        setPasswordConfirm("")
        } catch (error) {
+        setIsFormSubmitting(false)
          setIsError(true)
        }
     };
