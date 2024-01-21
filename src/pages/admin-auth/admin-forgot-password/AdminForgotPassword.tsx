@@ -1,8 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { PasswordWrapper } from "../../components";
-import { Input, Button } from "../../../design-system";
+import { Input, Button, Toaster } from "../../../design-system";
+import { admin } from "../../../api";
 import forgotPassword from "../../../assets/images/forgotPassword.svg";
+import toast from "react-hot-toast";
 
 const Form = styled.form`
     width: 100%;
@@ -17,13 +19,22 @@ const AdminForgotPassword = () => {
         setEmail(value);
     };
 
-    const getInstructions = (e: React.FormEvent<HTMLFormElement>) => {
+    const getInstructions = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(email);
+        try {
+            const response = await admin.forgotPassword(email)
+            setEmail("")
+            toast.success(response.message)
+        } catch (error) {
+            if(error instanceof Error) {
+                toast.error(error.message)
+            }
+        }
     };
 
     return (
-        <PasswordWrapper pageTitle="Forgot Password?" imageUrl={forgotPassword}>
+        <>
+         <PasswordWrapper pageTitle="Forgot Password?" imageUrl={forgotPassword}>
             <Form onSubmit={getInstructions} noValidate>
                 <Input
                     type="email"
@@ -43,6 +54,9 @@ const AdminForgotPassword = () => {
                 </Button>
             </Form>
         </PasswordWrapper>
+        <Toaster/>
+        </>
+       
     );
 };
 

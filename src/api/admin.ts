@@ -99,7 +99,7 @@ class Admin {
                 },
                 body: JSON.stringify({
                     password,
-                    passwordConfirm,
+                    passwordConfirm
                 }),
             });
             if (!response.ok) {

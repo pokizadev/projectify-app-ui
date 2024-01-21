@@ -1,14 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
-
-import { Button, Input, Toaster, Typography } from "../../../design-system";
-import { AuthWrapper } from "../../components";
+import { Button, Input, Toaster} from "../../../design-system";
+import { AuthActionLink, AuthWrapper } from "../../components";
 import { admin } from "../../../api";
 
 import peopleDiscussing from "../../../assets/images/frame-1.png";
-import { AuthActionLink } from "../../components/AuthActionLinks";
+
 
 const SignupForm = styled.form`
     width: 100%;
@@ -35,7 +33,6 @@ const AdminSignup = () => {
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
 
     const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
-    const [isError, setIsError] = useState<boolean>(false);
 
     const handleOnChangeFirstName = (value: string) => {
         setFirstName(value);
@@ -100,7 +97,6 @@ const AdminSignup = () => {
         } catch (error) {
             if (error instanceof Error) {
                 setIsFormSubmitting(false);
-                setIsError(true);
                 toast.error(error.message);
             }
         }
