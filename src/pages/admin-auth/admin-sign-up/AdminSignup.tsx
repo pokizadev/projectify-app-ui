@@ -1,12 +1,14 @@
 import { useState } from "react";
 import styled from "styled-components";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
-import { Button, Input, Toaster } from "../../../design-system";
+import { Button, Input, Toaster, Typography } from "../../../design-system";
 import { AuthWrapper } from "../../components";
 import { admin } from "../../../api";
 
 import peopleDiscussing from "../../../assets/images/frame-1.png";
+import { AuthActionLink } from "../../components/AuthActionLinks";
 
 const SignupForm = styled.form`
     width: 100%;
@@ -194,6 +196,10 @@ const AdminSignup = () => {
                         Sign Up
                     </StyledButton>
                 </SignupForm>
+
+                <div style={{marginTop: "auto"}}>
+                    <AuthActionLink linkText="Login" hintText="Already have an account" linkTo="../admin/login"/>
+                </div>
             </AuthWrapper>
             <Toaster />
         </>

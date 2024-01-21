@@ -6,12 +6,20 @@ import { Button, Input } from "../../../design-system";
 
 import meeting from "../../../assets/images/meeting.jpg";
 import { admin } from "../../../api";
+import { AuthActionLink } from "../../components/AuthActionLinks";
 
 const LoginForm = styled.form`
     width: 100%;
     display: grid;
     gap: var(--space-20);
 `;
+
+const ActionLinks = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+    
+`
 
 const AdminLogin = () => {
     const [email, setEmail] = useState<string>("");
@@ -82,6 +90,11 @@ const AdminLogin = () => {
                     Login
                 </Button>
             </LoginForm>
+            <ActionLinks>
+               <AuthActionLink linkText="Sign Up" hintText="Don't have an account" linkTo="../admin/signup"/>
+            <AuthActionLink linkText="Get Help" hintText="Forgot password" linkTo="../admin/forgot-password"/> 
+            </ActionLinks>
+            
         </AuthWrapper>
     );
 };
