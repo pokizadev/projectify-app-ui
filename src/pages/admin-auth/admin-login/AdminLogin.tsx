@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import toast from "react-hot-toast";
 import { AuthWrapper } from "../../components";
 import { Button, Input } from "../../../design-system";
 
-import meeting from "../../../assets/images/meeting.jpg";
 import { admin } from "../../../api";
+import { AuthActionLink } from "../../components/AuthActionLinks";
+
+import meeting from "../../../assets/images/meeting.jpg";
 
 const LoginForm = styled.form`
     width: 100%;
@@ -13,12 +16,17 @@ const LoginForm = styled.form`
     gap: var(--space-20);
 `;
 
+const ActionLinks = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+`;
+
 const AdminLogin = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
-    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false)
-    const [isError, setIsError] = useState<boolean>(false)
+    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
     const navigate = useNavigate();
 
     const handleOnChangeEmail = (value: string) => {
@@ -35,19 +43,21 @@ const AdminLogin = () => {
             setIsFormSubmitting(true);
             const { token } = await admin.login({
                 email,
-                password,        
-            })
+                password
+            });
 
-            localStorage.setItem("authToken", token)
-            navigate("/admin/platform")
+            localStorage.setItem("authToken", token);
+            navigate("/admin/platform");
 
-            setIsFormSubmitting(false)
-            setEmail("")
-            setPassword("")
-           } catch (error) {
-            setIsFormSubmitting(false)
-             setIsError(true)
-           }
+            setIsFormSubmitting(false);
+            setEmail("");
+            setPassword("");
+        } catch (error) {
+            if (error instanceof Error) {
+                toast.error(error.message);
+            }
+            setIsFormSubmitting(false);
+        }
     };
 
     return (
@@ -61,7 +71,6 @@ const AdminLogin = () => {
                     shape="rounded"
                     size="lg"
                     disabled={isFormSubmitting}
-
                 />
                 <Input
                     type="password"
@@ -82,6 +91,18 @@ const AdminLogin = () => {
                     Login
                 </Button>
             </LoginForm>
+            <ActionLinks>
+                <AuthActionLink
+                    linkText="Sign Up"
+                    hintText="Don't have an account"
+                    linkTo="../admin/signup"
+                />
+                <AuthActionLink
+                    linkText="Get Help"
+                    hintText="Forgot password"
+                    linkTo="../admin/forgot-password"
+                />
+            </ActionLinks>
         </AuthWrapper>
     );
 };
