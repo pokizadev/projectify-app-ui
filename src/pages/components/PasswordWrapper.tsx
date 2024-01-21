@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react";
 import styled from "styled-components";
-import { Typography } from "../../design-system";
+import { Typography, Toaster } from "../../design-system";
 
 type PasswordWrapperProps = {
     pageTitle: string;
@@ -53,6 +53,7 @@ const PasswordWrapper: FC<PasswordWrapperProps> = ({
                     {children}
                 </PasswordContent>
             </PasswordForm>
+            <Toaster/>
         </Wrapper>
     );
 };

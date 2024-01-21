@@ -1,12 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
 import toast from "react-hot-toast";
-import { Button, Input, Toaster} from "../../../design-system";
+import { Button, Input } from "../../../design-system";
 import { AuthActionLink, AuthWrapper } from "../../components";
 import { admin } from "../../../api";
 
 import peopleDiscussing from "../../../assets/images/frame-1.png";
-
 
 const SignupForm = styled.form`
     width: 100%;
@@ -103,102 +102,103 @@ const AdminSignup = () => {
     };
 
     return (
-        <>
-            <AuthWrapper
-                imageUrl={peopleDiscussing}
-                pageTitle="Projectify"
-                switchLayout
-            >
-                <SignupForm onSubmit={createAccount}>
-                    <Input
-                        type="text"
-                        placeholder="First Name"
-                        value={firstName}
-                        onChange={handleOnChangeFirstName}
-                        shape="rounded"
-                        size="lg"
-                        disabled={isFormSubmitting}
-                    />
-                    <Input
-                        type="text"
-                        placeholder="Last Name"
-                        value={lastName}
-                        onChange={handleOnChangeLastName}
-                        shape="rounded"
-                        size="lg"
-                        disabled={isFormSubmitting}
-                    />
-                    <StyledInput
-                        type="text"
-                        placeholder="Preferred First Name (optional)"
-                        value={preferredName}
-                        onChange={handleOnChangeName}
-                        shape="rounded"
-                        size="lg"
-                        disabled={isFormSubmitting}
-                    />
-                    <StyledInput
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={handleOnChangeEmail}
-                        shape="rounded"
-                        size="lg"
-                        disabled={isFormSubmitting}
-                    />
-                    <Input
-                        type="text"
-                        placeholder="Company Name"
-                        value={company}
-                        onChange={handleOnChangeCompany}
-                        shape="rounded"
-                        size="lg"
-                        disabled={isFormSubmitting}
-                    />
-                    <Input
-                        type="text"
-                        placeholder="Position"
-                        value={position}
-                        onChange={handleOnChangePosition}
-                        shape="rounded"
-                        size="lg"
-                        disabled={isFormSubmitting}
-                    />
-                    <Input
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={handleOnChangePassword}
-                        shape="rounded"
-                        size="lg"
-                        disabled={isFormSubmitting}
-                    />
-                    <Input
-                        type="password"
-                        placeholder="Password Confirmation"
-                        value={passwordConfirm}
-                        onChange={handleOnChangePasswordConfirm}
-                        shape="rounded"
-                        size="lg"
-                        disabled={isFormSubmitting}
-                    />
+        <AuthWrapper
+            imageUrl={peopleDiscussing}
+            pageTitle="Projectify"
+            switchLayout
+        >
+            <SignupForm onSubmit={createAccount}>
+                <Input
+                    type="text"
+                    placeholder="First Name"
+                    value={firstName}
+                    onChange={handleOnChangeFirstName}
+                    shape="rounded"
+                    size="lg"
+                    disabled={isFormSubmitting}
+                />
+                <Input
+                    type="text"
+                    placeholder="Last Name"
+                    value={lastName}
+                    onChange={handleOnChangeLastName}
+                    shape="rounded"
+                    size="lg"
+                    disabled={isFormSubmitting}
+                />
+                <StyledInput
+                    type="text"
+                    placeholder="Preferred First Name (optional)"
+                    value={preferredName}
+                    onChange={handleOnChangeName}
+                    shape="rounded"
+                    size="lg"
+                    disabled={isFormSubmitting}
+                />
+                <StyledInput
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={handleOnChangeEmail}
+                    shape="rounded"
+                    size="lg"
+                    disabled={isFormSubmitting}
+                />
+                <Input
+                    type="text"
+                    placeholder="Company Name"
+                    value={company}
+                    onChange={handleOnChangeCompany}
+                    shape="rounded"
+                    size="lg"
+                    disabled={isFormSubmitting}
+                />
+                <Input
+                    type="text"
+                    placeholder="Position"
+                    value={position}
+                    onChange={handleOnChangePosition}
+                    shape="rounded"
+                    size="lg"
+                    disabled={isFormSubmitting}
+                />
+                <Input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={handleOnChangePassword}
+                    shape="rounded"
+                    size="lg"
+                    disabled={isFormSubmitting}
+                />
+                <Input
+                    type="password"
+                    placeholder="Password Confirmation"
+                    value={passwordConfirm}
+                    onChange={handleOnChangePasswordConfirm}
+                    shape="rounded"
+                    size="lg"
+                    disabled={isFormSubmitting}
+                />
 
-                    <StyledButton
-                        color="primary"
-                        size="lg"
-                        shape="rounded"
-                        disabled={isFormSubmitting || !isFormSubmittable}
-                    >
-                        Sign Up
-                    </StyledButton>
-                </SignupForm>
+                <StyledButton
+                    color="primary"
+                    size="lg"
+                    shape="rounded"
+                    disabled={isFormSubmitting || !isFormSubmittable}
+                >
+                    Sign Up
+                </StyledButton>
+            </SignupForm>
 
-                <div style={{marginTop: "auto"}}>
-                    <AuthActionLink linkText="Login" hintText="Already have an account" linkTo="../admin/login"/>
-                </div>
-            </AuthWrapper>
-            <Toaster />
-        </>
+            <div style={{ marginTop: "auto" }}>
+                <AuthActionLink
+                    linkText="Login"
+                    hintText="Already have an account"
+                    linkTo="../admin/login"
+                />
+            </div>
+        </AuthWrapper>
     );
 };
 

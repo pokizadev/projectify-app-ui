@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { PasswordWrapper } from "../../components";
-import { Input, Button, Toaster } from "../../../design-system";
+import { Input, Button} from "../../../design-system";
 import { admin } from "../../../api";
 import forgotPassword from "../../../assets/images/forgotPassword.svg";
 import toast from "react-hot-toast";
@@ -33,7 +33,6 @@ const AdminForgotPassword = () => {
     };
 
     return (
-        <>
          <PasswordWrapper pageTitle="Forgot Password?" imageUrl={forgotPassword}>
             <Form onSubmit={getInstructions} noValidate>
                 <Input
@@ -54,9 +53,6 @@ const AdminForgotPassword = () => {
                 </Button>
             </Form>
         </PasswordWrapper>
-        <Toaster/>
-        </>
-       
     );
 };
 
