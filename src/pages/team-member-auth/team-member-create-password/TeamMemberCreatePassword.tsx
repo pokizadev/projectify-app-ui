@@ -1,7 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { Button, Input } from "../../../design-system";
-import { AuthWrapper } from "../../components";
+import { Button, Input} from "../../../design-system";
+import { AuthWrapper, AuthActionLink } from "../../components";
+import { teamMember } from "../../../api";
+import toast from "react-hot-toast";
 
 import teamWork from "../../../assets/images/teamWork.jpg";
 
@@ -14,15 +16,16 @@ const TeamMemberCreatePasswordForm = styled.form`
 
 const StyledInput = styled(Input)`
     grid-column: 1 / 3;
-`
+`;
 
 const StyledButton = styled(Button)`
     grid-column: 1 / 3;
-`
+`;
 const TeamMemberCreatePassword = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
+    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
@@ -36,9 +39,29 @@ const TeamMemberCreatePassword = () => {
         setPasswordConfirm(value);
     };
 
-    const createPassword = (e: React.FormEvent<HTMLFormElement>) => {
+    const isFormSubmittable = email && password && passwordConfirm;
+
+    const createPassword = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(password, passwordConfirm, email);
+        try {
+            setIsFormSubmitting(true);
+            const response = await teamMember.createPassword({
+                email,
+                password,
+                passwordConfirm
+            });
+            setIsFormSubmitting(false);
+            setEmail("");
+            setPassword("");
+            setPasswordConfirm("");
+
+            toast.success(response.message);
+        } catch (error) {
+            if (error instanceof Error) {
+                toast.error(error.message);
+                setIsFormSubmitting(false)
+            }
+        }
     };
 
     return (
@@ -51,7 +74,7 @@ const TeamMemberCreatePassword = () => {
                     onChange={handleOnChangeEmail}
                     shape="rounded"
                     size="lg"
-                    
+                    disabled={isFormSubmitting}
                 />
                 <Input
                     type="password"
@@ -60,6 +83,8 @@ const TeamMemberCreatePassword = () => {
                     onChange={handleOnChangePassword}
                     shape="rounded"
                     size="lg"
+                    disabled={isFormSubmitting}
+
                 />
                 <Input
                     type="password"
@@ -68,16 +93,19 @@ const TeamMemberCreatePassword = () => {
                     onChange={handleOnChangePasswordConfirm}
                     shape="rounded"
                     size="lg"
+                    disabled={isFormSubmitting}
+
                 />
-                <StyledButton
-                    color="primary"
-                    size="lg"
-                    shape="rounded"
-                    
-                >
+                <StyledButton color="primary" size="lg" shape="rounded" disabled={isFormSubmitting || !isFormSubmittable}>
                     Create Password
                 </StyledButton>
             </TeamMemberCreatePasswordForm>
+
+            <AuthActionLink
+                linkText="Login"
+                hintText="Already have a password"
+                linkTo="../team-member/login"
+            />
         </AuthWrapper>
     );
 };
