@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import toast from "react-hot-toast";
+import { useLocalStorage } from "../../../design-system/hooks";
 import { AuthWrapper } from "../../components";
 import { Button, Input } from "../../../design-system";
 
@@ -29,6 +30,8 @@ const AdminLogin = () => {
     const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
     const navigate = useNavigate();
 
+    const [setItem, getItem] = useLocalStorage()
+
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
     };
@@ -45,8 +48,7 @@ const AdminLogin = () => {
                 email,
                 password
             });
-
-            localStorage.setItem("authToken", token);
+            setItem("authToken", token)
             navigate("/admin/platform");
 
             setIsFormSubmitting(false);
