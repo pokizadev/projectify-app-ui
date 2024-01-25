@@ -1,9 +1,9 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, NavLink } from "react-router-dom";
+import { useLocalStorage } from "../../hooks";
 import { Typography } from "../Typography";
 import { Icon } from "../Icon";
-import { NavLink } from "react-router-dom";
-import "./SideBarLinks.css"
+import "./SideBarLinks.css";
 
 type SideBarLink = {
     linkText: string;
@@ -20,11 +20,13 @@ type SideBarLinksProps = { links: SideBarLinksGroup[]; loggedOutLink: string };
 
 const SideBarLinks: React.FC<SideBarLinksProps> = ({
     links,
-    loggedOutLink,
+    loggedOutLink
 }) => {
     const navigate = useNavigate();
+    const { removeItem } = useLocalStorage();
+
     const logOut = () => {
-        localStorage.removeItem("authToken");
+        removeItem("authToken");
         navigate(loggedOutLink);
     };
     return (

@@ -1,7 +1,7 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { SideBar, SideBarLinks } from "../../design-system";
-import { AppContent, AppLayout, SideBarUser} from "../components";
-import user from "../../assets/images/user1.png"
+import { AppContent, AppLayout, SideBarUser } from "../components";
+import user from "../../assets/images/user1.png";
 
 const links = [
     {
@@ -10,24 +10,24 @@ const links = [
             {
                 linkText: "Project",
                 linkTo: "projects",
-                iconName: "projects",
+                iconName: "projects"
             },
             {
                 linkText: "Stories",
                 linkTo: "stories",
-                iconName: "stories",
+                iconName: "stories"
             },
             {
                 linkText: "Personal Tasks",
                 linkTo: "personal-tasks",
-                iconName: "tasks",
+                iconName: "tasks"
             },
             {
                 linkText: "Team Members",
                 linkTo: "team-members",
-                iconName: "members",
-            },
-        ],
+                iconName: "members"
+            }
+        ]
     },
     {
         title: "Settings",
@@ -35,22 +35,28 @@ const links = [
             {
                 linkText: "Settings",
                 linkTo: "settings",
-                iconName: "settings",
+                iconName: "settings"
             },
             {
                 linkText: "Support",
                 linkTo: "support",
-                iconName: "support",
-            },
-        ],
-    },
+                iconName: "support"
+            }
+        ]
+    }
 ];
 
 const Platform = () => {
     return (
         <AppLayout>
             <SideBar>
-                <SideBarUser details={{firstName: "Sarah", lastName: "Smith", imageUrl: user, email: "123@example.com"}}
+                <SideBarUser
+                    details={{
+                        firstName: "Sarah",
+                        lastName: "Smith",
+                        imageUrl: user,
+                        email: "123@example.com"
+                    }}
                 />
                 <SideBarLinks links={links} loggedOutLink="/admin/sign-in" />
             </SideBar>
