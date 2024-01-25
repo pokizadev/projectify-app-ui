@@ -1,34 +1,39 @@
+import React, { useState, createContext, useContext} from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import styled from "styled-components";
 
-const useCounter = (startAt: number, incrementBy: number): [number, () => void] => {
-    const [counter, setCounter] = useState(startAt);
+export const AppContext = createContext<{id: number, text: string}[]>([]);
 
-    const increment = () => {
-        setCounter((prevCounter) => prevCounter + incrementBy);
-    };
+export const AppProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
+    return <AppContext.Provider value={[{id: 1, text: "hi"}]}>{children}</AppContext.Provider>
+}
 
-    return [counter, increment];
-};
+const StyledLink = styled(Link)`
+    padding: 8px;
+    display: flex;
+    font-size: 20px;
+`;
 
 const App = () => {
-    const [counter, setCounter] = useCounter(100, 100)
     return (
-        <div style={{ padding: "200px" }}>
-            <button onClick={setCounter}>Click</button>
-            <h1>{counter}</h1>
-            <h2>Admin</h2>
-            <Link to="admin/signup">Sign Up</Link>
-            <Link to="admin/login">Login</Link>
-            <Link to="admin/forgot-password">Forgot Password</Link>
-            <Link to="admin/reset-password">Reset Password</Link>
-            <h2>Team Member</h2>
-            <Link to="team-member/create-password">Sign Up</Link>
-            <Link to="team-member/login">Login</Link>
-            <Link to="team-member/forgot-password">Forgot Password</Link>
-            <Link to="team-member/reset-password">Reset Password</Link>
+        <div style={{ padding: "100px" }}>
+            <h1 style={{ marginBottom: "10px"}}>Welcome</h1>
+            <h2 style={{ marginBottom: "10px" }}>Admin</h2>
+            <StyledLink to="admin/signup">Sign Up</StyledLink>
+            <StyledLink to="admin/login">Login</StyledLink>
+            <StyledLink to="admin/forgot-password">Forgot Password</StyledLink>
+            <StyledLink to="admin/reset-password">Reset Password</StyledLink>
+            <h2 style={{ marginBottom: "10px"}}>Team Member</h2>
+            <StyledLink to="team-member/create-password">Sign Up</StyledLink>
+            <StyledLink to="team-member/login">Login</StyledLink>
+            <StyledLink to="team-member/forgot-password">
+                Forgot Password
+            </StyledLink>
+            <StyledLink to="team-member/reset-password">
+                Reset Password
+            </StyledLink>
         </div>
     );
 };
 
-export { App, useCounter };
+export { App };

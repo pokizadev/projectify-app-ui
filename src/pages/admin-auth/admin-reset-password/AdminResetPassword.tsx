@@ -6,7 +6,6 @@ import { Input, Button } from "../../../design-system";
 import updatePassword from "../../../assets/images/updatePassword.svg";
 import { admin } from "../../../api";
 import toast from "react-hot-toast";
-import { useCounter } from "../../../App";
 
 const ResetPasswordForm = styled.form`
     width: 100%;
@@ -20,7 +19,6 @@ const AdminResetPassword = () => {
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
     const [searchParams] = useSearchParams();
     const passwordResetToken = searchParams.get("passwordResetToken");
-    const [counter, setCounter] = useCounter(200, 5)
 
     const navigate = useNavigate();
 
@@ -55,7 +53,6 @@ const AdminResetPassword = () => {
 
     return (
         <PasswordWrapper pageTitle="Reset Password" imageUrl={updatePassword}>
-            <button onClick={setCounter}>{counter}</button>
             <ResetPasswordForm onSubmit={resetPassword} noValidate>
                 <Input
                     type="password"
