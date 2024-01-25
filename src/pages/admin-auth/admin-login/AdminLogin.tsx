@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import toast from "react-hot-toast";
-import { useLocalStorage } from "../../../design-system/hooks";
+import { useLocalStorage } from "../../../hooks";
 import { AuthWrapper } from "../../components";
 import { Button, Input } from "../../../design-system";
 
