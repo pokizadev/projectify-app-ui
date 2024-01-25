@@ -19,6 +19,7 @@ const AdminResetPassword = () => {
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
     const [searchParams] = useSearchParams();
     const passwordResetToken = searchParams.get("passwordResetToken");
+
     const navigate = useNavigate();
 
     const handleOnChangePassword = (value: string) => {

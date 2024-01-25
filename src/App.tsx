@@ -1,21 +1,38 @@
+import React, { useState, createContext, useContext} from "react";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+export const AppContext = createContext<{id: number, text: string}[]>([]);
+
+export const AppProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
+    return <AppContext.Provider value={[{id: 1, text: "hi"}]}>{children}</AppContext.Provider>
+}
+
+const StyledLink = styled(Link)`
+    padding: 8px;
+    display: flex;
+    font-size: 20px;
+`;
 
 const App = () => {
     return (
-        <>
-            <h1>You are at Home</h1>
-            <h2>Admin</h2>
-            <Link to="admin/signup">Sign Up</Link>
-            <Link to="admin/login">Login</Link>
-            <Link to="admin/forgot-password">Forgot Password</Link>
-            <Link to="admin/reset-password">Reset Password</Link>
-            <h2>Team Member</h2>
-            <Link to="team-member/create-password">Sign Up</Link>
-            <Link to="team-member/login">Login</Link>
-            <Link to="team-member/forgot-password">Forgot Password</Link>
-            <Link to="team-member/reset-password">Reset Password</Link>
-
-        </>
+        <div style={{ padding: "100px" }}>
+            <h1 style={{ marginBottom: "10px"}}>Welcome</h1>
+            <h2 style={{ marginBottom: "10px" }}>Admin</h2>
+            <StyledLink to="admin/signup">Sign Up</StyledLink>
+            <StyledLink to="admin/login">Login</StyledLink>
+            <StyledLink to="admin/forgot-password">Forgot Password</StyledLink>
+            <StyledLink to="admin/reset-password">Reset Password</StyledLink>
+            <h2 style={{ marginBottom: "10px"}}>Team Member</h2>
+            <StyledLink to="team-member/create-password">Sign Up</StyledLink>
+            <StyledLink to="team-member/login">Login</StyledLink>
+            <StyledLink to="team-member/forgot-password">
+                Forgot Password
+            </StyledLink>
+            <StyledLink to="team-member/reset-password">
+                Reset Password
+            </StyledLink>
+        </div>
     );
 };
 
