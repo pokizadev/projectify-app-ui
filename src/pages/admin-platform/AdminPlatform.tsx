@@ -1,7 +1,11 @@
-import { Outlet, useNavigate } from "react-router-dom";
-import { SideBar, SideBarLinks } from "../../design-system";
+import { Outlet} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { SideBar, SideBarLinks, Toaster } from "../../design-system";
 import { AppContent, AppLayout, SideBarUser } from "../components";
 import user from "../../assets/images/user1.png";
+import { GetMeResponseType, admin } from "../../api";
+import toast from "react-hot-toast";
+
 
 const links = [
     {
@@ -47,15 +51,28 @@ const links = [
 ];
 
 const Platform = () => {
+    const [user, setUser] = useState<GetMeResponseType["data"]>()
+    useEffect(() => {
+        admin
+            .getMe()
+            .then((data):void => {
+                setUser(data.data)
+            })
+            .catch((error: Error) => {
+                toast.error(error.message)
+            });
+    }, []);
     return (
+        <>
         <AppLayout>
             <SideBar>
                 <SideBarUser
                     details={{
-                        firstName: "Sarah",
-                        lastName: "Smith",
-                        imageUrl: user,
-                        email: "123@example.com"
+                        firstName: user ? user.firstName : "",
+                        lastName: user ? user.lastName : 
+                        "",
+                        imageUrl: "",
+                        email: user ? user.email : ""
                     }}
                 />
                 <SideBarLinks links={links} loggedOutLink="/admin/sign-in" />
@@ -64,6 +81,8 @@ const Platform = () => {
                 <Outlet />
             </AppContent>
         </AppLayout>
+        <Toaster/>
+        </>
     );
 };
 

@@ -1,10 +1,11 @@
 import React from "react";
-import { Navigate, Route, RouteProps } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useLocalStorage } from "../hooks";
+import { UserRole } from "../types/types";
 
 type ProtectedRouteProps = {
     component: React.ReactElement;
-    userType: "admin" | "teamMember";
+    userType: UserRole
     to: string;
 };
 
@@ -15,7 +16,7 @@ const Private: React.FC<ProtectedRouteProps> = ({
 }) => {
     const {getItem} = useLocalStorage()
     let isAuthTokenExists = getItem("authToken")
-    
+
     if (isAuthTokenExists) {
         return component;
     } else {

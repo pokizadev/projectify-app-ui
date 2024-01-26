@@ -1,3 +1,5 @@
+import { UserType } from "../types/types";
+
 type SignUpInput = {
     firstName: string;
     lastName: string;
@@ -7,13 +9,16 @@ type SignUpInput = {
     position: string;
     password: string;
     passwordConfirm: string;
-    
 };
 
-type loginInput = {
+type LoginInput = {
     email: string;
     password: string;
 };
+
+export type GetMeResponseType = {
+    data: UserType
+}
 
 class Admin {
     url: string;
@@ -29,9 +34,9 @@ class Admin {
             const response = await fetch(`${this.url}/sign-up`, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "application/json"
                 },
-                body: JSON.stringify(input),
+                body: JSON.stringify(input)
             });
             if (!response.ok) {
                 const data = await response.json();
@@ -43,14 +48,14 @@ class Admin {
         }
     }
 
-    async login(input: loginInput): Promise<{ token: string }> {
+    async login(input: LoginInput): Promise<{ token: string }> {
         try {
             const response = await fetch(`${this.url}/login`, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "application/json"
                 },
-                body: JSON.stringify(input),
+                body: JSON.stringify(input)
             });
             if (!response.ok) {
                 const data = await response.json();
@@ -68,11 +73,11 @@ class Admin {
             const response = await fetch(`${this.url}/forgot-password`, {
                 method: "PATCH",
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    email,
-                }),
+                    email
+                })
             });
             if (!response.ok) {
                 const data = await response.json();
@@ -95,12 +100,12 @@ class Admin {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
-                    authorization: `Bearer ${token}`,
+                    authorization: `Bearer ${token}`
                 },
                 body: JSON.stringify({
                     password,
                     passwordConfirm
-                }),
+                })
             });
             if (!response.ok) {
                 const data = await response.json();
@@ -112,7 +117,26 @@ class Admin {
             throw error;
         }
     }
-    
+
+    async getMe(): Promise<GetMeResponseType> {
+        try {
+            const rawAuthToken = localStorage.getItem("authToken")
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : ""
+            const response = await fetch(`${this.url}/me`, {
+                headers: {
+                    authorization: `Bearer ${authToken}`
+                }
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+
+            return response.json();
+        } catch (error) {
+            throw error
+        }
+    }
 }
 
 export const admin = new Admin();
