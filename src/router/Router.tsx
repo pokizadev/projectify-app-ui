@@ -14,8 +14,10 @@ import {
     TeamMemberForgotPassword,
     TeamMemberResetPassword,
     AdminPlatform,
-    AdminProjects
+    AdminProjects,
+    TeamMemberPlatform
 } from "../pages";
+import { Private } from "./Private";
 
 
 export const router = createBrowserRouter(
@@ -47,8 +49,15 @@ export const router = createBrowserRouter(
                 element={<TeamMemberResetPassword />}
             />
 
-            <Route path="/admin/platform" element={<AdminPlatform />}>
+            <Route path="/admin/platform" element={<Private component={<AdminPlatform/>} userType="admin" to="../admin/login"/>} >
                 <Route path="projects" element={<AdminProjects />} />
+                <Route path="stories" element={<h1>Stories</h1>} />
+                <Route path="personal-tasks" element={<h1>Tasks</h1>} />
+                <Route path="team-members" element={<h1>Members</h1>} />
+            </Route>
+
+            <Route path="/team-member/platform" element={<Private component={<TeamMemberPlatform/>} userType="teamMember" to="../team-member/login"/>} >
+                <Route path="projects" element={< AdminProjects />} />
                 <Route path="stories" element={<h1>Stories</h1>} />
                 <Route path="personal-tasks" element={<h1>Tasks</h1>} />
                 <Route path="team-members" element={<h1>Members</h1>} />
