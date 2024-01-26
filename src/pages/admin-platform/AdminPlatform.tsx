@@ -1,11 +1,12 @@
-import { Outlet} from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
 import { SideBar, SideBarLinks, Toaster } from "../../design-system";
 import { AppContent, AppLayout, SideBarUser } from "../components";
 import user from "../../assets/images/user1.png";
-import { GetMeResponseType, admin } from "../../api";
+import { admin } from "../../api";
 import toast from "react-hot-toast";
-
+import { Actions } from "../../store";
+import { useStore } from "../../hooks";
 
 const links = [
     {
@@ -51,37 +52,45 @@ const links = [
 ];
 
 const Platform = () => {
-    const [user, setUser] = useState<GetMeResponseType["data"]>()
+    const {
+        state: { user },
+        dispatch
+    } = useStore();
     useEffect(() => {
         admin
             .getMe()
-            .then((data):void => {
-                setUser(data.data)
+            .then((data): void => {
+                dispatch({
+                    type: Actions.INIT_USER,
+                    payload: data.data
+                });
             })
             .catch((error: Error) => {
-                toast.error(error.message)
+                toast.error(error.message);
             });
     }, []);
     return (
         <>
-        <AppLayout>
-            <SideBar>
-                <SideBarUser
-                    details={{
-                        firstName: user ? user.firstName : "",
-                        lastName: user ? user.lastName : 
-                        "",
-                        imageUrl: "",
-                        email: user ? user.email : ""
-                    }}
-                />
-                <SideBarLinks links={links} loggedOutLink="/admin/sign-in" />
-            </SideBar>
-            <AppContent>
-                <Outlet />
-            </AppContent>
-        </AppLayout>
-        <Toaster/>
+            <AppLayout>
+                <SideBar>
+                    <SideBarUser
+                        details={{
+                            firstName: user?.firstName || "",
+                            lastName: user?.lastName || "",
+                            imageUrl: "",
+                            email: user?.email || ""
+                        }}
+                    />
+                    <SideBarLinks
+                        links={links}
+                        loggedOutLink="/admin/sign-in"
+                    />
+                </SideBar>
+                <AppContent>
+                    <Outlet />
+                </AppContent>
+            </AppLayout>
+            <Toaster />
         </>
     );
 };
