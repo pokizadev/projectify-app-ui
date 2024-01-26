@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import { trimWhiteSpaces, getNameInitials } from "../utils";
 import { sizeClassNames, shapeClassNames } from "./classnames";
 import "./Avatar.css";
-import { get } from "http";
 
 type AvatarSize = "sm" | "md" | "lg";
 type AvatarShape = "rounded" | "circle";
