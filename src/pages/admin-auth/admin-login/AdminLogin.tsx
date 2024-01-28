@@ -40,6 +40,10 @@ const AdminLogin = () => {
         setPassword(value);
     };
 
+    const saveAuthToken = (token: string) => {
+        setItem("authToken", token)
+    }
+
     const login = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
@@ -48,7 +52,7 @@ const AdminLogin = () => {
                 email,
                 password
             });
-            setItem("authToken", token)
+            saveAuthToken(token)
             navigate("/admin/platform");
 
             setIsFormSubmitting(false);
