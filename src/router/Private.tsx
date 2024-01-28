@@ -23,7 +23,7 @@ const Private: React.FC<ProtectedRouteProps> = ({
 
     useEffect(() => {
         if(isAuthTokenExists) {
-            if (userType === "admin") {
+            if (userType === UserRole.admin) {
                 admin
                     .getMe()
                     .then((data): void => {
@@ -39,7 +39,7 @@ const Private: React.FC<ProtectedRouteProps> = ({
                         navigate("../")
 
                     });
-            } else if (userType === "teamMember") {
+            } else if (userType === UserRole.teamMember) {
             }
         }
        
@@ -50,7 +50,7 @@ const Private: React.FC<ProtectedRouteProps> = ({
 
     if (!isAuthTokenExists) {
         const navigateTo =
-            userType === "admin"
+            userType === UserRole.admin
                 ? "../admin/login"
                 : "../team-member/login";
         return <Navigate to={navigateTo} />;
@@ -58,7 +58,7 @@ const Private: React.FC<ProtectedRouteProps> = ({
         return component;
     } else if (!isAuthorized) {
         const navigateTo =
-            userType === "admin"
+            userType === UserRole.admin
                 ? "../admin/platform"
                 : "../team-member/platform";
         return <Navigate to={navigateTo} />;

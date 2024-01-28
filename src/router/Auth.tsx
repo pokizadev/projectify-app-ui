@@ -15,7 +15,7 @@ const Auth: React.FC<AuthRouteProps> = ({ component, userType }) => {
 
     if (userRole && authToken) {
         const navigateTo =
-            userType === "admin"
+            userType === UserRole.admin
                 ? "../admin/platform"
                 : "../team-member/platform";
         return <Navigate to={navigateTo} />;
