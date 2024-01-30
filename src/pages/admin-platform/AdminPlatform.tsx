@@ -1,12 +1,10 @@
-import { Outlet } from "react-router-dom";
-import { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 import { SideBar, SideBarLinks, Toaster } from "../../design-system";
 import { AppContent, AppLayout, SideBarUser } from "../components";
-import user from "../../assets/images/user1.png";
-import { admin } from "../../api";
-import toast from "react-hot-toast";
+import avatar from "../../assets/images/user1.png";
+
+import { useLocalStorage, useStore } from "../../hooks";
 import { Actions } from "../../store";
-import { useStore } from "../../hooks";
 
 const links = [
     {
@@ -53,22 +51,17 @@ const links = [
 
 const Platform = () => {
     const {
-        state: { user },
-        dispatch
+        state: { user }, dispatch
     } = useStore();
-    useEffect(() => {
-        admin
-            .getMe()
-            .then((data): void => {
-                dispatch({
-                    type: Actions.INIT_USER,
-                    payload: data.data
-                });
-            })
-            .catch((error: Error) => {
-                toast.error(error.message);
-            });
-    }, []);
+
+    const navigate = useNavigate()
+    const {removeItem } = useLocalStorage()
+    const logOut = () => {
+        removeItem("authToken")
+        removeItem("userRole")
+        dispatch({type: Actions.RESET_STATE })
+        navigate("/admin/login")
+    }
     return (
         <>
             <AppLayout>
@@ -77,13 +70,13 @@ const Platform = () => {
                         details={{
                             firstName: user?.firstName || "",
                             lastName: user?.lastName || "",
-                            imageUrl: "",
+                            imageUrl: avatar,
                             email: user?.email || ""
                         }}
                     />
                     <SideBarLinks
                         links={links}
-                        loggedOutLink="/admin/sign-in"
+                        logOut = {logOut}
                     />
                 </SideBar>
                 <AppContent>

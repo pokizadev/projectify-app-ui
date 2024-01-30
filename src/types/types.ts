@@ -1,5 +1,8 @@
- export type UserRole = "admin" | "teamMember"
- 
+ export enum UserRole {
+    admin = "admin",
+    teamMember = "teamMember"
+ }
+
  export interface UserType {
     firstName: string
     lastName: string
