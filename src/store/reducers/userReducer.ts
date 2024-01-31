@@ -1,15 +1,43 @@
-import { ActionType, Actions } from "../actions";
+import {
+    ActionType,
+    Actions,
+    CreateTaskAction,
+    PopulateTasksActions
+} from "../actions";
 import { GlobalState, initialState } from "../state";
 
-export const userReducer = (state: GlobalState, action: ActionType): GlobalState => {
-    if(action.type === Actions.INIT_USER ) {
+export const userReducer = (
+    state: GlobalState,
+    action: ActionType
+): GlobalState => {
+    if (action.type === Actions.INIT_USER) {
         return {
-            ...state, 
+            ...state,
             user: action.payload
+        };
+    } else if (action.type === Actions.RESET_STATE) {
+        return initialState;
+    } else if (action.type === Actions.POPULATE_TASKS) {
+        return {
+            ...state,
+            adminPersonalTasks: (action as PopulateTasksActions).payload
+        };
+    } else if (action.type === Actions.ADD_TASK) {
+        if (state.adminPersonalTasks) {
+            return {
+                ...state,
+                adminPersonalTasks: [
+                    ...state.adminPersonalTasks,
+                    (action as CreateTaskAction).payload
+                ]
+            };
+        } else {
+            return {
+                ...state,
+                adminPersonalTasks: [(action as CreateTaskAction).payload]
+            };
         }
-    } else if(action.type === Actions.RESET_STATE) {
-        return initialState
     }
 
-    return state
-}
+    return state;
+};

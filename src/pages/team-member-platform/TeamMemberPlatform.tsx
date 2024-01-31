@@ -1,7 +1,9 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { SideBar, SideBarLinks } from "../../design-system";
 import { AppLayout, AppContent, SideBarUser } from "../components";
 import teamMember from "../../assets/images/team-member.png"
+import { useLocalStorage, useStore } from "../../hooks";
+import { Actions } from "../../store";
 
 
 
@@ -42,13 +44,26 @@ const links = [
         ],
     },
 ];
-const TeamMemberPlatform = () => {
+const Platform = () => {
+    const {
+        state: { user }, dispatch
+    } = useStore();
+
+    const navigate = useNavigate()
+    const {removeItem } = useLocalStorage()
+    const logOut = () => {
+        removeItem("authToken")
+        dispatch({type: Actions.RESET_STATE })
+        navigate("/admin/login")
+    }
     return (
         <AppLayout>
         <SideBar>
-            <SideBarUser details={{firstName: "Lora", lastName: "Jackson", imageUrl: teamMember, email: "123@example.com"}}
+            <SideBarUser details={{
+                firstName: user?.firstName || "", lastName: user?.lastName || "", imageUrl: teamMember, 
+                email: user?.email || ""}}
             />
-            <SideBarLinks links={links} loggedOutLink="/admin/sign-in" />
+            <SideBarLinks links={links} logOut={logOut} />
         </SideBar>
         <AppContent>
             <Outlet />
@@ -57,4 +72,4 @@ const TeamMemberPlatform = () => {
     );
 };
 
-export { TeamMemberPlatform };
+export { Platform as TeamMemberPlatform };
