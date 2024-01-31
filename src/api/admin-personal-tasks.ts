@@ -1,14 +1,16 @@
-type TaskStatus = "TODO" | "INPROGRESS" | "DONE";
-
-interface Task {
-    id: string;
-    title: string;
-    description: string;
-    due: string;
-    status: TaskStatus;
-}
+import { Task  } from "../types/types";
 
 type TaskCreateInput = Omit<Task, "id" | "status">
+
+interface GetAllTasksResponse {
+    data: {
+        tasks: Task[] | []
+    }
+}
+
+interface TaskCreateResonponse {
+    data: Task
+}
 
 class AdminPersonalTasks {
     url: string;
@@ -20,12 +22,15 @@ class AdminPersonalTasks {
         }/admins/me`;
     }
 
-    async createTask(input: TaskCreateInput) {
+    async createTask(input: TaskCreateInput): Promise<TaskCreateResonponse> {
         try {
+            const rawAuthToken = localStorage.getItem("authToken")
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : ""
             const response = await fetch(`${this.url}/tasks`, {
                 method: "PATCH",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${authToken}`
                 },
                 body: JSON.stringify(input)
             });
@@ -39,6 +44,25 @@ class AdminPersonalTasks {
         }
     }
 
+    async getTasks(): Promise<{data: GetAllTasksResponse}> {
+        try {
+            const rawAuthToken = localStorage.getItem("authToken")
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : ""
+            const response = await fetch(`${this.url}/tasks`, {
+                headers: {
+                    authorization: `Bearer ${authToken}`
+                }
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+
+            return response.json();
+        } catch (error) {
+            throw error
+        }
+    }
 }
 
 export const adminPersonalTasks = new AdminPersonalTasks();

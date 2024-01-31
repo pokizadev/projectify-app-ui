@@ -30,6 +30,7 @@ const Tasks = () => {
     const [tasks, setTasks] = useState<string[]>([])
     const [showCreateTaskModal, setShowCreateTaskModal] = useState<boolean>(false)
 
+
     return (
         <PageBase>
             {!tasks.length ? (
