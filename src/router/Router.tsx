@@ -21,6 +21,7 @@ import { Private } from "./Private";
 import { Auth } from "./Auth";
 import { UserRole } from "../types/types";
 import { AdminTasks } from "../pages/admin-platform/personal-tasks/PersonalTasks";
+import { AdminTeamMembers } from "../pages/admin-platform/team-members/TeamMembers";
 
 
 export const router = createBrowserRouter(
@@ -56,7 +57,7 @@ export const router = createBrowserRouter(
                 <Route path="projects" element={<AdminProjects />} />
                 <Route path="stories" element={<h1>Stories</h1>} />
                 <Route path="personal-tasks" element={<AdminTasks/>} />
-                <Route path="team-members" element={<h1>Members</h1>} />
+                <Route path="team-members" element={<AdminTeamMembers/>} />
             </Route>
 
             <Route path="/team-member/platform" element={<Private component={<TeamMemberPlatform/>} userType={UserRole.teamMember}/>} >

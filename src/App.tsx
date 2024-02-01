@@ -19,7 +19,7 @@ const App = () => {
         <div style={{ padding: "100px" }}>
             <h1 style={{ marginBottom: "10px"}}>Welcome</h1>
             <h2 style={{ marginBottom: "10px" }}>Admin</h2>
-            <StyledLink to="admin/signup">Sign Up</StyledLink>
+            <StyledLink to="admin/sign-up">Sign Up</StyledLink>
             <StyledLink to="admin/login">Login</StyledLink>
             <StyledLink to="admin/forgot-password">Forgot Password</StyledLink>
             <StyledLink to="admin/reset-password">Reset Password</StyledLink>
