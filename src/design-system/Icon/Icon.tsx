@@ -1,9 +1,5 @@
 import sprite from "./sprite.svg";
-
-type IconProps = {
-    iconName: string;
-    className?: string;
-};
+import { IconProps } from "./types";
 
 const Icon: React.FC<IconProps> = ({ iconName, className}) => {
     return (
