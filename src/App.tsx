@@ -1,6 +1,7 @@
 import React, { useState, createContext, useContext} from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Badge, Icon } from "./design-system";
 
 export const AppContext = createContext<{id: number, text: string}[]>([]);
 
@@ -32,7 +33,57 @@ const App = () => {
             <StyledLink to="team-member/reset-password">
                 Reset Password
             </StyledLink>
+
+
+            <div>
+                <Badge label="Badge" color="gray" />
+                <Badge
+                    label="Badge"
+                    shape="circle"
+                    variant="outlined"
+                    color="violet"
+                />
+                <Badge
+                    label="Badge"
+                    shape="rounded"
+                    variant="contained"
+                    color="orange"
+                    icon={<Icon iconName="flag" />}
+                />
+                <Badge
+                    label="Badge"
+                    shape="circle"
+                    variant="contained"
+                    color="blue"
+                    status
+                />
+            </div>
+            <div>
+                <Badge label="Badge" color="red" />
+                <Badge
+                    label="Badge"
+                    shape="circle"
+                    variant="outlined"
+                    color="violet"
+                />
+                <Badge
+                    label="Badge"
+                    shape="rounded"
+                    variant="contained"
+                    color="purple"
+                    icon={<Icon iconName="flag" />}
+                />
+                <Badge
+                    label="Badge"
+                    shape="circle"
+                    variant="contained"
+                    color="green"
+                    status
+                />
+            </div>
         </div>
+
+
     );
 };
 
