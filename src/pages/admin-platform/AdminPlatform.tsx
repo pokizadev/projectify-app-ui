@@ -1,17 +1,17 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import { SideBar, SideBarLinks, Toaster } from "../../design-system";
+import { SideBar, SideBarLinks, SideBarLinksGroup, Toaster } from "../../design-system";
 import { AppContent, AppLayout, SideBarUser } from "../components";
 import avatar from "../../assets/images/user1.png";
 
 import { useLocalStorage, useStore } from "../../hooks";
 import { Actions } from "../../store";
 
-const links = [
+const links: SideBarLinksGroup[] = [
     {
         title: "Menu",
         links: [
             {
-                linkText: "Project",
+                linkText: "Projects",
                 linkTo: "projects",
                 iconName: "projects"
             },
