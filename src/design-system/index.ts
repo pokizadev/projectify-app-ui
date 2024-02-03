@@ -10,5 +10,7 @@ export * from "./Icon"
 export * from "./SideBar"
 export * from "./SideBarLinks"
 export * from "./Toast"
+export * from "./Badge"
+export * from "./DatePicker"
 
 export * from "./utils"
