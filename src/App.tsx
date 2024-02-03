@@ -1,8 +1,8 @@
 import React, { useState, createContext, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Badge, Icon, DatePicker } from "./design-system";
-import "react-datepicker/dist/react-datepicker.css";
+import { Badge, Icon, DatePickerV1 } from "./design-system";
+
 
 export const AppContext = createContext<{ id: number; text: string }[]>([]);
 
@@ -88,7 +88,7 @@ const App = () => {
                     status
                 />
             </div>
-            <DatePicker
+            <DatePickerV1
                 selected={date}
                 onChange={(date) => setDate(date)}
                 placeholder="Select Deadline"
