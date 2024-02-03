@@ -1,13 +1,20 @@
-import React, { useState, createContext, useContext} from "react";
+import React, { useState, createContext, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Badge, Icon } from "./design-system";
+import { Badge, Icon, DatePicker } from "./design-system";
+import "react-datepicker/dist/react-datepicker.css";
 
-export const AppContext = createContext<{id: number, text: string}[]>([]);
+export const AppContext = createContext<{ id: number; text: string }[]>([]);
 
-export const AppProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
-    return <AppContext.Provider value={[{id: 1, text: "hi"}]}>{children}</AppContext.Provider>
-}
+export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
+    children
+}) => {
+    return (
+        <AppContext.Provider value={[{ id: 1, text: "hi" }]}>
+            {children}
+        </AppContext.Provider>
+    );
+};
 
 const StyledLink = styled(Link)`
     padding: 8px;
@@ -16,15 +23,16 @@ const StyledLink = styled(Link)`
 `;
 
 const App = () => {
+    const [date, setDate] = useState<Date>();
     return (
         <div style={{ padding: "100px" }}>
-            <h1 style={{ marginBottom: "10px"}}>Welcome</h1>
+            <h1 style={{ marginBottom: "10px" }}>Welcome</h1>
             <h2 style={{ marginBottom: "10px" }}>Admin</h2>
             <StyledLink to="admin/sign-up">Sign Up</StyledLink>
             <StyledLink to="admin/login">Login</StyledLink>
             <StyledLink to="admin/forgot-password">Forgot Password</StyledLink>
             <StyledLink to="admin/reset-password">Reset Password</StyledLink>
-            <h2 style={{ marginBottom: "10px"}}>Team Member</h2>
+            <h2 style={{ marginBottom: "10px" }}>Team Member</h2>
             <StyledLink to="team-member/create-password">Sign Up</StyledLink>
             <StyledLink to="team-member/login">Login</StyledLink>
             <StyledLink to="team-member/forgot-password">
@@ -33,7 +41,6 @@ const App = () => {
             <StyledLink to="team-member/reset-password">
                 Reset Password
             </StyledLink>
-
 
             <div>
                 <Badge label="Badge" color="gray" />
@@ -81,9 +88,12 @@ const App = () => {
                     status
                 />
             </div>
+            <DatePicker
+                selected={date}
+                onChange={(date) => setDate(date)}
+                placeholder="Select Deadline"
+            />
         </div>
-
-
     );
 };
 
