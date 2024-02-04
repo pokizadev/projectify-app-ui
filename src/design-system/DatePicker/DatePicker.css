@@ -53,6 +53,11 @@
     display: none;
 }
 
+/* Work around the content shift when date picker opens */
+.react-datepicker__tab-loop {
+    position: absolute;
+}
+
 .react-datepicker__day--keyboard-selected,
 .react-datepicker__month-text--keyboard-selected,
 .react-datepicker__quarter-text--keyboard-selected,
