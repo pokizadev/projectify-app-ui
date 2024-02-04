@@ -16,9 +16,9 @@ export interface  ResetStateAction {
     type: Actions.RESET_STATE;
 }
 
-export interface PopulateTasksActions {
+export interface PopulateTasksAction {
     type: Actions.POPULATE_TASKS;
-    payload: Task[] | null;
+    payload: Task[]
 }
 
 export interface CreateTaskAction {
@@ -26,5 +26,5 @@ export interface CreateTaskAction {
     payload: Task
 }
 
-export type ActionType = InitUserAction | ResetStateAction | PopulateTasksActions | CreateTaskAction
+export type ActionType = InitUserAction | ResetStateAction | PopulateTasksAction | CreateTaskAction
 
