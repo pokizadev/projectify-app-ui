@@ -3,7 +3,10 @@ export * from "./admin-auth/admin-login/AdminLogin"
 export * from "./admin-auth/admin-forgot-password/AdminForgotPassword"
 export * from "./admin-auth/admin-reset-password/AdminResetPassword"
 export * from "./admin-platform/AdminPlatform"
+export * from "./admin-platform/personal-tasks/PersonalTasks"
 export * from "./admin-platform/projects/Projects"
+export * from "./admin-platform/team-members/TeamMembers"
+
 
 
 export * from "./team-member-auth/team-member-create-password/TeamMemberCreatePassword"

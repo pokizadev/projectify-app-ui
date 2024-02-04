@@ -2,7 +2,7 @@ import {
     ActionType,
     Actions,
     CreateTaskAction,
-    PopulateTasksActions
+    PopulateTasksAction
 } from "../actions";
 import { GlobalState, initialState } from "../state";
 
@@ -20,7 +20,7 @@ export const userReducer = (
     } else if (action.type === Actions.POPULATE_TASKS) {
         return {
             ...state,
-            adminPersonalTasks: (action as PopulateTasksActions).payload
+            adminPersonalTasks: (action as PopulateTasksAction).payload
         };
     } else if (action.type === Actions.ADD_TASK) {
         if (state.adminPersonalTasks) {

@@ -1,10 +1,10 @@
-import { Task  } from "../types/types";
+import { Task  } from "../types";
 
 type TaskCreateInput = Omit<Task, "id" | "status">
 
 interface GetAllTasksResponse {
     data: {
-        tasks: Task[] | []
+        tasks: Task[]
     }
 }
 
@@ -44,7 +44,7 @@ class AdminPersonalTasks {
         }
     }
 
-    async getTasks(): Promise<{data: GetAllTasksResponse}> {
+    async getTasks(): Promise<GetAllTasksResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken")
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : ""
