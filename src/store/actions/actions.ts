@@ -1,4 +1,4 @@
-import { Task, User } from "../../types/types"
+import { Task, AdminUser, TeamMemberUser } from "../../types/types"
 
 export enum Actions {
     INIT_USER = "INIT_USER",
@@ -9,7 +9,7 @@ export enum Actions {
 
 export interface InitUserAction {
     type: Actions
-    payload: User
+    payload: AdminUser | TeamMemberUser
 }
 
 export interface  ResetStateAction {

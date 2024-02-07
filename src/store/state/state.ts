@@ -1,7 +1,8 @@
-import { Task, User} from "../../types/types";
+import { Task, AdminUser, TeamMemberUser} from "../../types";
+
 
 export interface GlobalState {
-    user: User | null;
+    user: AdminUser | TeamMemberUser | null;
     adminPersonalTasks: Task[]
 }
 

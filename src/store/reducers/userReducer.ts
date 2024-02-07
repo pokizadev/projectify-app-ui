@@ -1,8 +1,8 @@
 import {
     ActionType,
     Actions,
-    CreateTaskAction,
-    PopulateTasksAction
+    PopulateTasksAction,
+    CreateTaskAction
 } from "../actions";
 import { GlobalState, initialState } from "../state";
 
