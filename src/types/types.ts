@@ -3,20 +3,28 @@
     teamMember = "teamMember"
  }
 
- export interface UserType {
+ export interface User {
     firstName: string
     lastName: string
     email: string
     id: string
     imageUrl?: string
-    company?: {
-        name: string
-        position: string
-    } | null;
     role: UserRole
 }
 
-export type TaskStatus = "TODO" | "INPROGRESS" | "DONE";
+export interface AdminUser extends User {
+    preferredFirstName: string;
+    company: {
+        name: string;
+        position: string;
+    } | null;
+}
+
+export interface TeamMemberUser extends User {
+    position: string;
+    status: string;
+    adminId: string;
+}
 
 export interface Task {
     id: string;
@@ -25,3 +33,6 @@ export interface Task {
     due: Date;
     status: TaskStatus;
 }
+
+
+export type TaskStatus = "TODO" | "INPROGRESS" | "DONE";
