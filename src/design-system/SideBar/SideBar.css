@@ -3,8 +3,11 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    gap: var(--space-30)
+    gap: var(--space-30);
+    z-index: 1;
+    box-shadow: var(--shadow-m);
 }
+
 
 .side-bar__logo-wrapper {
     padding: var(--space-30) var(--space-16) 0 var(--space-16);
