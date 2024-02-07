@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { Button, Input} from "../../../design-system";
 import { AuthWrapper, AuthActionLink } from "../../components";
 import { teamMember } from "../../../api";
@@ -25,7 +26,9 @@ const TeamMemberCreatePassword = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
-    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
+    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false)
+    const [searchParams ] = useSearchParams()
+    const navigate = useNavigate()
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
@@ -43,25 +46,19 @@ const TeamMemberCreatePassword = () => {
 
     const createPassword = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        try {
-            setIsFormSubmitting(true);
-            const response = await teamMember.createPassword({
-                email,
-                password,
-                passwordConfirm
+        const inviteToken = searchParams.get("inviteToken");
+        console.log(inviteToken);
+        teamMember
+            .createPassword(
+                { email, password, passwordConfirm },
+                inviteToken as string
+            )
+            .then((data) => {
+                navigate("/team-member/sign-in");
+            })
+            .catch((error) => {
+                console.log(error);
             });
-            setIsFormSubmitting(false);
-            setEmail("");
-            setPassword("");
-            setPasswordConfirm("");
-
-            toast.success(response.message);
-        } catch (error) {
-            if (error instanceof Error) {
-                toast.error(error.message);
-                setIsFormSubmitting(false)
-            }
-        }
     };
 
     return (
