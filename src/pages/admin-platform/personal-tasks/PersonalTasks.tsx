@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import toast from "react-hot-toast";
 import {
     Input,
     Modal,
@@ -9,17 +10,19 @@ import {
 } from "../../../design-system";
 import { NoDataPlaceholder, TaskCard } from "../../components";
 import { useStore } from "../../../hooks";
-import { Actions, PopulateTasksAction } from "../../../store";
+import { Actions, AddTaskAction, PopulateTasksAction } from "../../../store";
 import { groupTasksByStatus } from "../../../utils";
 import { TaskStatus } from "../../../types";
 import noTask from "../../../assets/illustrations/no-tasks.svg";
-import { adminPersonalTasks as adminPersonalTasksService } from "../../../api";
+import {
+    TaskCreateInput,
+    adminPersonalTasks as adminPersonalTasksService
+} from "../../../api";
 
 enum StatusToTitle {
     TODO = "to do",
     INPROGRESS = " In Progress",
     DONE = "Done"
-
 }
 
 const PageBase = styled.main`
@@ -51,8 +54,8 @@ const PageContent = styled.section`
 
 const PageHeader = styled.header`
     display: flex;
-    justify-content: space-between
-`
+    justify-content: space-between;
+`;
 
 const PageTitle = styled(Typography)`
     margin-bottom: var(--space-36);
@@ -62,7 +65,7 @@ const TasksColumns = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-30);
-    height: calc(100vh - 12.8rem)
+    height: calc(100vh - 12.8rem);
 `;
 
 const TasksColumn = styled.div`
@@ -82,15 +85,16 @@ const TasksColumnTitle = styled(Typography)`
 
 const Tasks = () => {
     const [taskDue, setTaskDue] = useState<Date>();
-    const [taskTitle, setTaskTitle] = useState<string>("")
+    const [taskTitle, setTaskTitle] = useState<string>("");
     const [taskDescription, setTaskDescription] = useState<string>("");
     const [isTasksFetching, setIsTasksFetching] = useState(true);
+    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
     const [showCreateTaskModal, setShowCreateTaskModal] =
-    useState<boolean>(false);
+        useState<boolean>(false);
 
     const {
         state: { adminPersonalTasks },
-        dispatch,
+        dispatch
     } = useStore();
 
     useEffect(() => {
@@ -100,7 +104,7 @@ const Tasks = () => {
                 setIsTasksFetching(false);
                 const action: PopulateTasksAction = {
                     type: Actions.POPULATE_TASKS,
-                    payload: data.data.tasks,
+                    payload: data.data.tasks
                 };
                 dispatch(action);
             })
@@ -114,8 +118,41 @@ const Tasks = () => {
         return null;
     }
 
+    const createTask = () => {
+        setIsFormSubmitting(true);
+        const input: TaskCreateInput = {
+            title: taskTitle,
+            description: taskDescription,
+            due: taskDue!
+        };
+
+        adminPersonalTasksService
+            .createTask(input)
+            .then((data) => {
+                const action: AddTaskAction = {
+                    type: Actions.ADD_TASK,
+                    payload: data.data
+                };
+                dispatch(action);
+                setIsFormSubmitting(false);
+                closeCreateTaskModal();
+                toast.success("Task has been successfully created!");
+            })
+            .catch((e) => {
+                setIsFormSubmitting(false);
+                const error = e as Error;
+                toast.error(error.message);
+            });
+    };
+
+    const closeCreateTaskModal = () => {
+        setTaskTitle("");
+        setTaskDescription("");
+        setTaskDue(undefined);
+        setShowCreateTaskModal(false);
+    };
+
     const groupedTasks = groupTasksByStatus(adminPersonalTasks);
-   
 
     return (
         <PageBase>
@@ -128,7 +165,7 @@ const Tasks = () => {
                 />
             ) : (
                 <PageContent>
-                <PageHeader>
+                    <PageHeader>
                         <PageTitle variant="h6" weight="medium">
                             Personal Tasks
                         </PageTitle>
@@ -142,28 +179,33 @@ const Tasks = () => {
                             Create A Task
                         </Button>
                     </PageHeader>
-                <TasksColumns>
-                    {Object.keys(groupedTasks).map((groupName) => {
-                        return (
-                            <TasksColumn key={groupName}>
-                                <TasksColumnTitle
-                                    variant="paragraphSM"
-                                    weight="semibold"
-                                >
-                                    {StatusToTitle[groupName as TaskStatus]}{" "}
-                                    <span>
-                                        ({groupedTasks[groupName].length})
-                                    </span>
-                                </TasksColumnTitle>
+                    <TasksColumns>
+                        {Object.keys(groupedTasks).map((groupName) => {
+                            return (
+                                <TasksColumn key={groupName}>
+                                    <TasksColumnTitle
+                                        variant="paragraphSM"
+                                        weight="semibold"
+                                    >
+                                        {StatusToTitle[groupName as TaskStatus]}{" "}
+                                        <span>
+                                            ({groupedTasks[groupName].length})
+                                        </span>
+                                    </TasksColumnTitle>
 
-                                {groupedTasks[groupName].map((task) => {
-                                    return <TaskCard task={{...task}} />;
-                                })}
-                            </TasksColumn>
-                        );
-                    })}
-                </TasksColumns>
-            </PageContent>
+                                    {groupedTasks[groupName].map((task) => {
+                                        return (
+                                            <TaskCard
+                                                key={task.id}
+                                                task={task}
+                                            />
+                                        );
+                                    })}
+                                </TasksColumn>
+                            );
+                        })}
+                    </TasksColumns>
+                </PageContent>
             )}
 
             <Modal show={showCreateTaskModal} position="center">
@@ -201,11 +243,19 @@ const Tasks = () => {
                         shape="rounded"
                         variant="outlined"
                         fullWidth
-                        onClick={() => setShowCreateTaskModal(false)}
+                        onClick={closeCreateTaskModal}
+                        disabled={isFormSubmitting}
                     >
                         Cancel
                     </Button>
-                    <Button size="lg" shape="rounded" color="primary" fullWidth>
+                    <Button
+                        size="lg"
+                        shape="rounded"
+                        color="primary"
+                        fullWidth
+                        onClick={closeCreateTaskModal}
+                        disabled={isFormSubmitting}
+                    >
                         Save
                     </Button>
                 </Buttons>
