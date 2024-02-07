@@ -21,10 +21,10 @@ export interface PopulateTasksAction {
     payload: Task[]
 }
 
-export interface CreateTaskAction {
+export interface AddTaskAction {
     type: Actions.ADD_TASK;
     payload: Task
 }
 
-export type ActionType = InitUserAction | ResetStateAction | PopulateTasksAction | CreateTaskAction
+export type ActionType = InitUserAction | ResetStateAction | PopulateTasksAction | AddTaskAction
 
