@@ -101,7 +101,7 @@ const AdminLogin = () => {
                 <AuthActionLink
                     linkText="Sign Up"
                     hintText="Don't have an account"
-                    linkTo="../admin/signup"
+                    linkTo="../admin/sign-up"
                 />
                 <AuthActionLink
                     linkText="Get Help"
