@@ -92,6 +92,8 @@ const App = () => {
                 selected={date}
                 onChange={(date) => setDate(date)}
                 placeholder="Select Deadline"
+                shape="rounded"
+                inputSize="lg"
             />
         </div>
     );
