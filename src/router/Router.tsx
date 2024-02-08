@@ -16,7 +16,7 @@ import {
     AdminPlatform,
     AdminProjects,
     TeamMemberPlatform,
-    AdminPersonalTasks,
+    AdminTasksPage,
     AdminTeamMembers
 
 } from "../pages";
@@ -58,7 +58,7 @@ export const router = createBrowserRouter(
             <Route path="/admin/platform" element={<Private component={<AdminPlatform/>} userType={UserRole.admin} />} >
                 <Route path="projects" element={<AdminProjects />} />
                 <Route path="stories" element={<h1>Stories</h1>} />
-                <Route path="personal-tasks" element={<AdminPersonalTasks/>} />
+                <Route path="personal-tasks" element={<AdminTasksPage/>} />
                 <Route path="team-members" element={<AdminTeamMembers/>} />
             </Route>
 
