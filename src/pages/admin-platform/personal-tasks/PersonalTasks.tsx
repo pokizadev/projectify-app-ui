@@ -175,7 +175,9 @@ const Tasks = () => {
                 };
                 dispatch(action);
             })
-            .catch((e) => {});
+            .catch((e) => {
+                toast.error("Something went wrong! Try later")
+            });
     };
 
     const groupedTasks = groupTasksByStatus(adminPersonalTasks);
