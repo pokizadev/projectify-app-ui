@@ -10,7 +10,12 @@ import {
 } from "../../../design-system";
 import { NoDataPlaceholder, TaskCard } from "../../components";
 import { useStore } from "../../../hooks";
-import { Actions, AddTaskAction, PopulateTasksAction } from "../../../store";
+import {
+    Actions,
+    AddTaskAction,
+    PopulateTasksAction,
+    ChangeTaskStatusAction
+} from "../../../store";
 import { groupTasksByStatus } from "../../../utils";
 import { TaskStatus } from "../../../types";
 import noTask from "../../../assets/illustrations/no-tasks.svg";
@@ -28,7 +33,7 @@ enum StatusToTitle {
 enum StatusToColor {
     TODO = "var(--jaguar-500)",
     INPROGRESS = "var(--sunglow-700)",
-    DONE = "var(--green-500)",
+    DONE = "var(--green-500)"
 }
 
 const PageBase = styled.main`
@@ -81,10 +86,9 @@ const TasksColumn = styled.div`
     border: 0.15rem solid var(--jaguar-100);
 `;
 
-const TasksColumnTitle = styled(Typography)<{color: string}>`
+const TasksColumnTitle = styled(Typography)<{ color: string }>`
     margin-bottom: var(--space-16);
     color: ${(props) => props.color};
-    
 `;
 
 const Tasks = () => {
@@ -156,6 +160,24 @@ const Tasks = () => {
         setShowCreateTaskModal(false);
     };
 
+    const onDrop = (e: React.DragEvent<HTMLDivElement>, status: TaskStatus) => {
+        const task = JSON.parse(e.dataTransfer.getData("application/json"));
+
+        adminPersonalTasksService
+            .updateTask(task.id, { status: status })
+            .then((_) => {
+                const action: ChangeTaskStatusAction = {
+                    type: Actions.CHANGE_TASK_STATUS,
+                    payload: {
+                        id: task.id,
+                        status: status
+                    }
+                };
+                dispatch(action);
+            })
+            .catch((e) => {});
+    };
+
     const groupedTasks = groupTasksByStatus(adminPersonalTasks);
 
     return (
@@ -187,10 +209,21 @@ const Tasks = () => {
                         {Object.keys(groupedTasks).map((groupName) => {
                             return (
                                 <TasksColumn key={groupName}>
+                                    <TasksColumn
+                                        key={groupName}
+                                        onDragOver={(e) => e.preventDefault()}
+                                        onDrop={(e) =>
+                                            onDrop(e, groupName as TaskStatus)
+                                        }
+                                    ></TasksColumn>
                                     <TasksColumnTitle
                                         variant="paragraphSM"
                                         weight="semibold"
-                                        color={StatusToColor[groupName as TaskStatus]}
+                                        color={
+                                            StatusToColor[
+                                                groupName as TaskStatus
+                                            ]
+                                        }
                                     >
                                         {StatusToTitle[groupName as TaskStatus]}{" "}
                                         <span>

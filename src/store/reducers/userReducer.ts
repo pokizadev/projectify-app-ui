@@ -2,7 +2,8 @@ import {
     ActionType,
     Actions,
     PopulateTasksAction,
-    AddTaskAction
+    AddTaskAction,
+    ChangeTaskStatusAction
 } from "../actions";
 import { GlobalState, initialState } from "../state";
 
@@ -24,13 +25,11 @@ export const userReducer = (
             adminPersonalTasks: payload
         };
     } else if (action.type === Actions.ADD_TASK) {
-        const payload = action.payload as AddTaskAction["payload"]
+        const payload = action.payload as AddTaskAction["payload"];
         if (state.adminPersonalTasks) {
             return {
                 ...state,
-                adminPersonalTasks: [
-                    ...state.adminPersonalTasks, payload
-                ]
+                adminPersonalTasks: [...state.adminPersonalTasks, payload]
             };
         } else {
             return {
@@ -38,6 +37,20 @@ export const userReducer = (
                 adminPersonalTasks: [payload]
             };
         }
+    } else if (action.type === Actions.CHANGE_TASK_STATUS) {
+        const payload = action.payload as ChangeTaskStatusAction["payload"];
+        const updatedTasks = state.adminPersonalTasks.map((task) => {
+            if (task.id === payload.id) {
+                return { ...task, status: payload.status };
+            } else {
+                return { ...task };
+            }
+        });
+
+        return {
+            ...state,
+            adminPersonalTasks: updatedTasks
+        };
     }
 
     return state;

@@ -1,30 +1,43 @@
-import { Task, AdminUser, TeamMemberUser } from "../../types/types"
+import { Task, AdminUser, TeamMemberUser, TaskStatus } from "../../types/types";
 
 export enum Actions {
     INIT_USER = "INIT_USER",
     RESET_STATE = "RESET_STATE",
     POPULATE_TASKS = "POPULATE_TASKS",
-    ADD_TASK = "ADD_TASK"
+    ADD_TASK = "ADD_TASK",
+    CHANGE_TASK_STATUS = "CHANGE_TASK_STATUS"
 }
 
 export interface InitUserAction {
-    type: Actions
-    payload: AdminUser | TeamMemberUser
+    type: Actions;
+    payload: AdminUser | TeamMemberUser;
 }
 
-export interface  ResetStateAction {
+export interface ResetStateAction {
     type: Actions.RESET_STATE;
 }
 
 export interface PopulateTasksAction {
     type: Actions.POPULATE_TASKS;
-    payload: Task[]
+    payload: Task[];
 }
 
 export interface AddTaskAction {
     type: Actions.ADD_TASK;
-    payload: Task
+    payload: Task;
 }
 
-export type ActionType = InitUserAction | ResetStateAction | PopulateTasksAction | AddTaskAction
+export type ChangeTaskStatusAction = {
+    type: Actions.CHANGE_TASK_STATUS;
+    payload: {
+        id: string;
+        status: TaskStatus;
+    };
+};
 
+export type ActionType =
+    | InitUserAction
+    | ResetStateAction
+    | PopulateTasksAction
+    | AddTaskAction
+    | ChangeTaskStatusAction;
