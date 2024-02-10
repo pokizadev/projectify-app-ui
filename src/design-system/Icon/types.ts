@@ -12,6 +12,7 @@ export type IconName =
     | "three-dots"
     | "edit"
     | "delete"
+    | "chevron-down"
 
 export type IconProps = {
     iconName: IconName;
