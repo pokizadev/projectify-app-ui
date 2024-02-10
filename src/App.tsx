@@ -1,8 +1,8 @@
 import React, { useState, createContext, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Badge, Icon, DatePickerV1 } from "./design-system";
-
+import { Badge, Icon } from "./design-system";
+import { Select } from "./design-system";
 
 export const AppContext = createContext<{ id: number; text: string }[]>([]);
 
@@ -88,12 +88,20 @@ const App = () => {
                     status
                 />
             </div>
-            <DatePickerV1
-                selected={date}
-                onChange={(date) => setDate(date)}
-                placeholder="Select Deadline"
+            <Select
+                options={[
+                    { label: "Option1", value: "option1" },
+                    { label: "Option2", value: "option2" },
+                    { label: "Option3", value: "option3" },
+                    { label: "Option4", value: "option4" },
+                    { label: "Option5", value: "option5" },
+                    { label: "Option6", value: "option6" }
+                ]}
+                value="option2"
+                headerPlaceholder="Select Option"
+                onSelect={(value) => {}}
+                size="md"
                 shape="rounded"
-                inputSize="lg"
             />
         </div>
     );
