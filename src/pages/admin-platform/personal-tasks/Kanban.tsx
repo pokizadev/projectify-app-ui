@@ -8,7 +8,6 @@ import { adminTasksService } from "../../../api";
 import { Typography, Button, Modal } from "../../../design-system";
 import { TaskStatus } from "../../../types";
 import { TaskCard } from "../../components";
-import { set } from "date-fns";
 import { EditTaskModal } from "./EditTaskModal";
 
 type KanbanProps = {
@@ -78,7 +77,7 @@ const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
        }
     };
     return (
-        <> {" "}
+        <>
         <TasksColumns>
             {Object.keys(groupedTasks).map((groupName) => {
                 return (
