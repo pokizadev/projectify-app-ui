@@ -12,8 +12,8 @@ const TeamMemberLoginForm = styled.form`
 `;
 
 const TeamMemberLogin = () => {
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
@@ -30,10 +30,7 @@ const TeamMemberLogin = () => {
 
     return (
         <AuthWrapper imageUrl={teamWork} pageTitle="Projectify App">
-            <TeamMemberLoginForm
-                onSubmit={confirmLogin}
-                noValidate
-            >
+            <TeamMemberLoginForm onSubmit={confirmLogin} noValidate>
                 <Input
                     type="email"
                     placeholder="Email"
@@ -41,7 +38,6 @@ const TeamMemberLogin = () => {
                     onChange={handleOnChangeEmail}
                     shape="rounded"
                     size="lg"
-                    
                 />
                 <Input
                     type="password"
@@ -50,14 +46,9 @@ const TeamMemberLogin = () => {
                     onChange={handleOnChangePassword}
                     shape="rounded"
                     size="lg"
-                    
                 />
 
-                <Button
-                    color="primary"
-                    size="lg"
-                    shape="rounded"
-                >
+                <Button color="primary" size="lg" shape="rounded">
                     Login
                 </Button>
             </TeamMemberLoginForm>

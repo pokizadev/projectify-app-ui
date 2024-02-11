@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { Button, Input} from "../../../design-system";
+import { Button, Input } from "../../../design-system";
 import { AuthWrapper, AuthActionLink } from "../../components";
 import { teamMemberService } from "../../../api";
 import toast from "react-hot-toast";
@@ -23,12 +23,12 @@ const StyledButton = styled(Button)`
     grid-column: 1 / 3;
 `;
 const TeamMemberCreatePassword = () => {
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-    const [passwordConfirm, setPasswordConfirm] = useState<string>("");
-    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false)
-    const [searchParams ] = useSearchParams()
-    const navigate = useNavigate()
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordConfirm, setPasswordConfirm] = useState("");
+    const [isFormSubmitting, setIsFormSubmitting] = useState(false);
+    const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
@@ -81,7 +81,6 @@ const TeamMemberCreatePassword = () => {
                     shape="rounded"
                     size="lg"
                     disabled={isFormSubmitting}
-
                 />
                 <Input
                     type="password"
@@ -91,9 +90,13 @@ const TeamMemberCreatePassword = () => {
                     shape="rounded"
                     size="lg"
                     disabled={isFormSubmitting}
-
                 />
-                <StyledButton color="primary" size="lg" shape="rounded" disabled={isFormSubmitting || !isFormSubmittable}>
+                <StyledButton
+                    color="primary"
+                    size="lg"
+                    shape="rounded"
+                    disabled={isFormSubmitting || !isFormSubmittable}
+                >
                     Create Password
                 </StyledButton>
             </TeamMemberCreatePasswordForm>

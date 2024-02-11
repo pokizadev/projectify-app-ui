@@ -14,7 +14,6 @@ const CreateProjectModalTitle = styled(Typography)`
     margin-bottom: var(--space-24);
 `;
 
-
 const Inputs = styled.div`
     display: flex;
     flex-direction: column;
@@ -29,8 +28,7 @@ const Buttons = styled.div`
 
 const Projects = () => {
     const [projects, setProject] = useState<string[]>([]);
-    const [showCreateProjectModal, setShowCreateProjectModal] =
-        useState<boolean>(false);
+    const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
 
     return (
         <PageBase>

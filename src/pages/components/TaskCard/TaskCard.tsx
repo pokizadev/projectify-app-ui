@@ -54,8 +54,12 @@ enum StatusToIcon {
     INPROGRESS = "flag",
     DONE = "check"
 }
-const TaskCard: React.FC<TaskCardProps> = ({ task, menuActions, onSelectMenuAction }) => {
-    const [isDragging, setIsDragging] = useState<boolean>(false);
+const TaskCard: React.FC<TaskCardProps> = ({
+    task,
+    menuActions,
+    onSelectMenuAction
+}) => {
+    const [isDragging, setIsDragging] = useState(false);
 
     const onDragStart = (e: React.DragEvent<HTMLDivElement>) => {
         setIsDragging(true);

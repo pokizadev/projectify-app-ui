@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Input, Modal, Typography, Button } from "../../../design-system";
 import { NoDataPlaceholder } from "../../components";
 import noTeamMembers from "../../../assets/illustrations/no-team-members.svg";
-import uploadImg from "../../../assets/illustrations/upload-img.svg"
+import uploadImg from "../../../assets/illustrations/upload-img.svg";
 
 const PageBase = styled.div`
     position: relative;
@@ -29,9 +29,8 @@ const Buttons = styled.div`
 `;
 
 const StyledInput = styled(Input)`
-  text-align: center;
- 
-`
+    text-align: center;
+`;
 
 const StyledImg = styled.img`
     height: var(--space-24);
@@ -40,46 +39,41 @@ const StyledImg = styled.img`
     top: 10%;
     left: 50%;
     cursor: pointer;
-`
-
+`;
 
 const TeamMembers = () => {
     const [teamMembers, setTeamMembers] = useState<string[]>([]);
-    const [showAddTeamMemberModal, setShowAddTeamMemberModal] =
-        useState<boolean>(false);
-    const [firstName, setFirstName] = useState<string>("")
-    const [lastName, setLastName] = useState<string>("")
-    const [position, setPosition] = useState<string>("")
-    const [email, setEmail] = useState<string>("")
-    const [isFromSubmitting, setIsFormSubmitting] = useState<boolean>(false)
+    const [showAddTeamMemberModal, setShowAddTeamMemberModal] = useState(false);
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [position, setPosition] = useState("");
+    const [email, setEmail] = useState("");
+    const [isFromSubmitting, setIsFormSubmitting] = useState(false);
 
     const handleOnChangeFirstName = (value: string) => {
-        setFirstName(value)
-    }
+        setFirstName(value);
+    };
 
     const handleOnChangeLastName = (value: string) => {
-        setLastName(value)
-    }
+        setLastName(value);
+    };
 
     const handleOnChangePosition = (value: string) => {
-        setPosition(value)
-    }
+        setPosition(value);
+    };
 
     const handleOnChangeEmail = (value: string) => {
-        setEmail(value)
-    }
+        setEmail(value);
+    };
 
-    const setIsFormSubmittable = firstName && lastName && position && email
+    const setIsFormSubmittable = firstName && lastName && position && email;
 
     const addTeamMember = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             setIsFormSubmitting(true);
-            
-        } catch (error) {
-            
-        }
-    }
+        } catch (error) {}
+    };
 
     return (
         <PageBase>
@@ -106,7 +100,7 @@ const TeamMembers = () => {
                         onChange={() => {}}
                         size="lg"
                     />
-                    <StyledImg src={uploadImg} alt="" onClick={() => {}}/>
+                    <StyledImg src={uploadImg} alt="" onClick={() => {}} />
                     <Input
                         placeholder="First Name"
                         value=""
@@ -114,21 +108,21 @@ const TeamMembers = () => {
                         shape="rounded"
                         size="lg"
                     />
-                     <Input
+                    <Input
                         placeholder="Last Name"
                         value=""
                         onChange={() => {}}
                         shape="rounded"
                         size="lg"
                     />
-                     <Input
+                    <Input
                         placeholder="Position"
                         value=""
                         onChange={() => {}}
                         shape="rounded"
                         size="lg"
                     />
-                     <Input
+                    <Input
                         placeholder="Email"
                         value=""
                         onChange={() => {}}
