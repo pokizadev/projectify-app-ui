@@ -4,7 +4,7 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import { AuthActionLink, PasswordWrapper } from "../../components";
 import { Input, Button } from "../../../design-system";
 import updatePassword from "../../../assets/images/updatePassword.svg";
-import { admin } from "../../../api";
+import { adminService } from "../../../api";
 import toast from "react-hot-toast";
 
 const ResetPasswordForm = styled.form`
@@ -33,7 +33,7 @@ const AdminResetPassword = () => {
     const resetPassword = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await admin.resetPassword(
+            const response = await adminService.resetPassword(
                 password,
                 passwordConfirm,
                 passwordResetToken as string

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { Button, Input} from "../../../design-system";
 import { AuthWrapper, AuthActionLink } from "../../components";
-import { teamMember } from "../../../api";
+import { teamMemberService } from "../../../api";
 import toast from "react-hot-toast";
 
 import teamWork from "../../../assets/images/teamWork.jpg";
@@ -48,7 +48,7 @@ const TeamMemberCreatePassword = () => {
         e.preventDefault();
         const inviteToken = searchParams.get("inviteToken");
         console.log(inviteToken);
-        teamMember
+        teamMemberService
             .createPassword(
                 { email, password, passwordConfirm },
                 inviteToken as string
