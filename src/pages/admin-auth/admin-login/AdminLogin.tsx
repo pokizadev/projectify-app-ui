@@ -6,7 +6,7 @@ import { useLocalStorage } from "../../../hooks";
 import { AuthWrapper } from "../../components";
 import { Button, Input } from "../../../design-system";
 
-import { admin } from "../../../api";
+import { adminService } from "../../../api";
 import { AuthActionLink } from "../../components/AuthActionLinks";
 
 import meeting from "../../../assets/images/meeting.jpg";
@@ -48,7 +48,7 @@ const AdminLogin = () => {
         e.preventDefault();
         try {
             setIsFormSubmitting(true);
-            const { token } = await admin.login({
+            const { token } = await adminService.login({
                 email,
                 password
             });

@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { PasswordWrapper } from "../../components";
 import { Input, Button} from "../../../design-system";
-import { admin } from "../../../api";
+import { adminService } from "../../../api";
 import forgotPassword from "../../../assets/images/forgotPassword.svg";
 import toast from "react-hot-toast";
 
@@ -22,7 +22,7 @@ const AdminForgotPassword = () => {
     const getInstructions = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await admin.forgotPassword(email)
+            const response = await adminService.forgotPassword(email)
             setEmail("")
             toast.success(response.message)
         } catch (error) {

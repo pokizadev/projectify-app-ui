@@ -3,7 +3,7 @@ import styled from "styled-components";
 import toast from "react-hot-toast";
 import { Button, Input } from "../../../design-system";
 import { AuthActionLink, AuthWrapper } from "../../components";
-import { admin } from "../../../api";
+import { adminService } from "../../../api";
 
 import peopleDiscussing from "../../../assets/images/frame-1.png";
 
@@ -72,7 +72,7 @@ const AdminSignup = () => {
         e.preventDefault();
         try {
             setIsFormSubmitting(true);
-            const response = await admin.signUp({
+            const response = await adminService.signUp({
                 firstName,
                 lastName,
                 preferredName,

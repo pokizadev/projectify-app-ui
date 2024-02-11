@@ -139,4 +139,4 @@ class Admin {
     }
 }
 
-export const admin = new Admin();
+export const adminService = new Admin();
