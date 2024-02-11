@@ -1,9 +1,10 @@
-import { SelectProps } from "./types";
-import { useState } from "react";
+import { SelectProps, Option, OptionValue } from "./types";
+import { useState, useRef, useEffect } from "react";
 import { Label } from "../Label";
 import { Button } from "../Button";
 import "./Select.css";
 import { trimWhiteSpaces } from "../utils";
+import { Icon } from "../Icon";
 
 const sizeClassNames = {
     md: "select-medium",
@@ -13,6 +14,21 @@ const sizeClassNames = {
 const shapeClassNames = {
     rounded: "select-rounded",
     circle: "select-circle",
+};
+
+const handleOutsideClick = (
+    event: Event,
+    ref: React.RefObject<HTMLDivElement>,
+    setShow: (arg: boolean) => void
+) => {
+    if (
+        ref &&
+        ref.current &&
+        event.target instanceof Node &&
+        !ref.current.contains(event.target)
+    ) {
+        setShow(false);
+    }
 };
 
 const Select: React.FC<SelectProps> = (props) => {
@@ -32,6 +48,21 @@ const Select: React.FC<SelectProps> = (props) => {
     } = props;
 
     const [expanded, setExpanded] = useState<boolean>(false);
+    const selectRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (expanded) {
+            document.addEventListener("mousedown", (e) =>
+                handleOutsideClick(e, selectRef, setExpanded)
+            );
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", (e) =>
+                handleOutsideClick(e, selectRef, setExpanded)
+            );
+        };
+    }, [expanded]);
 
     const onClickHeader = () => {
         setExpanded((prevValue) => !prevValue);
@@ -43,8 +74,24 @@ const Select: React.FC<SelectProps> = (props) => {
         `select ${sizeClassName} ${shapeClassName} ${className || ""}`
     );
 
+    const onSelectItem = (value: Option) => {
+        onSelect(value);
+        setExpanded(false);
+    };
+
+    const getOptioLabel = (value: OptionValue) => {
+        const option = options.find((option) => option.value === value);
+
+        return option?.label;
+    };
+
+    const finalHeaderPlaceholder = value
+        ? getOptioLabel(value)
+        : headerPlaceholder;
+
+
     return (
-        <div className={finalClassName}>
+        <div className={finalClassName} ref={selectRef}>
             {label && <Label>{label}</Label>}
             <Button
                 size={size}
@@ -56,7 +103,13 @@ const Select: React.FC<SelectProps> = (props) => {
                 disabled={disabled}
                 fullWidth
             >
-                {headerPlaceholder}
+                {finalHeaderPlaceholder}
+                <Icon
+                    iconName="chevron-down"
+                    className={`select__icon ${
+                        expanded ? "select__icon--expanded" : ""
+                    }`}
+                />
             </Button>
             {expanded && (
                 <ul className="select__body">
