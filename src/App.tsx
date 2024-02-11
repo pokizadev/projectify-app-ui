@@ -2,7 +2,7 @@ import React, { useState, createContext, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Badge, Icon } from "./design-system";
-import { Select } from "./design-system";
+import { Select, OptionValue } from "./design-system";
 
 export const AppContext = createContext<{ id: number; text: string }[]>([]);
 
@@ -24,6 +24,7 @@ const StyledLink = styled(Link)`
 
 const App = () => {
     const [date, setDate] = useState<Date>();
+    const [value, setValue] = useState<OptionValue>("");
     return (
         <div style={{ padding: "100px" }}>
             <h1 style={{ marginBottom: "10px" }}>Welcome</h1>
@@ -97,11 +98,12 @@ const App = () => {
                     { label: "Option5", value: "option5" },
                     { label: "Option6", value: "option6" }
                 ]}
-                value="option2"
+                value={value}
                 headerPlaceholder="Select Option"
-                onSelect={(value) => {}}
+                onSelect={(option) => {setValue(option.value)}}
                 size="md"
-                shape="rounded"
+                shape="circle"
+
             />
         </div>
     );
