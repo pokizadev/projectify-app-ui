@@ -8,7 +8,7 @@ import {
     Input,
     DatePickerV1,
     Select,
-    Option,
+    Option
 } from "../../../design-system";
 import { useStore } from "../../../hooks";
 import { TaskStatus } from "../../../types";
@@ -25,13 +25,13 @@ type EditTaskModalProps = {
 const statusOptions = [
     {
         value: "TODO",
-        label: "To Do",
+        label: "To Do"
     },
     {
         value: "INPROGRESS",
-        label: "In Progress",
+        label: "In Progress"
     },
-    { value: "DONE", label: "Done" },
+    { value: "DONE", label: "Done" }
 ];
 
 const EditTaskModalTitle = styled(Typography)`
@@ -52,16 +52,16 @@ const Buttons = styled.div`
 const EditTaskModal: React.FC<EditTaskModalProps> = ({
     show,
     closeModal,
-    taskId,
+    taskId
 }) => {
     const {
         dispatch,
-        state: { adminPersonalTasks },
+        state: { adminPersonalTasks }
     } = useStore();
 
     const [taskDue, setTaskDue] = useState<Date>();
-    const [taskTitle, setTaskTitle] = useState<string>("");
-    const [taskDescription, setTaskDescription] = useState<string>("");
+    const [taskTitle, setTaskTitle] = useState("");
+    const [taskDescription, setTaskDescription] = useState("");
     const [selectedStatus, setSelectedStatus] = useState<Option | undefined>();
     const [isFormSubmitting, setIsFormSubmitting] = useState(false);
 
@@ -85,7 +85,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
             title: taskTitle,
             description: taskDescription,
             due: taskDue,
-            status: selectedStatus?.value as TaskStatus,
+            status: selectedStatus?.value as TaskStatus
         };
         setIsFormSubmitting(true);
         adminTasksService
@@ -99,8 +99,8 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                         title: taskTitle,
                         description: taskDescription,
                         due: taskDue as Date,
-                        status: selectedStatus?.value as TaskStatus,
-                    },
+                        status: selectedStatus?.value as TaskStatus
+                    }
                 };
                 dispatch(action);
                 closeModal();

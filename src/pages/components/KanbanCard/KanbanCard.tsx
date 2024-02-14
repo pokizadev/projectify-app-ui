@@ -1,10 +1,10 @@
 import styled, { css } from "styled-components";
-import { TaskCardProps } from "./types";
+import { KanbanCardProps } from "./types";
 import { Badge, Bar, Menu, Typography } from "../../../design-system";
 import { format } from "date-fns";
 import { useState } from "react";
 
-const TaskCardBase = styled.div<{ $isDragging: boolean }>`
+const KanbanCardBase = styled.div<{ $isDragging: boolean }>`
     background-color: var(--white);
     padding: var(--space-16);
     border-radius: var(--border-radius-16);
@@ -25,7 +25,7 @@ const TaskCardBase = styled.div<{ $isDragging: boolean }>`
     }
 `;
 
-const TaskCardHeader = styled.div`
+const KanbanCardHeader = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -54,8 +54,12 @@ enum StatusToIcon {
     INPROGRESS = "flag",
     DONE = "check"
 }
-const TaskCard: React.FC<TaskCardProps> = ({ task, menuActions, onSelectMenuAction }) => {
-    const [isDragging, setIsDragging] = useState<boolean>(false);
+const KanbanCard: React.FC<KanbanCardProps> = ({
+    task,
+    menuActions,
+    onSelectMenuAction
+}) => {
+    const [isDragging, setIsDragging] = useState(false);
 
     const onDragStart = (e: React.DragEvent<HTMLDivElement>) => {
         setIsDragging(true);
@@ -70,16 +74,16 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, menuActions, onSelectMenuActi
         onSelectMenuAction(value, task.id);
     };
     return (
-        <TaskCardBase
+        <KanbanCardBase
             draggable
             onDragStart={onDragStart}
             onDragEnd={onDragEnd}
             $isDragging={isDragging}
         >
-            <TaskCardHeader>
+            <KanbanCardHeader>
                 <Bar color={StatusToColor[task.status]} />
                 <Menu items={menuActions} onSelect={handleOnSelectMenuItem} />
-            </TaskCardHeader>
+            </KanbanCardHeader>
             <div>
                 <TaskTitle variant="paragraphLG" weight="semibold">
                     {task?.title}
@@ -95,8 +99,8 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, menuActions, onSelectMenuActi
                 variant="contained"
                 shape="rounded"
             />
-        </TaskCardBase>
+        </KanbanCardBase>
     );
 };
 
-export { TaskCard };
+export { KanbanCard };

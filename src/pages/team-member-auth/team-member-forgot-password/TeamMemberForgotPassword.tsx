@@ -11,7 +11,7 @@ const TeamMemberForgotPasswordForm = styled.form`
 `;
 
 const TeamMemberForgotPassword = () => {
-    const [email, setEmail] = useState<string>("");
+    const [email, setEmail] = useState("");
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
@@ -24,10 +24,7 @@ const TeamMemberForgotPassword = () => {
 
     return (
         <PasswordWrapper pageTitle="Forgot Password?" imageUrl={forgotPassword}>
-            <TeamMemberForgotPasswordForm
-                onSubmit={getInstructions}
-                noValidate
-            >
+            <TeamMemberForgotPasswordForm onSubmit={getInstructions} noValidate>
                 <Input
                     type="email"
                     placeholder="Email"

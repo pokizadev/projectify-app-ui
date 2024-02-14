@@ -13,7 +13,7 @@ const Form = styled.form`
 `;
 
 const AdminForgotPassword = () => {
-    const [email, setEmail] = useState<string>("");
+    const [email, setEmail] = useState("");
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);

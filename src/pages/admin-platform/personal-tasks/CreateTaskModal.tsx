@@ -6,12 +6,10 @@ import {
     Modal,
     Input,
     DatePickerV1,
-    Button,
+    Button
 } from "../../../design-system";
 
-import {
-    TaskCreateInput, adminTasksService
-} from "../../../api";
+import { TaskCreateInput, adminTasksService } from "../../../api";
 import { useStore } from "../../../hooks";
 import { Actions, AddTaskAction } from "../../../store";
 
@@ -38,11 +36,11 @@ const Buttons = styled.div`
 
 const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
     show,
-    closeModal,
+    closeModal
 }) => {
     const [taskDue, setTaskDue] = useState<Date>();
-    const [taskTitle, setTaskTitle] = useState<string>("");
-    const [taskDescription, setTaskDescription] = useState<string>("");
+    const [taskTitle, setTaskTitle] = useState("");
+    const [taskDescription, setTaskDescription] = useState("");
     const [isFormSubmitting, setIsFormSubmitting] = useState(false);
 
     const { dispatch } = useStore();
@@ -52,7 +50,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
         const input: TaskCreateInput = {
             title: taskTitle,
             description: taskDescription,
-            due: taskDue!,
+            due: taskDue!
         };
 
         adminTasksService
@@ -60,7 +58,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
             .then((data) => {
                 const action: AddTaskAction = {
                     type: Actions.ADD_TASK,
-                    payload: data.data,
+                    payload: data.data
                 };
                 dispatch(action);
                 setIsFormSubmitting(false);

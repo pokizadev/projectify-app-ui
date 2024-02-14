@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { NoDataPlaceholder } from "../../components";
 import noTask from "../../../assets/illustrations/no-tasks.svg";
-import { adminTasksService} from "../../../api";
+import { adminTasksService } from "../../../api";
 import { useStore } from "../../../hooks";
 import { Actions, PopulateTasksAction } from "../../../store";
 import { groupTasksByStatus } from "../../../utils";
@@ -24,8 +24,7 @@ const PageContent = styled.section`
 const AdminTasksPage = () => {
     const [isTasksFetching, setIsTasksFetching] = useState(true);
 
-    const [showCreateTaskModal, setShowCreateTaskModal] =
-        useState<boolean>(false);
+    const [showCreateTaskModal, setShowCreateTaskModal] = useState(false);
 
     const {
         state: { adminPersonalTasks },
@@ -54,7 +53,7 @@ const AdminTasksPage = () => {
     }
 
     const groupedTasks = groupTasksByStatus(adminPersonalTasks);
-    
+
     return (
         <PageBase>
             {!adminPersonalTasks.length ? (
@@ -78,7 +77,6 @@ const AdminTasksPage = () => {
             />
         </PageBase>
     );
-
 };
 
 export { AdminTasksPage };

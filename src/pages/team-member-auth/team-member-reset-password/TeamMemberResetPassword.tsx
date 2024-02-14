@@ -11,8 +11,8 @@ const TeamMemberResetPasswordForm = styled.form`
 `;
 
 const TeamMemberResetPassword = () => {
-    const [newPassword, setNewPassword] = useState<string>("");
-    const [passwordConfirm, setPasswordConfirm] = useState<string>("");
+    const [newPassword, setNewPassword] = useState("");
+    const [passwordConfirm, setPasswordConfirm] = useState("");
 
     const handleOnChangeNewPassword = (value: string) => {
         setNewPassword(value);
@@ -29,10 +29,7 @@ const TeamMemberResetPassword = () => {
 
     return (
         <PasswordWrapper pageTitle="Reset Password?" imageUrl={updatePassword}>
-            <TeamMemberResetPasswordForm
-                onSubmit={resetPassword}
-                noValidate
-            >
+            <TeamMemberResetPasswordForm onSubmit={resetPassword} noValidate>
                 <Input
                     type="password"
                     placeholder="New Password"
