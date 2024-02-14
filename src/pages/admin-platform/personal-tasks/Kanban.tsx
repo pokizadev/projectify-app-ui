@@ -7,8 +7,9 @@ import { Actions, ChangeTaskStatusAction } from "../../../store";
 import { adminTasksService } from "../../../api";
 import { Typography, Button, Modal } from "../../../design-system";
 import { TaskStatus } from "../../../types";
-import { TaskCard } from "../../components";
+import { KanbanCard } from "../../components";
 import { EditTaskModal } from "./EditTaskModal";
+import { DeleteTaskModal } from "./DeleteTaskModal";
 
 type KanbanProps = {
     groupedTasks: GroupedTasks;
@@ -36,7 +37,7 @@ const TasksColumns = styled.div`
 const TasksColumn = styled.div`
     padding: 2.2rem 1rem 1rem 1rem;
     background-color: var(--jaguar-25);
-    border-radius: var(--border-radius-20);
+    border-radius: var(--border-radius-16);
     border: 0.15rem solid var(--jaguar-100);
 `;
 
@@ -47,6 +48,7 @@ const TasksColumnTitle = styled(Typography)<{ color: string }>`
 
 const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
     const [showEditTaskModal, setShowEditTaskModal] = useState(false);
+    const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false)
     const [selectedTaskId, setSelectedTaskId] = useState("");
     const { dispatch } = useStore();
     const onDrop = (e: React.DragEvent<HTMLDivElement>, status: TaskStatus) => {
@@ -69,11 +71,12 @@ const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
             });
     };
 
-    const onSelectTaskCardMenuAction = (value: string, taskId: string) => {
+    const onSelectKanbanCardMenuAction = (value: string, taskId: string) => {
         setSelectedTaskId(taskId);
         if (value === "editTask") {
-            console.log(taskId);
             setShowEditTaskModal(true);
+        } else {
+            setShowDeleteTaskModal(true)
         }
     };
     return (
@@ -97,7 +100,7 @@ const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
 
                             {groupedTasks[groupName].map((task) => {
                                 return (
-                                    <TaskCard
+                                    <KanbanCard
                                         key={task.id}
                                         task={task}
                                         menuActions={[
@@ -115,7 +118,7 @@ const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
                                             }
                                         ]}
                                         onSelectMenuAction={
-                                            onSelectTaskCardMenuAction
+                                            onSelectKanbanCardMenuAction
                                         }
                                     />
                                 );
@@ -127,6 +130,11 @@ const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
             <EditTaskModal
                 show={showEditTaskModal}
                 closeModal={() => setShowEditTaskModal(false)}
+                taskId={selectedTaskId}
+            />
+            <DeleteTaskModal
+                show={showDeleteTaskModal}
+                closeModal={() => setShowDeleteTaskModal(false)}
                 taskId={selectedTaskId}
             />
         </>
