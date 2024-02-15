@@ -2,7 +2,7 @@ import React, { useState, createContext, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Badge, Icon } from "./design-system";
-import { Checkbox } from "./design-system";
+import { Checkbox, Switch } from "./design-system";
 
 export const AppContext = createContext<{ id: number; text: string }[]>([]);
 
@@ -23,8 +23,8 @@ const StyledLink = styled(Link)`
 `;
 
 const App = () => {
-    const [value, setValue] = useState(false)
-    return ( 
+    const [value, setValue] = useState(false);
+    return (
         <div style={{ padding: "100px" }}>
             <h1 style={{ marginBottom: "10px" }}>Welcome</h1>
             <h2 style={{ marginBottom: "10px" }}>Admin</h2>
@@ -89,13 +89,18 @@ const App = () => {
                 />
             </div>
             <div>
-            <Checkbox
+                <Checkbox
                     label="Hello world"
                     id="checkbox"
                     checked={value}
                     onChange={(value) => setValue(value)}
                     shape="rounded"
-                
+                />
+
+                <Switch
+                    checked={value}
+                    onSwitch={(value) => setValue(value)}
+                    shape="circle"
                 />
             </div>
         </div>
