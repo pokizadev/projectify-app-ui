@@ -1,9 +1,11 @@
 import { Task, AdminUser, TeamMemberUser} from "../../types";
 
+export type UserState = AdminUser | TeamMemberUser | null;
+export type TaskState = Task[];
 
 export interface GlobalState {
-    user: AdminUser | TeamMemberUser | null;
-    adminPersonalTasks: Task[]
+    user: UserState
+    adminPersonalTasks: TaskState
 }
 
 export const initialState: GlobalState = {

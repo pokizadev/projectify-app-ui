@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from "react";
 import {
-    userReducer,
+    rootReducer,
     initialState,
     GlobalState,
     ActionType
@@ -19,7 +19,7 @@ export const AppContext = createContext<AppContextType>({
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     children
 }) => {
-    const [state, dispatch] = useReducer<React.Reducer<GlobalState, ActionType>>(userReducer, initialState);
+    const [state, dispatch] = useReducer<React.Reducer<GlobalState, ActionType>>(rootReducer, initialState);
     const value = {
         state,
         dispatch
