@@ -88,7 +88,7 @@ const App = () => {
                     status
                 />
             </div>
-            <div style={{ background: "aqua" }}>
+            <div>
                 <Checkbox
                     label="Hello world"
                     id="checkbox"
