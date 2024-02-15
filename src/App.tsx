@@ -88,7 +88,7 @@ const App = () => {
                     status
                 />
             </div>
-            <div>
+            <div style={{ background: "aqua" }}>
                 <Checkbox
                     label="Hello world"
                     id="checkbox"
@@ -101,6 +101,8 @@ const App = () => {
                     checked={value}
                     onSwitch={(value) => setValue(value)}
                     shape="circle"
+                    id="switch"
+                    position="end"
                 />
             </div>
         </div>
