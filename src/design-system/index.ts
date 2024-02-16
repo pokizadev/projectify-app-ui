@@ -16,5 +16,7 @@ export * from "./Bar"
 export * from "./Menu"
 export * from "./Select"
 export * from "./Checkbox"
+export * from "./Progress"
+export * from "./Table"
 
 export * from "./utils"

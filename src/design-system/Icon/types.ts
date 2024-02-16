@@ -17,6 +17,10 @@ export type IconName =
     | "check-sharp"
     | "minus-sharp"
     | "minus"
+    | "info-in-circle"
+    | "check-in-circle"
+    | "info-in-circle-sharp"
+    | "check-in-circle-sharp"
 
 export type IconProps = {
     iconName: IconName;
