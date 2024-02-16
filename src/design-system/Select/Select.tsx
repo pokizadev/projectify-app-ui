@@ -94,6 +94,12 @@ const Select: React.FC<SelectProps> = (props) => {
                         return (
                             <li key={option.value} className="select__item">
                                 {option.label}
+                                {value === option.value && (
+                                    <Icon
+                                        iconName={shape ? "check" : "check-sharp"}
+                                        className="select__selected-icon"
+                                    />
+                                )}
                             </li>
                         );
                     })}
