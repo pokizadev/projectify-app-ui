@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Typography } from "../../design-system";
+import { Typography } from "../../../design-system";
 import styled from "styled-components";
 
 type PropsType = {
@@ -21,7 +21,6 @@ const HintTextTypography = styled(Typography)`
 const StyledLink = styled(Link)`
     color: var(--primary-500);
     font-weight: var(--font-weight-600);
-
 `;
 const AuthActionLink: React.FC<PropsType> = ({
     hintText,
@@ -33,7 +32,9 @@ const AuthActionLink: React.FC<PropsType> = ({
             <HintTextTypography variant="paragraphSM" weight="medium">
                 {hintText}
             </HintTextTypography>
-            <StyledLink to={linkTo} className="paragraph-sm">{linkText}</StyledLink>
+            <StyledLink to={linkTo} className="paragraph-sm">
+                {linkText}
+            </StyledLink>
         </ActionLinkWrapper>
     );
 };

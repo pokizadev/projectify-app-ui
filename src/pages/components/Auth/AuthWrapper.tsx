@@ -1,7 +1,7 @@
 import { FC, ReactNode } from "react";
 import styled from "styled-components";
-import { Logo } from "../../design-system/Logo";
-import { Toaster } from "../../design-system";
+import { Logo } from "../../../design-system/Logo";
+import { Toaster } from "../../../design-system";
 
 type AuthWrapperProps = {
     imageUrl: string;
@@ -71,7 +71,7 @@ const AuthWrapper: FC<AuthWrapperProps> = ({
             <AuthImageWrapper $switchLayout={switchLayout}>
                 <AuthImage src={imageUrl} />
             </AuthImageWrapper>
-            <Toaster/>
+            <Toaster />
         </Wrapper>
     );
 };

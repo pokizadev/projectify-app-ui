@@ -7,7 +7,7 @@ import { AuthWrapper } from "../../components";
 import { Button, Input } from "../../../design-system";
 
 import { adminService } from "../../../api";
-import { AuthActionLink } from "../../components/AuthActionLinks";
+import { AuthActionLink } from "../../components/Auth/AuthActionLinks";
 
 import meeting from "../../../assets/images/meeting.jpg";
 
@@ -30,7 +30,7 @@ const AdminLogin = () => {
     const [isFormSubmitting, setIsFormSubmitting] = useState(false);
     const navigate = useNavigate();
 
-    const {setItem, getItem} = useLocalStorage()
+    const { setItem, getItem } = useLocalStorage();
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
@@ -41,8 +41,8 @@ const AdminLogin = () => {
     };
 
     const saveAuthToken = (token: string) => {
-        setItem("authToken", token)
-    }
+        setItem("authToken", token);
+    };
 
     const login = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -52,7 +52,7 @@ const AdminLogin = () => {
                 email,
                 password
             });
-            saveAuthToken(token)
+            saveAuthToken(token);
             navigate("/admin/platform");
 
             setIsFormSubmitting(false);
