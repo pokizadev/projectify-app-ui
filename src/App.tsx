@@ -55,7 +55,7 @@ const App = () => {
                     shape="rounded"
                     variant="contained"
                     color="orange"
-                    icon={<Icon iconName="flag" />}
+                    status
                 />
                 <Badge
                     label="Badge"
@@ -72,20 +72,21 @@ const App = () => {
                     shape="circle"
                     variant="outlined"
                     color="violet"
+                    iconName="three-dots"
                 />
                 <Badge
                     label="Badge"
                     shape="rounded"
                     variant="contained"
                     color="purple"
-                    icon={<Icon iconName="flag" />}
+                   iconName="calendar"
                 />
                 <Badge
                     label="Badge"
                     shape="circle"
                     variant="contained"
                     color="green"
-                    status
+                    iconName="check-in-circle"
                 />
             </div>
             <div>
