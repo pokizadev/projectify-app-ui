@@ -2,7 +2,7 @@ import React, { useState, createContext, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Badge, Icon } from "./design-system";
-import { Checkbox, Switch } from "./design-system";
+import { Checkbox, LinearProgress, Switch } from "./design-system";
 
 export const AppContext = createContext<{ id: number; text: string }[]>([]);
 
@@ -104,6 +104,14 @@ const App = () => {
                     id="switch"
                     position="end"
                 />
+            </div>
+            <div>
+                <LinearProgress value={50} color="orange" error />
+                <LinearProgress value={40} color="blue" />
+                <LinearProgress value={40} color="green" />
+                <LinearProgress value={40} color="red" />
+
+                <LinearProgress value={30} />
             </div>
         </div>
     );
