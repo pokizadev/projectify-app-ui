@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { NoDataPlaceholder, Page, PageContent, PageHeader } from "../../components";
+import { TeamMemberFilters } from "./TeamMemberFilters";
+import { TeamMembersTable } from "./TeamMembersTable";
 import { CreateTeamMemberModal } from "./CreateTeamMemberModal";
 import { useStore } from "../../../hooks";
 import { teamMemberService } from "../../../api";
@@ -48,11 +50,13 @@ const AdminTeamMembersPage = () => {
                 <PageContent>
                     <PageHeader
                         pageTitle="Team Members"
-                        actionButtonText="Create A Team Member"
+                        actionButtonText="Create A Member"
                         actionButtonOnClick={() =>
                             setShowCreateTeamMemberModal(true)
                         }
                     />
+                    <TeamMemberFilters />
+                    <TeamMembersTable data={teamMembers} />
                 </PageContent>
             )}
             <CreateTeamMemberModal

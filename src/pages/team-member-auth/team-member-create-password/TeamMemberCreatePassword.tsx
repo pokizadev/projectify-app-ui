@@ -54,6 +54,7 @@ const TeamMemberCreatePassword = () => {
                 inviteToken as string
             )
             .then((data) => {
+                toast.success("Great. Now you can sign in!");
                 navigate("/team-member/sign-in");
             })
             .catch((error) => {
