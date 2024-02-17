@@ -26,7 +26,7 @@ const TeamMemberFilters = () => {
             <Select
                 value=""
                 onSelect={() => {}}
-                options={statusOptions}
+                options={[]}
                 shape="rounded"
                 size="md"
                 headerPlaceholder="By Project"
@@ -35,7 +35,7 @@ const TeamMemberFilters = () => {
             <Select
                 value=""
                 onSelect={() => {}}
-                options={[]}
+                options={statusOptions}
                 shape="rounded"
                 size="md"
                 headerPlaceholder="By Status"
