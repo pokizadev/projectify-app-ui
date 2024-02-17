@@ -14,13 +14,19 @@ const FiltersBase = styled.section`
     }
 `;
 
+const statusOptions = [
+    {label: "Active", value: "ACTIVE"},
+    {label: "Inactive", value: "INACTIVE"},
+    {label: "Deactivated", value: "DEACTIVATED"}
+]
+
 const TeamMemberFilters = () => {
     return (
         <FiltersBase>
             <Select
                 value=""
                 onSelect={() => {}}
-                options={[]}
+                options={statusOptions}
                 shape="rounded"
                 size="md"
                 headerPlaceholder="By Project"
