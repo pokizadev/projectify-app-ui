@@ -9,12 +9,12 @@ import { useCloseWhenClickOutside } from "../hooks";
 
 const sizeClassNames = {
     md: "select-medium",
-    lg: "select-large",
+    lg: "select-large"
 };
 
 const shapeClassNames = {
     rounded: "select-rounded",
-    circle: "select-circle",
+    circle: "select-circle"
 };
 
 const Select: React.FC<SelectProps> = (props) => {
@@ -30,12 +30,13 @@ const Select: React.FC<SelectProps> = (props) => {
         error,
         hintMessage,
         searchable,
-        className,
+        className
     } = props;
 
     const selectRef = useRef<HTMLDivElement>(null);
 
-    const {show: expanded, setShow: setExpanded} = useCloseWhenClickOutside(selectRef)
+    const { show: expanded, setShow: setExpanded } =
+        useCloseWhenClickOutside(selectRef);
 
     const onClickHeader = () => {
         setExpanded((prevValue) => !prevValue);
@@ -49,7 +50,7 @@ const Select: React.FC<SelectProps> = (props) => {
 
     const finalHeaderClassName = trimWhiteSpaces(
         `select__header ${value ? "select__header--has-selection" : ""}`
-    )
+    );
 
     const onSelectItem = (option: Option) => {
         onSelect(option);
@@ -65,7 +66,6 @@ const Select: React.FC<SelectProps> = (props) => {
     const finalHeaderPlaceholder = value
         ? getOptionLabel(value)
         : headerPlaceholder;
-
 
     return (
         <div className={finalClassName} ref={selectRef}>
@@ -92,8 +92,26 @@ const Select: React.FC<SelectProps> = (props) => {
                 <ul className="select__body">
                     {options.map((option) => {
                         return (
-                            <li key={option.value} className="select__item">
+                            <li
+                                key={option.value}
+                                className={trimWhiteSpaces(
+                                    `select__item ${
+                                        value === option.value
+                                            ? "select__item--selected"
+                                            : ""
+                                    }`
+                                )}
+                                onClick={() => onSelectItem(option)}
+                            >
                                 {option.label}
+                                {value === option.value && (
+                                    <Icon
+                                        iconName={
+                                            shape ? "check" : "check-sharp"
+                                        }
+                                        className="select__selected-icon"
+                                    />
+                                )}
                             </li>
                         );
                     })}

@@ -1,42 +1,98 @@
-import { TeamMemberUser } from "../types";
+import { TeamMember, TeamMemberUser } from "../types";
 
 type CreatePasswordInput = {
     password: string;
     passwordConfirm: string;
-    email: string
-}
+    email: string;
+};
 
 type LoginInput = {
     email: string;
-    password: string
-}
+    password: string;
+};
 
 type GetMeResponseType = {
-    data: TeamMemberUser
-}
+    data: TeamMemberUser;
+};
 
-class TeamMember {
+type CreateInput = Omit<TeamMember, "id" | "status">;
+
+type CreateInputResponse = {
+    data: TeamMember;
+};
+
+type GetAllTeamMembersResponse = {
+    data: TeamMember[];
+};
+
+class TeamMemberService {
     url: string;
     constructor() {
-        this.url = `${process.env.NODE_ENV === "development" ? process.env.REACT_APP_PROJECTIFY_API_URL : process.env.REACT_APP_PROJECTIFY_API_URL_LOCAL}/team-members`
+        this.url = `${
+            process.env.NODE_ENV === "development"
+                ? process.env.REACT_APP_PROJECTIFY_API_URL
+                : process.env.REACT_APP_PROJECTIFY_API_URL_LOCAL
+        }/team-members`;
+    }
+
+    async create(input: CreateInput): Promise<CreateInputResponse> {
+        try {
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+            const response = await fetch(`${this.url}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${authToken}`
+                },
+                body: JSON.stringify(input)
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+            return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async getAll(): Promise<GetAllTeamMembersResponse> {
+        try {
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+            const response = await fetch(`${this.url}/`, {
+                headers: {
+                    authorization: `Bearer ${authToken}`
+                }
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+
+            return response.json();
+        } catch (error) {
+            throw error;
+        }
     }
 
     async createPassword(input: CreatePasswordInput, inviteToken: string) {
+        console.log(inviteToken);
         try {
             const response = await fetch(`${this.url}/create-password`, {
-                method: "POST",
+                method: "PATCH",
                 headers: {
-                    "Content-Type": 
-                    "application/json",
-                    "authorization":  `Bearer ${inviteToken}`
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${inviteToken}`,
                 },
-                body: JSON.stringify(input)
-            })
-            if(!response.ok) {
-                const data = await response.json()
-                throw new Error(data.message)
+                body: JSON.stringify(input),
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
             }
-            return response.json()
+            return response.json();
         } catch (error) {
             throw error;
         }
@@ -113,8 +169,8 @@ class TeamMember {
 
     async getMe(): Promise<GetMeResponseType> {
         try {
-            const rawAuthToken = localStorage.getItem("authToken")
-            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : ""
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
             const response = await fetch(`${this.url}/me`, {
                 headers: {
                     authorization: `Bearer ${authToken}`
@@ -127,11 +183,9 @@ class TeamMember {
 
             return response.json();
         } catch (error) {
-            throw error
+            throw error;
         }
     }
+}
 
-
-} 
-
-export const teamMemberService = new TeamMember();
+export const teamMemberService = new TeamMemberService();

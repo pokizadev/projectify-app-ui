@@ -3,10 +3,10 @@ import { BaseCellProps, BaseRowProps } from "./types";
 
 export const TableRowBase = styled.tr<BaseRowProps>`
     display: grid;
-    grid-template-columns: ${(props) => props.$columns};
+    grid-template-columns: ${(props) => props.$columns.join(" ")};
+    align-items: center;
     padding: var(--space-16);
-    border-radius: var(--border-radius-24);
-    box-shadow: var(--shadow-xs);
+    border-radius: var(--border-radius-16);
 `;
 
 const Cell = css<BaseCellProps>`
@@ -31,6 +31,7 @@ export const TableHeadCellBase = styled.th<BaseCellProps>`
 export const TableBody = styled.tbody`
     ${TableRowBase} {
         height: 8.2rem;
+        box-shadow: var(--shadow-xs);
     }
     ${TableRowBase}:not(:last-child) {
         margin-bottom: var(--space-10);
@@ -39,8 +40,7 @@ export const TableBody = styled.tbody`
 
 export const TableHead = styled.thead`
     ${TableRowBase} {
-        height: 4rem;
+        height: 6rem;
         margin-bottom: var(--space-4);
     }
 `;
-export const TableBase = styled.table;
