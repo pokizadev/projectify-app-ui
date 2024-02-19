@@ -1,4 +1,4 @@
-import { TeamMember, TeamMemberUser, AdminTeamMemberActions, AdminTeamMemberStatusChange } from "../types";
+import { TeamMember, TeamMemberUser, AdminTeamMemberActions, AdminTeamMemberStatusChange, TeamMemberUpdate } from "../types";
 
 type CreatePasswordInput = {
     password: string;
@@ -222,6 +222,27 @@ class TeamMemberService {
                     },
                 }
             );
+
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async update(teamMemberId: string, updateDate: TeamMemberUpdate) {
+        const rawAuthToken = localStorage.getItem("authToken");
+        const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+        try {
+            const response = await fetch(`${this.url}/${teamMemberId}/update`, {
+                method: "PATCH",
+                headers: {
+                    authorization: `Bearer ${authToken}`,
+                },
+                body: JSON.stringify(updateDate),
+            });
 
             if (!response.ok) {
                 const data = await response.json();

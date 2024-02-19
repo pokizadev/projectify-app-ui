@@ -1,4 +1,4 @@
-import { Task, AdminUser, TeamMemberUser, TeamMember, TeamMemberStatus, TaskStatus } from "../../types/types";
+import { Task, AdminUser, TeamMemberUser, TeamMember, TeamMemberStatus, TeamMemberUpdate, TaskStatus } from "../../types/types";
 
 export enum Actions {
     INIT_USER = "INIT_USER",
@@ -11,7 +11,8 @@ export enum Actions {
     ADMIN_ADD_TEAM_MEMBER = "ADMIN_ADD_TEAM_MEMBER",
     ADMIN_POPULATE_TEAM_MEMBERS = "ADMIN_POPULATE_TEAM_MEMBERS",
     ADMIN_REMOVE_TEAM_MEMBER = "ADMIN_REMOVE_TEAM_MEMBER",
-    ADMIN_CHANGE_TEAM_MEMBER_STATUS = "ADMIN_CHANGE_TEAM_MEMBER_STATUS"
+    ADMIN_CHANGE_TEAM_MEMBER_STATUS = "ADMIN_CHANGE_TEAM_MEMBER_STATUS",
+    ADMIN_UPDATE_TEAM_MEMBER = "ADMIN_UPDATE_TEAM_MEMBER",
 }
 
 export interface InitUserAction {
@@ -78,6 +79,14 @@ export type AdminChangeTeamMemberStatusAction = {
     };
 };
 
+export type AdminUpdateTeamMemberAction = {
+    type: Actions.ADMIN_UPDATE_TEAM_MEMBER;
+    payload: {
+        id: string;
+        data: TeamMemberUpdate;
+    };
+};
+
 
 export type ActionType =
     | InitUserAction
@@ -91,3 +100,4 @@ export type ActionType =
     | AdminPopulateTeamMembersAction
     | AdminRemoveTeamMemberAction
     | AdminChangeTeamMemberStatusAction
+    | AdminUpdateTeamMemberAction

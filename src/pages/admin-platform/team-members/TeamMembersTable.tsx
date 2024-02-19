@@ -22,6 +22,8 @@ import {
 import { useState } from "react";
 import { DeleteTeamMemberModal } from "./DeleteTeamMemberModal";
 import { ChangeTeamMemberStatusModal } from "./ChangeTeamMemberStatusModal";
+import { EditTeamMemberModal } from "./EditTeamMemberModal";
+import { act } from "react-dom/test-utils";
 
 type TeamMembersTableProps = {
     data: TeamMember[];
@@ -68,6 +70,8 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
         showChangeTeamMemberStatusModal,
         setShowChangeTeamMemberStatusModal
     ] = useState(false);
+    const [showEditTeamMemberModal, setShowEditTeamMemberModal] =
+        useState(false);
 
     const onSelectActionCellMenu = (
         teamMemberId: string,
@@ -82,6 +86,8 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
         ) {
             setChangeStatus(action);
             setShowChangeTeamMemberStatusModal(true);
+        } else if (action === AdminTeamMemberActions.edit) {
+            setShowEditTeamMemberModal(true);
         }
     };
     return (
@@ -186,6 +192,11 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                 teamMemberId={selectedTeamMemberId}
                 closeModal={() => setShowChangeTeamMemberStatusModal(false)}
                 changeStatus={changeStatus!}
+            />
+            <EditTeamMemberModal
+                show={showEditTeamMemberModal}
+                teamMemberId={selectedTeamMemberId}
+                closeModal={() => setShowEditTeamMemberModal(false)}
             />
         </>
     );
