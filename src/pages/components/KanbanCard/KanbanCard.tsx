@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { KanbanCardProps } from "./types";
-import { Badge, Bar,LinearProgress,  Menu, Typography } from "../../../design-system";
+import { Badge, Bar, Menu, Typography } from "../../../design-system";
 import { format } from "date-fns";
 import { useState } from "react";
 
