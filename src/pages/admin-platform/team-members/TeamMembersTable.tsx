@@ -1,5 +1,5 @@
 import format from "date-fns/format";
-import { Badge, BadgeColors, Typography } from "../../../design-system";
+import { Badge, BadgeColors, Typography, Menu, MenuOption } from "../../../design-system";
 import {
     Table,
     TableBody,
@@ -8,21 +8,69 @@ import {
     TableHeadCell,
     TableRow,
 } from "../../../design-system/Table";
-import { TeamMember } from "../../../types";
+import { TeamMember, TeamMemberStatus } from "../../../types";
+import { useState } from "react";
+import { DeleteTeamMemberModal } from "./DeleteTeamMemberModal";
 
 type TeamMembersTableProps = {
     data: TeamMember[];
 };
 
-const columns = ["15%", "15%", "22.5%", "20%", "15%", "12.5%"];
+enum TeamMemberActions {
+    edit = "edit",
+    delete = "delete",
+    reactivate = "reactivate",
+    deactivate = "deactivate",
+}
+
+const options: MenuOption[] = [
+    { label: "Edit", iconName: "edit", value: "edit", color: "primary" },
+    {
+        label: "Reactivate",
+        iconName: "check-in-circle",
+        value: "reactivate",
+        color: "primary",
+    },
+    { label: "Delete", iconName: "delete", value: "delete", color: "danger" },
+    {
+        label: "Deactivate",
+        iconName: "x-in-circle",
+        value: "deactivate",
+        color: "danger",
+    },
+];
+
+const allowedActions = {
+    ACTIVE: [options[0], options[3]],
+    INACTIVE: [options[0], options[2]],
+    DEACTIVATED: [options[0], options[1]],
+};
+
+const columns = ["12.5%", "12.5%", "20%", "20%", "15%", "15%"];
 
 const mapsStatusToBadgeColors = {
     ACTIVE: "violet",
     INACTIVE: "gray",
     DEACTIVATED: "red",
 };
+
 const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
+    const [selectedTeamMemberId, setSelectedTeamMemberId] = useState("");
+    const [showDeleteTeamMemberModal, setShowDeleteTeamMemberModal] =
+        useState(false);
+
+    const onSelectActionCellMenu = (
+        teamMemberId: string,
+        action: TeamMemberActions
+    ) => {
+        setSelectedTeamMemberId(teamMemberId);
+        if (action === "delete") {
+            setShowDeleteTeamMemberModal(true);
+        }
+    };
     return (
+        <>
+        {" "}
         <Table>
             <TableHead>
                 <TableRow columns={columns}>
@@ -32,6 +80,7 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                     <TableHeadCell>Email</TableHeadCell>
                     <TableHeadCell>Join Date</TableHeadCell>
                     <TableHeadCell>Status</TableHeadCell>
+                    <TableHeadCell> </TableHeadCell>
                 </TableRow>
             </TableHead>
             <TableBody>
@@ -77,33 +126,47 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                                 >
                                     {format(
                                         teamMember.joinDate,
-                                        "MMM dd, yyyy"
+                                        "MMM d, yyyy"
                                     )}
                                 </Typography>
                             </TableBodyCell>
                             <TableBodyCell>
-                                <Typography
-                                    variant="paragraphSM"
-                                    weight="medium"
-                                >
-                                    <Badge
-                                        color={
-                                            mapsStatusToBadgeColors[
-                                                teamMember.status
-                                            ] as BadgeColors
-                                        }
-                                        label={teamMember.status}
-                                        variant="outlined"
-                                        shape="rounded"
-                                        status
-                                    />
-                                </Typography>
+                                <Badge
+                                    color={
+                                        mapsStatusToBadgeColors[
+                                            teamMember.status
+                                        ] as BadgeColors
+                                    }
+                                    label={teamMember.status}
+                                    variant="outlined"
+                                    shape="rounded"
+                                    status
+                                />
+                            </TableBodyCell>
+                            <TableBodyCell>
+                                <Menu
+                                    options={
+                                        allowedActions[teamMember.status]
+                                    }
+                                    onSelect={(value) =>
+                                        onSelectActionCellMenu(
+                                            teamMember.id,
+                                            value as TeamMemberActions
+                                        )
+                                    }
+                                />
                             </TableBodyCell>
                         </TableRow>
                     );
                 })}
             </TableBody>
         </Table>
+        <DeleteTeamMemberModal
+            show={showDeleteTeamMemberModal}
+            teamMemberId={selectedTeamMemberId}
+            closeModal={() => setShowDeleteTeamMemberModal(false)}
+        />
+    </>
     );
 };
 

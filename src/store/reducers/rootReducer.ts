@@ -1,8 +1,8 @@
-import { userReducer } from "./userReducer";
-import { adminTasksReducer } from "./adminTasksReducer";
+import { userReducer } from "./user";
+import { adminTasksReducer } from "./admin-tasks";
 import { GlobalState } from "../state";
 import { ActionType } from "../actions";
-import { adminTeamMembersReducer } from "./adminTeamMemberReducer";
+import { adminTeamMembersReducer } from "./admin-team-members";
 
 const rootReducer = (state: GlobalState, action: ActionType): GlobalState => {
     const newState: GlobalState = {

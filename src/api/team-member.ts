@@ -78,7 +78,6 @@ class TeamMemberService {
     }
 
     async createPassword(input: CreatePasswordInput, inviteToken: string) {
-        console.log(inviteToken);
         try {
             const response = await fetch(`${this.url}/create-password`, {
                 method: "PATCH",
@@ -182,6 +181,26 @@ class TeamMemberService {
             }
 
             return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async delete(teamMemberId: string) {
+        const rawAuthToken = localStorage.getItem("authToken");
+        const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+        try {
+            const response = await fetch(`${this.url}/${teamMemberId}/delete`, {
+                method: "DELETE",
+                headers: {
+                    authorization: `Bearer ${authToken}`,
+                },
+            });
+
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
         } catch (error) {
             throw error;
         }
