@@ -23,7 +23,6 @@ import { useState } from "react";
 import { DeleteTeamMemberModal } from "./DeleteTeamMemberModal";
 import { ChangeTeamMemberStatusModal } from "./ChangeTeamMemberStatusModal";
 import { EditTeamMemberModal } from "./EditTeamMemberModal";
-import { act } from "react-dom/test-utils";
 
 type TeamMembersTableProps = {
     data: TeamMember[];

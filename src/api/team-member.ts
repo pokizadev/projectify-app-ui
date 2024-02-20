@@ -232,7 +232,7 @@ class TeamMemberService {
         }
     }
 
-    async update(teamMemberId: string, updateDate: TeamMemberUpdate) {
+    async update(teamMemberId: string, updateData: TeamMemberUpdate) {
         const rawAuthToken = localStorage.getItem("authToken");
         const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
         try {
@@ -241,7 +241,7 @@ class TeamMemberService {
                 headers: {
                     authorization: `Bearer ${authToken}`,
                 },
-                body: JSON.stringify(updateDate),
+                body: JSON.stringify(updateData),
             });
 
             if (!response.ok) {

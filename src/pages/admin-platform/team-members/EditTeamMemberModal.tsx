@@ -68,7 +68,7 @@ const EditTeamMemberModal: React.FC<ModalProps> = ({
         setLastName(value);
     };
 
-    const handlOnChangePosition = (value: string) => {
+    const handleOnChangePosition = (value: string) => {
         setPosition(value);
     };
 
@@ -124,7 +124,7 @@ const EditTeamMemberModal: React.FC<ModalProps> = ({
                     type="text"
                     placeholder="Position"
                     value={position}
-                    onChange={handlOnChangePosition}
+                    onChange={handleOnChangePosition}
                     shape="rounded"
                     size="lg"
                 />
