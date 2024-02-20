@@ -1,5 +1,11 @@
 import styled from "styled-components";
-import { Select } from "../../../design-system";
+import { Select, Option } from "../../../design-system";
+import React from "react";
+
+type TeamMemberFiltersProps = {
+    selectedStatus: string;
+    setSelectedStatus: (option: Option) => void;
+};
 
 const FiltersBase = styled.section`
     display: grid;
@@ -17,10 +23,14 @@ const FiltersBase = styled.section`
 const statusOptions = [
     {label: "Active", value: "ACTIVE"},
     {label: "Inactive", value: "INACTIVE"},
-    {label: "Deactivated", value: "DEACTIVATED"}
+    {label: "Deactivated", value: "DEACTIVATED"},
+    { label: "All", value: "all" },
 ]
 
-const TeamMemberFilters = () => {
+const TeamMemberFilters: React.FC<TeamMemberFiltersProps> = ({
+    selectedStatus,
+    setSelectedStatus,
+}) => {
     return (
         <FiltersBase>
             <Select
@@ -33,8 +43,8 @@ const TeamMemberFilters = () => {
                 className="filter-by-project"
             />
             <Select
-                value=""
-                onSelect={() => {}}
+                value={selectedStatus}
+                onSelect={setSelectedStatus}
                 options={statusOptions}
                 shape="rounded"
                 size="md"

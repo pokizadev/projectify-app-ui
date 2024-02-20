@@ -6,6 +6,8 @@ import { CreateTeamMemberModal } from "./CreateTeamMemberModal";
 import { useStore } from "../../../hooks";
 import { teamMemberService } from "../../../api";
 import { Actions, AdminPopulateTeamMembersAction } from "../../../store";
+import { Option } from "../../../design-system";
+import { TeamMemberStatus } from "../../../types";
 import toast from "react-hot-toast";
 import noTeamMember from "../../../assets/illustrations/no-team-members.svg";
 
@@ -13,6 +15,7 @@ const AdminTeamMembersPage = () => {
     const [showCreateTeamMemberModal, setShowCreateTeamMemberModal] =
         useState(false);
         const [isTeamMembersFetching, setIsTeamMembersFetching] = useState(true);
+        const [statusFilter, setStatusFilter] = useState("");
         const {
             state: { teamMembers },
             dispatch,
@@ -35,10 +38,21 @@ const AdminTeamMembersPage = () => {
                     toast.error(err.message);
                 });
         }, []);
+
+        const handleSetStatusFilter = (filter: Option) => {
+            setStatusFilter(filter.value as TeamMemberStatus);
+        };
     
         if (isTeamMembersFetching) return null;
 
         const teamMembersArr = Object.values(teamMembers)
+        const filteredTeamMembers = teamMembersArr.filter(
+            (teamMember) =>
+                teamMember.status === statusFilter ||
+                statusFilter === "all" ||
+                statusFilter === ""
+        );
+
     return (
         <Page>
             {!teamMembersArr.length ? (
@@ -57,8 +71,11 @@ const AdminTeamMembersPage = () => {
                             setShowCreateTeamMemberModal(true)
                         }
                     />
-                    <TeamMemberFilters />
-                    <TeamMembersTable data={teamMembersArr} />
+                    <TeamMemberFilters 
+                        setSelectedStatus={handleSetStatusFilter}
+                        selectedStatus={statusFilter}
+                    />
+                    <TeamMembersTable data={filteredTeamMembers} />
                 </PageContent>
             )}
             <CreateTeamMemberModal
