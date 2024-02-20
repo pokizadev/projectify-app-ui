@@ -1,4 +1,4 @@
-import { TeamMember, TeamMemberUser } from "../types";
+import { TeamMember, TeamMemberUser, AdminTeamMemberActions, AdminTeamMemberStatusChange, TeamMemberUpdate } from "../types";
 
 type CreatePasswordInput = {
     password: string;
@@ -195,6 +195,53 @@ class TeamMemberService {
                 headers: {
                     authorization: `Bearer ${authToken}`,
                 },
+            });
+
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async changeStatus(
+        teamMemberId: string,
+        changeStatus: AdminTeamMemberStatusChange
+    ) {
+        const rawAuthToken = localStorage.getItem("authToken");
+        const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+        try {
+            const response = await fetch(
+                `${this.url}/${teamMemberId}/${changeStatus}`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        authorization: `Bearer ${authToken}`,
+                    },
+                }
+            );
+
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async update(teamMemberId: string, updateData: TeamMemberUpdate) {
+        const rawAuthToken = localStorage.getItem("authToken");
+        const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+        try {
+            const response = await fetch(`${this.url}/${teamMemberId}/update`, {
+                method: "PATCH",
+                headers: {
+                    authorization: `Bearer ${authToken}`,
+                },
+                body: JSON.stringify(updateData),
             });
 
             if (!response.ok) {

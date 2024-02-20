@@ -144,6 +144,7 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
                     size="lg"
                     shape="rounded"
                     headerPlaceholder="Select Position"
+                    searchable={true}
                 />
                 <DatePickerV1
                     inputSize="lg"
