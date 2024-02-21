@@ -49,7 +49,6 @@ const Checkbox: React.FC<CheckboxProps> = ({
     position
 }) => {
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.checked);
         onChange(e.target.checked);
     };
     const checkboxWrapperClassName = trimWhiteSpaces(
