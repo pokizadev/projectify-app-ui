@@ -54,12 +54,12 @@ export interface TeamMember {
     lastName: string;
     position: string;
     email: string;
-    joinDate: Date;
+    joinDate: string;
 }
 
 export interface TeamMemberUpdate {
     firstName?: string;
     lastName?: string;
     position?: string;
-    joinDate?: Date;
+    joinDate?: string;
 }

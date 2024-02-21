@@ -23,6 +23,7 @@ import { useState } from "react";
 import { DeleteTeamMemberModal } from "./DeleteTeamMemberModal";
 import { ChangeTeamMemberStatusModal } from "./ChangeTeamMemberStatusModal";
 import { EditTeamMemberModal } from "./EditTeamMemberModal";
+import { parseISO } from "date-fns";
 
 type TeamMembersTableProps = {
     data: TeamMember[];
@@ -145,7 +146,7 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                                         weight="medium"
                                     >
                                         {format(
-                                            teamMember.joinDate,
+                                            parseISO(teamMember.joinDate),
                                             "MMM d, yyyy"
                                         )}
                                     </Typography>
