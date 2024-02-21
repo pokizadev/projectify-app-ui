@@ -1,15 +1,15 @@
- export enum UserRole {
+export enum UserRole {
     admin = "admin",
     teamMember = "teamMember"
- }
+}
 
- export interface User {
-    firstName: string
-    lastName: string
-    email: string
-    id: string
-    imageUrl?: string
-    role: UserRole
+export interface User {
+    firstName: string;
+    lastName: string;
+    email: string;
+    id: string;
+    imageUrl?: string;
+    role: UserRole;
 }
 
 export interface AdminUser extends User {
@@ -26,25 +26,30 @@ export interface TeamMemberUser extends User {
     adminId: string;
 }
 
+export type TaskStatus = "TODO" | "INPROGRESS" | "DONE";
+
 export interface Task {
     id: string;
     title: string;
     description: string;
-    due: Date;
+    due: string;
     status: TaskStatus;
 }
 
-export type TaskStatus = "TODO" | "INPROGRESS" | "DONE";
-
-export type TeamMemberStatus = "ACTIVE" | "INACTIVE" | "DEACTIVATED"
+export type TaskUpdate = {
+    title?: string;
+    description?: string;
+    due?: string;
+};
 
 export enum AdminTeamMemberActions {
     edit = "edit",
     delete = "delete",
     reactivate = "reactivate",
-    deactivate = "deactivate",
+    deactivate = "deactivate"
 }
 
+export type TeamMemberStatus = "ACTIVE" | "INACTIVE" | "DEACTIVATED";
 export type AdminTeamMemberStatusChange = "reactivate" | "deactivate";
 
 export interface TeamMember {
