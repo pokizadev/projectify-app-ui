@@ -40,6 +40,8 @@ export type TaskUpdate = {
     title?: string;
     description?: string;
     due?: string;
+    status?: TaskStatus
+
 };
 
 export enum AdminTeamMemberActions {

@@ -12,7 +12,7 @@ import {
 import { useStore } from "../../../hooks";
 import { Actions, AdminUpdateTeamMemberAction } from "../../../store";
 import { teamMemberService } from "../../../api";
-import { formatISO, parseISO } from "date-fns";
+import { toDateObj, toIso8601 } from "../../../utils";
 
 type ModalProps = {
     show: boolean;
@@ -56,7 +56,7 @@ const EditTeamMemberModal: React.FC<ModalProps> = ({
             setFirstName(teamMember.firstName);
             setLastName(teamMember.lastName);
             setPosition(teamMember.position);
-            setJoinDate(parseISO(teamMember.joinDate));
+            setJoinDate(toDateObj(teamMember.joinDate));
         }
     }, [teamMemberId]);
 
@@ -76,7 +76,7 @@ const EditTeamMemberModal: React.FC<ModalProps> = ({
         const updateData = {
             firstName,
             lastName,
-            joinDate: formatISO(joinDate!),
+            joinDate: toIso8601(joinDate!),
             position,
         };
 

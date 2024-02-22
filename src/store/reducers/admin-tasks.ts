@@ -34,7 +34,6 @@ const adminTasksReducer = produce(
                     if(task) {
                         task.status = payload.status
                     }
-                }
                 return draft;
             }
 
