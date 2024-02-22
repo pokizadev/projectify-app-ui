@@ -1,6 +1,6 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { SideBar, SideBarLinks, SideBarLinksGroup, Toaster } from "../../design-system";
-import { AppContent, AppLayout, SideBarUser } from "../components";
+import { AppPage, AppLayout, SideBarUser } from "../components";
 import avatar from "../../assets/images/user1.png";
 
 import { useLocalStorage, useStore } from "../../hooks";
@@ -79,9 +79,9 @@ const Platform = () => {
                         logOut = {logOut}
                     />
                 </SideBar>
-                <AppContent>
+                <AppPage>
                     <Outlet />
-                </AppContent>
+                </AppPage>
             </AppLayout>
             <Toaster />
         </>

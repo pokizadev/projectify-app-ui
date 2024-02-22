@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NoDataPlaceholder, Page, PageContent, PageHeader } from "../../components";
+import { NoDataPlaceholder, PageHeader } from "../../components";
 import { TeamMemberFilters } from "./TeamMemberFilters";
 import { TeamMembersTable } from "./TeamMembersTable";
 import { CreateTeamMemberModal } from "./CreateTeamMemberModal";
@@ -14,47 +14,47 @@ import noTeamMember from "../../../assets/illustrations/no-team-members.svg";
 const AdminTeamMembersPage = () => {
     const [showCreateTeamMemberModal, setShowCreateTeamMemberModal] =
         useState(false);
-        const [isTeamMembersFetching, setIsTeamMembersFetching] = useState(true);
-        const [statusFilter, setStatusFilter] = useState("");
-        const {
-            state: { teamMembers },
-            dispatch,
-        } = useStore();
-    
-        useEffect(() => {
-            teamMemberService
-                .getAll()
-                .then((data) => {
-                    const action: AdminPopulateTeamMembersAction = {
-                        type: Actions.ADMIN_POPULATE_TEAM_MEMBERS,
-                        payload: data.data,
-                    };
-                    dispatch(action);
-                    setIsTeamMembersFetching(false);
-                })
-                .catch((e) => {
-                    const err = e as Error;
-                    setIsTeamMembersFetching(false);
-                    toast.error(err.message);
-                });
-        }, []);
+    const [isTeamMembersFetching, setIsTeamMembersFetching] = useState(true);
+    const [statusFilter, setStatusFilter] = useState("");
+    const {
+        state: { teamMembers },
+        dispatch
+    } = useStore();
 
-        const handleSetStatusFilter = (filter: Option) => {
-            setStatusFilter(filter.value as TeamMemberStatus);
-        };
-    
-        if (isTeamMembersFetching) return null;
+    useEffect(() => {
+        teamMemberService
+            .getAll()
+            .then((data) => {
+                const action: AdminPopulateTeamMembersAction = {
+                    type: Actions.ADMIN_POPULATE_TEAM_MEMBERS,
+                    payload: data.data
+                };
+                dispatch(action);
+                setIsTeamMembersFetching(false);
+            })
+            .catch((e) => {
+                const err = e as Error;
+                setIsTeamMembersFetching(false);
+                toast.error(err.message);
+            });
+    }, []);
 
-        const teamMembersArr = Object.values(teamMembers)
-        const filteredTeamMembers = teamMembersArr.filter(
-            (teamMember) =>
-                teamMember.status === statusFilter ||
-                statusFilter === "all" ||
-                statusFilter === ""
-        );
+    const handleSetStatusFilter = (filter: Option) => {
+        setStatusFilter(filter.value as TeamMemberStatus);
+    };
+
+    if (isTeamMembersFetching) return null;
+
+    const teamMembersArr = Object.values(teamMembers);
+    const filteredTeamMembers = teamMembersArr.filter(
+        (teamMember) =>
+            teamMember.status === statusFilter ||
+            statusFilter === "all" ||
+            statusFilter === ""
+    );
 
     return (
-        <Page>
+        <>
             {!teamMembersArr.length ? (
                 <NoDataPlaceholder
                     illustrationUrl={noTeamMember}
@@ -63,7 +63,7 @@ const AdminTeamMembersPage = () => {
                     buttonAction={() => setShowCreateTeamMemberModal(true)}
                 ></NoDataPlaceholder>
             ) : (
-                <PageContent>
+                <>
                     <PageHeader
                         pageTitle="Team Members"
                         actionButtonText="Create A Member"
@@ -71,18 +71,18 @@ const AdminTeamMembersPage = () => {
                             setShowCreateTeamMemberModal(true)
                         }
                     />
-                    <TeamMemberFilters 
+                    <TeamMemberFilters
                         setSelectedStatus={handleSetStatusFilter}
                         selectedStatus={statusFilter}
                     />
                     <TeamMembersTable data={filteredTeamMembers} />
-                </PageContent>
+                </>
             )}
             <CreateTeamMemberModal
                 show={showCreateTeamMemberModal}
                 closeModal={() => setShowCreateTeamMemberModal(false)}
             />
-        </Page>
+        </>
     );
 };
 
