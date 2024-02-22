@@ -1,11 +1,9 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { SideBar, SideBarLinks, SideBarLinksGroup, Toaster } from "../../design-system";
-import { AppLayout, AppContent, SideBarUser } from "../components";
+import { AppLayout, AppPage, SideBarUser } from "../components";
 import teamMember from "../../assets/images/team-member.png"
 import { useLocalStorage, useStore } from "../../hooks";
 import { Actions } from "../../store";
-
-
 
 const links: SideBarLinksGroup[] = [
     {
@@ -65,9 +63,9 @@ const Platform = () => {
             />
             <SideBarLinks links={links} logOut={logOut} />
         </SideBar>
-        <AppContent>
+        <AppPage>
             <Outlet />
-        </AppContent>
+        </AppPage>
     </AppLayout>
     );
 };

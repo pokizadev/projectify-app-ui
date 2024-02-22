@@ -5,9 +5,9 @@ import { GroupedTasks } from "../../../utils";
 import { useStore } from "../../../hooks";
 import { Actions, ChangeTaskStatusAction } from "../../../store";
 import { adminTasksService } from "../../../api";
-import { Typography, Button, Modal } from "../../../design-system";
+import { Typography } from "../../../design-system";
 import { TaskStatus } from "../../../types";
-import { KanbanCard } from "../../components";
+import { KanbanCard, Scrollable } from "../../components";
 import { EditTaskModal } from "./EditTaskModal";
 import { DeleteTaskModal } from "./DeleteTaskModal";
 
@@ -31,14 +31,16 @@ const TasksColumns = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-30);
-    height: calc(100vh - 12.8rem);
+    height: calc(100% - 7rem);
 `;
 
 const TasksColumn = styled.div`
+    height: 100%;
     padding: 2.2rem 1rem 1rem 1rem;
     background-color: var(--jaguar-25);
     border-radius: var(--border-radius-16);
     border: 0.15rem solid var(--jaguar-100);
+    overflow: hidden;
 `;
 
 const TasksColumnTitle = styled(Typography)<{ color: string }>`
@@ -46,9 +48,15 @@ const TasksColumnTitle = styled(Typography)<{ color: string }>`
     color: ${(props) => props.color};
 `;
 
+const KanbanCards = styled(Scrollable)`
+    height: calc(
+        100% - 4rem
+    ); // Excluding Column Title Line-height + margin bottom of it
+`;
+
 const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
     const [showEditTaskModal, setShowEditTaskModal] = useState(false);
-    const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false)
+    const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
     const [selectedTaskId, setSelectedTaskId] = useState("");
     const { dispatch } = useStore();
     const onDrop = (e: React.DragEvent<HTMLDivElement>, status: TaskStatus) => {
@@ -76,7 +84,7 @@ const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
         if (value === "editTask") {
             setShowEditTaskModal(true);
         } else {
-            setShowDeleteTaskModal(true)
+            setShowDeleteTaskModal(true);
         }
     };
     return (
@@ -97,32 +105,35 @@ const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
                                 {StatusToTitle[groupName as TaskStatus]}{" "}
                                 <span>({groupedTasks[groupName].length})</span>
                             </TasksColumnTitle>
-
-                            {groupedTasks[groupName].map((task) => {
-                                return (
-                                    <KanbanCard
-                                        key={task.id}
-                                        task={task}
-                                        menuActions={[
-                                            {
-                                                label: "Edit",
-                                                value: "editTask",
-                                                color: "primary",
-                                                iconName: "edit"
-                                            },
-                                            {
-                                                label: "Delete",
-                                                value: "deleteTask",
-                                                color: "danger",
-                                                iconName: "delete"
-                                            }
-                                        ]}
-                                        onSelectMenuAction={
-                                            onSelectKanbanCardMenuAction
-                                        }
-                                    />
-                                );
-                            })}
+                            <KanbanCards>
+                                {groupedTasks[groupName]
+                                    .slice(0)
+                                    .map((task) => {
+                                        return (
+                                            <KanbanCard
+                                                key={task.id}
+                                                task={task}
+                                                menuActions={[
+                                                    {
+                                                        label: "Edit",
+                                                        value: "editTask",
+                                                        color: "primary",
+                                                        iconName: "edit"
+                                                    },
+                                                    {
+                                                        label: "Delete",
+                                                        value: "deleteTask",
+                                                        color: "danger",
+                                                        iconName: "delete"
+                                                    }
+                                                ]}
+                                                onSelectMenuAction={
+                                                    onSelectKanbanCardMenuAction
+                                                }
+                                            />
+                                        );
+                                    })}
+                            </KanbanCards>
                         </TasksColumn>
                     );
                 })}
