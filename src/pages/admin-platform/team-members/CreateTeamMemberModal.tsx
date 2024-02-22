@@ -14,6 +14,7 @@ import {
 import { useStore } from "../../../hooks";
 import { Actions, AdminAddTeamMemberAction } from "../../../store";
 import { teamMemberService } from "../../../api";
+import { toIso8601 } from "../../../utils";
 
 type ModalProps = {
     show: boolean;
@@ -40,8 +41,8 @@ const positions: Option[] = [
     { value: "Frontend Engineer", label: "Frontend Engineer" },
     { value: "Backend Engineer", label: "Backend Engineer" },
     { value: "Fullstack Engineer", label: "Fullstack Engineer" },
-    { value: "Products Designer", label: "Products Designer" },
-    { value: "Product Managers", label: "Product Managers" },
+    { value: "Product Designer", label: "Product Designer" },
+    { value: "Product Manager", label: "Product Manager" },
     { value: "Frontend Engineer II", label: "Frontend Engineer II" },
     { value: "Frontend Engineer III", label: "Frontend Engineer III" },
     { value: "Senior Frontend Engineer", label: "Senior Frontend Engineer" },
@@ -92,7 +93,7 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
             firstName,
             lastName,
             email,
-            joinDate: joinDate!,
+            joinDate: toIso8601(joinDate!),
             position: position?.value as string,
         };
         try {

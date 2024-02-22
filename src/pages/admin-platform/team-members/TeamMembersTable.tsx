@@ -1,32 +1,37 @@
+import { useState } from "react";
+import styled from "styled-components";
 import format from "date-fns/format";
 import {
     Badge,
     BadgeColors,
     Typography,
     Menu,
-    MenuOption
-} from "../../../design-system";
-import {
+    MenuOption,
     Table,
     TableBody,
     TableBodyCell,
     TableHead,
     TableHeadCell,
     TableRow
-} from "../../../design-system/Table";
+} from "../../../design-system";
 import {
     TeamMember,
     AdminTeamMemberActions,
     AdminTeamMemberStatusChange
 } from "../../../types";
-import { useState } from "react";
 import { DeleteTeamMemberModal } from "./DeleteTeamMemberModal";
 import { ChangeTeamMemberStatusModal } from "./ChangeTeamMemberStatusModal";
 import { EditTeamMemberModal } from "./EditTeamMemberModal";
+import { toDateObj } from "../../../utils";
+import { Scrollable } from "../../components";
 
 type TeamMembersTableProps = {
     data: TeamMember[];
 };
+
+const TableContainer = styled(Scrollable)`
+    height: calc(100% - 13rem);
+`
 
 const options: MenuOption[] = [
     { label: "Edit", iconName: "edit", value: "edit", color: "primary" },
@@ -90,7 +95,7 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
         }
     };
     return (
-        <>
+        <TableContainer>
             <Table>
                 <TableHead>
                     <TableRow columns={columns}>
@@ -145,7 +150,7 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                                         weight="medium"
                                     >
                                         {format(
-                                            teamMember.joinDate,
+                                            toDateObj(teamMember.joinDate),
                                             "MMM d, yyyy"
                                         )}
                                     </Typography>
@@ -197,7 +202,7 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                 teamMemberId={selectedTeamMemberId}
                 closeModal={() => setShowEditTeamMemberModal(false)}
             />
-        </>
+        </TableContainer>
     );
 };
 

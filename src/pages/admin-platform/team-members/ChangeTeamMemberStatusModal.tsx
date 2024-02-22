@@ -3,10 +3,7 @@ import { teamMemberService } from "../../../api";
 import { useStore } from "../../../hooks";
 import { Actions, AdminChangeTeamMemberStatusAction } from "../../../store";
 import { ConfirmationModal } from "../../components";
-import {
-    AdminTeamMemberActions,
-    AdminTeamMemberStatusChange,
-} from "../../../types";
+import { AdminTeamMemberStatusChange } from "../../../types";
 
 type ChangeTeamMemberStatusModalProps = {
     show: boolean;
@@ -17,7 +14,7 @@ type ChangeTeamMemberStatusModalProps = {
 
 enum ActionToStatus {
     deactivate = "DEACTIVATED",
-    reactivate = "ACTIVE",
+    reactivate = "ACTIVE"
 }
 
 const ChangeTeamMemberStatusModal: React.FC<
@@ -33,8 +30,8 @@ const ChangeTeamMemberStatusModal: React.FC<
                     type: Actions.ADMIN_CHANGE_TEAM_MEMBER_STATUS,
                     payload: {
                         id: teamMemberId,
-                        status: ActionToStatus[changeStatus],
-                    },
+                        status: ActionToStatus[changeStatus]
+                    }
                 };
                 dispatch(action);
                 closeModal();

@@ -1,4 +1,4 @@
-import { Task, AdminUser, TeamMemberUser, TeamMember, TeamMemberStatus, TeamMemberUpdate, TaskStatus } from "../../types/types";
+import { Task, AdminUser, TeamMemberUser, TeamMember, TeamMemberStatus, TeamMemberUpdate, TaskStatus, TaskUpdate } from "../../types/types";
 
 export enum Actions {
     INIT_USER = "INIT_USER",
@@ -44,7 +44,10 @@ export type ChangeTaskStatusAction = {
 
 export type UpdateTaskAction = {
     type: Actions.UPDATE_TASK;
-    payload: Task
+    payload: {
+        id: string;
+        data: TaskUpdate
+    }
 }
 
 export type RemoveTaskAction = {
