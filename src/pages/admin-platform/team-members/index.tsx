@@ -16,6 +16,8 @@ const AdminTeamMembersPage = () => {
         useState(false);
     const [isTeamMembersFetching, setIsTeamMembersFetching] = useState(true);
     const [statusFilter, setStatusFilter] = useState("");
+    const [searchText, setSearchText] = useState("");
+
     const {
         state: { teamMembers },
         dispatch
@@ -46,12 +48,28 @@ const AdminTeamMembersPage = () => {
     if (isTeamMembersFetching) return null;
 
     const teamMembersArr = Object.values(teamMembers);
-    const filteredTeamMembers = teamMembersArr.filter(
-        (teamMember) =>
-            teamMember.status === statusFilter ||
-            statusFilter === "all" ||
-            statusFilter === ""
-    );
+
+    const filterTeamMembers = () => {
+        let filteredTeamMembers = teamMembersArr;
+        if (statusFilter && statusFilter !== "all") {
+            filteredTeamMembers = filteredTeamMembers.filter(
+                (teamMember) => teamMember.status === statusFilter
+            );
+        }
+        if (searchText) {
+            filteredTeamMembers = filteredTeamMembers.filter(
+                (teamMember) =>
+                    teamMember.firstName
+                        .toLowerCase()
+                        .includes(searchText.toLowerCase()) ||
+                    teamMember.lastName
+                        .toLowerCase()
+                        .includes(searchText.toLowerCase())
+            );
+        }
+        return filteredTeamMembers;
+    };
+    const filteredTeamMembers = filterTeamMembers()
 
     return (
         <>
@@ -74,6 +92,8 @@ const AdminTeamMembersPage = () => {
                     <TeamMemberFilters
                         setSelectedStatus={handleSetStatusFilter}
                         selectedStatus={statusFilter}
+                        searchText={searchText}
+                        setSearchText={setSearchText}
                     />
                     <TeamMembersTable data={filteredTeamMembers} />
                 </>
