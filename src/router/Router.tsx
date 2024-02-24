@@ -65,7 +65,7 @@ export const router = createBrowserRouter(
             </Route>
 
             <Route path="/team-member/platform" element={<Private component={<TeamMemberPlatform/>} userType={UserRole.teamMember}/>} >
-                <Route path="projects" element={< AdminProjects />} />
+                <Route path="projects" element={< AdminProjectsPage />} />
                 <Route path="stories" element={<h1>Stories</h1>} />
                 <Route path="personal-tasks" element={<h1>Tasks</h1>} />
                 <Route path="team-members" element={<h1>Members</h1>} />
