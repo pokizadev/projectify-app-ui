@@ -12,7 +12,7 @@ import {
 import { TaskCreateInput, adminTasksService } from "../../../api";
 import { useStore } from "../../../hooks";
 import { Actions, AddTaskAction } from "../../../store";
-import {toIso8601} from "../../../utils"
+import { toIso8601 } from "../../../utils";
 
 type CreateTaskModalProps = {
     show: boolean;
@@ -39,7 +39,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
     show,
     closeModal
 }) => {
-    const [taskDue, setTaskDue] = useState<Date>();
+    const [taskDue, setTaskDue] = useState<Date | null>();
     const [taskTitle, setTaskTitle] = useState("");
     const [taskDescription, setTaskDescription] = useState("");
     const [isFormSubmitting, setIsFormSubmitting] = useState(false);
@@ -103,6 +103,14 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
                     shape="rounded"
                     size="lg"
                 />
+                <DatePickerV1
+                    inputSize="lg"
+                    shape="rounded"
+                    placeholder="Start Date"
+                    selected={taskDue}
+                    onChange={(date) => setTaskDue(date)}
+                />
+
                 <DatePickerV1
                     inputSize="lg"
                     shape="rounded"
