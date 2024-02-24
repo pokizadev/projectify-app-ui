@@ -10,7 +10,7 @@ import {
     AdminForgotPassword,
     AdminResetPassword,
     AdminPlatform,
-    AdminProjects,
+    AdminProjectsPage,
     AdminTasksPage,
     AdminTeamMembersPage,
 
@@ -58,14 +58,14 @@ export const router = createBrowserRouter(
             />
 
             <Route path="/admin/platform" element={<Private component={<AdminPlatform/>} userType={UserRole.admin} />} >
-                <Route path="projects" element={<AdminProjects />} />
+                <Route path="projects" element={<AdminProjectsPage />} />
                 <Route path="stories" element={<h1>Stories</h1>} />
                 <Route path="personal-tasks" element={<AdminTasksPage/>} />
                 <Route path="team-members" element={<AdminTeamMembersPage/>} />
             </Route>
 
             <Route path="/team-member/platform" element={<Private component={<TeamMemberPlatform/>} userType={UserRole.teamMember}/>} >
-                <Route path="projects" element={< AdminProjects />} />
+                <Route path="projects" element={< AdminProjectsPage />} />
                 <Route path="stories" element={<h1>Stories</h1>} />
                 <Route path="personal-tasks" element={<h1>Tasks</h1>} />
                 <Route path="team-members" element={<h1>Members</h1>} />

@@ -12,7 +12,7 @@ import {
 import { TaskCreateInput, adminTasksService } from "../../../api";
 import { useStore } from "../../../hooks";
 import { Actions, AddTaskAction } from "../../../store";
-import {toIso8601} from "../../../utils"
+import { toIso8601 } from "../../../utils";
 
 type CreateTaskModalProps = {
     show: boolean;
@@ -39,7 +39,8 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
     show,
     closeModal
 }) => {
-    const [taskDue, setTaskDue] = useState<Date>();
+    const [startDate, setStartDate] = useState<Date>();
+    const [endDate, setEndDate] = useState<Date>();
     const [taskTitle, setTaskTitle] = useState("");
     const [taskDescription, setTaskDescription] = useState("");
     const [isFormSubmitting, setIsFormSubmitting] = useState(false);
@@ -51,7 +52,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
         const input: TaskCreateInput = {
             title: taskTitle,
             description: taskDescription,
-            due: toIso8601(taskDue!)
+            due: toIso8601(endDate!)
         };
 
         adminTasksService
@@ -76,7 +77,8 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
     const closeCreateTaskModal = () => {
         setTaskTitle("");
         setTaskDescription("");
-        setTaskDue(undefined);
+        setStartDate(undefined);
+        setEndDate(undefined);
         closeModal();
     };
 
@@ -106,9 +108,17 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
                 <DatePickerV1
                     inputSize="lg"
                     shape="rounded"
+                    placeholder="Start Date"
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                />
+
+                <DatePickerV1
+                    inputSize="lg"
+                    shape="rounded"
                     placeholder="Due Date"
-                    selected={taskDue}
-                    onChange={(date) => setTaskDue(date)}
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
                 />
             </Inputs>
             <Buttons>

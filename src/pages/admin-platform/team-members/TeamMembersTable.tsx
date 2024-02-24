@@ -56,7 +56,7 @@ const allowedActions = {
     DEACTIVATED: [options[0], options[1]]
 };
 
-const columns = ["12.5%", "12.5%", "20%", "20%", "15%", "15%"];
+const columns = ["12.5%", "12.5%", "20%", "20%", "15%", "15%", "5%"];
 
 const mapsStatusToBadgeColors = {
     ACTIVE: "violet",

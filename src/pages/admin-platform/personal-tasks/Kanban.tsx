@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import toast from "react-hot-toast";
 import { GroupedTasks } from "../../../utils";
 import { useStore } from "../../../hooks";
@@ -21,10 +21,16 @@ enum StatusToTitle {
     DONE = "Done"
 }
 
-enum StatusToColor {
+enum StatusToColumnTitleColor {
     TODO = "var(--jaguar-500)",
     INPROGRESS = "var(--sunglow-700)",
     DONE = "var(--green-500)"
+}
+enum statusToColumnTitleBackground {
+    TODO = "gray",
+    INPROGRESS = "orange",
+    DONE = "green",
+    BLOCKED = "red"
 }
 
 const TasksColumns = styled.div`
@@ -41,6 +47,8 @@ const TasksColumn = styled.div`
     border-radius: var(--border-radius-16);
     border: 0.15rem solid var(--jaguar-100);
     overflow: auto;
+
+    background-color: var(--jaguar-25);
 `;
 
 const TasksColumnTitle = styled(Typography)<{ color: string }>`
@@ -103,7 +111,11 @@ const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
                             <TasksColumnTitle
                                 variant="paragraphSM"
                                 weight="semibold"
-                                color={StatusToColor[groupName as TaskStatus]}
+                                color={
+                                    StatusToColumnTitleColor[
+                                        groupName as TaskStatus
+                                    ]
+                                }
                             >
                                 {StatusToTitle[groupName as TaskStatus]}{" "}
                                 <span>({groupedTasks[groupName].length})</span>

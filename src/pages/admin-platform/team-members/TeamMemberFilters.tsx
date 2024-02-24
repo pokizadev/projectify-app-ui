@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Input, Select, Option } from "../../../design-system";
 import React from "react";
+import { PageFilters } from "../../components/PageFilters";
 
 type TeamMemberFiltersProps = {
     selectedStatus: string;
@@ -9,24 +10,11 @@ type TeamMemberFiltersProps = {
     setSearchText: (value: string) => void;
 };
 
-const FiltersBase = styled.section`
-    display: grid;
-    grid-template-columns: 20rem 20rem 1fr 20rem;
-    align-items: center;
-    gap: var(--space-24);
-    margin-bottom: var(--space-20);
-
-    .filter-by-status {
-        grid-column: 1 / 2;
-    }
+const Filters = styled(PageFilters)`
     .search {
-        grid-column: 2 / 3;
+        margin-right: auto;
     }
-
-    .filter-by-project {
-        grid-column: 4 / 5;
-    }
-`;
+`
 
 const statusOptions = [
     { label: "Active", value: "ACTIVE" },
@@ -42,7 +30,7 @@ const TeamMemberFilters: React.FC<TeamMemberFiltersProps> = ({
     setSearchText
 }) => {
     return (
-        <FiltersBase>
+        <Filters>
             <Select
                 value={selectedStatus}
                 onSelect={setSelectedStatus}
@@ -69,7 +57,7 @@ const TeamMemberFilters: React.FC<TeamMemberFiltersProps> = ({
                 headerPlaceholder="By Project"
                 className="filter-by-project"
             />
-        </FiltersBase>
+        </Filters>
     );
 };
 
