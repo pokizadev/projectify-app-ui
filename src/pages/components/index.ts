@@ -6,4 +6,5 @@ export * from "./NoDataPlaceholder";
 export * from "./Auth/AuthActionLinks";
 export * from "./KanbanCard";
 export * from "./ConfirmationModal";
-export * from "./PageHeader"
+export * from "./PageHeader";
+export * from "./PageFilters"

@@ -39,7 +39,8 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
     show,
     closeModal
 }) => {
-    const [taskDue, setTaskDue] = useState<Date | null>();
+    const [startDate, setStartDate] = useState<Date>();
+    const [endDate, setEndDate] = useState<Date>();
     const [taskTitle, setTaskTitle] = useState("");
     const [taskDescription, setTaskDescription] = useState("");
     const [isFormSubmitting, setIsFormSubmitting] = useState(false);
@@ -51,7 +52,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
         const input: TaskCreateInput = {
             title: taskTitle,
             description: taskDescription,
-            due: toIso8601(taskDue!)
+            due: toIso8601(endDate!)
         };
 
         adminTasksService
@@ -76,7 +77,8 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
     const closeCreateTaskModal = () => {
         setTaskTitle("");
         setTaskDescription("");
-        setTaskDue(undefined);
+        setStartDate(undefined);
+        setEndDate(undefined);
         closeModal();
     };
 
@@ -107,16 +109,16 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
                     inputSize="lg"
                     shape="rounded"
                     placeholder="Start Date"
-                    selected={taskDue}
-                    onChange={(date) => setTaskDue(date)}
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
                 />
 
                 <DatePickerV1
                     inputSize="lg"
                     shape="rounded"
                     placeholder="Due Date"
-                    selected={taskDue}
-                    onChange={(date) => setTaskDue(date)}
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
                 />
             </Inputs>
             <Buttons>
