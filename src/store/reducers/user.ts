@@ -10,9 +10,7 @@ export const userReducer = (
             const payload = action.payload as InitUserAction["payload"];
             return payload;
         }
-        case Actions.RESET_STATE: {
-            return null;
-        }
+        
         default:
             return state;
     }

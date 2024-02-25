@@ -11,7 +11,8 @@ import {
 import { useState } from "react";
 import { projectService } from "../../../api/projects";
 import { toIso8601 } from "../../../utils";
-import { DatePickerOnChangeDateType } from "../../../design-system/DatePicker/types";
+import { useStore } from "../../../hooks";
+import { Actions,  } from "../../../store";
 
 type CreateProjectModalProps = {
     show: boolean;
