@@ -70,3 +70,27 @@ export interface TeamMemberUpdate {
     position?: string;
     joinDate?: string;
 }
+
+export type ProjectStatus = "ACTIVE" | "ONHOLD" | "ARCHIVED" | 'COMPLETED'
+export type ContributorStatus = "ACTIVE" | "INACTIVE"
+
+export interface Project {
+    id: string;
+    name: string;
+    description: string;
+    status: ProjectStatus;
+    startDate: string;
+    endDate: string
+}
+
+export interface ProjectContributor {
+    id: string;
+    firstName: string;
+    lastName: string;
+    joinedAt: string;
+    status: ContributorStatus
+}
+
+export interface ProjectWithContributors extends Project {
+    contributors?: ProjectContributor[]
+}

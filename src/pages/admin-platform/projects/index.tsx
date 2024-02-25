@@ -1,16 +1,60 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-import { NoDataPlaceholder } from "../../components";
-import noProject from "../../../assets/illustrations/no-project.svg";
+import { NoDataPlaceholder, PageHeader } from "../../components";
+import toast from "react-hot-toast";
+import { Option } from "../../../design-system";
+import { useStore } from "../../../hooks";
+import { projectService } from "../../../api";
+import { Actions, PopulateProjectsAction } from "../../../store";
 import { CreateProjectModal } from "./CreateProjectModal";
+import { ProjectsFilters } from "./ProjectsFilters";
+import { ProjectStatus } from "../../../types";
+import { ProjectsTable } from "./ProjectsTable";
+import noProject from "../../../assets/illustrations/no-projects.svg";
+
 
 const AdminProjectsPage = () => {
-    const [projects, setProjects] = useState<string[]>([]);
+    const [isProjectsFetching, setIdProjectsFetching] = useState<string[]>([]);
     const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
+    const [isProjectsFetching, setIsProjectsFetching] = useState(true);
+    const [statusFilter, setStatusFilter] = useState("");
+    const [sortedBy, setSortedBy] = useState("");
+    const {
+        state: { projects },
+        dispatch,
+    } = useStore();
+
+    useEffect(() => {
+        projectService
+            .getAll()
+            .then((data) => {
+                const action: PopulateProjectsAction = {
+                    type: Actions.POPULATE_PROJECTS,
+                    payload: data.data,
+                };
+                dispatch(action);
+                setIsProjectsFetching(false);
+            })
+            .catch((e) => {
+                const err = e as Error;
+                toast.error(err.message);
+            });
+    }, []);
+
+    if (isProjectsFetching) return null;
+
+    const handleSetStatusFilter = (filter: Option) => {
+        setStatusFilter(filter.value as ProjectStatus);
+    };
+    const handleSetSortBy = (sortedBy: Option) => {
+        setSortedBy(sortedBy.value as string);
+    };
+
+    const projectsArr = Object.values(projects);
 
     return (
         <>
-            {!projects.length ? (
+            {!projectsArr.length ? (
                 <NoDataPlaceholder
                     illustrationUrl={noProject}
                     text="You don’t have any projects yet!"
@@ -18,7 +62,22 @@ const AdminProjectsPage = () => {
                     buttonAction={() => setShowCreateProjectModal(true)}
                 />
             ) : (
-                <h1>Projects</h1>
+                <>
+                <PageHeader
+                    pageTitle="Projects"
+                    actionButtonText="Create A Project"
+                    actionButtonOnClick={() =>
+                        setShowCreateProjectModal(true)
+                    }
+                />
+                <ProjectsFilters
+                    sortedBy={sortedBy}
+                    setSortedBy={handleSetSortBy}
+                    selectedStatus={statusFilter}
+                    setSelectedStatus={handleSetStatusFilter}
+                />
+                <ProjectsTable data={projectsArr} />
+            </>
             )}
             <CreateProjectModal
                 show={showCreateProjectModal}

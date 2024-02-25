@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import toast from "react-hot-toast";
 
 import {
     Input,
@@ -8,6 +9,10 @@ import {
     Modal
 } from "../../../design-system";
 import { useState } from "react";
+import { projectService } from "../../../api/projects";
+import { toIso8601 } from "../../../utils";
+import { useStore } from "../../../hooks";
+import { Actions, AddProjectAction } from "../../../store";
 
 type CreateProjectModalProps = {
     show: boolean;
@@ -32,12 +37,69 @@ const Buttons = styled.div`
 
 const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
     show,
-    closeModal,
+    closeModal
 }) => {
     const [startDate, setStartDate] = useState<Date | null>();
     const [endDate, setEndDate] = useState<Date | null>();
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
 
-   
+    const { dispatch } = useStore()
+ 
+    const onChangeStartDate = (date: Date) => {
+        setStartDate(date);
+    };
+
+    const onChangeEndDate = (date: Date) => {
+        setEndDate(date);
+    };
+
+    const onChangeName = (value: string) => {
+        setName(value);
+    };
+
+    const onChangeDescription = (value: string) => {
+        setDescription(value);
+    };
+
+    const clearFields = () => {
+        setName("");
+        setDescription("");
+        setStartDate(null);
+        setEndDate(null);
+    };
+
+    const cancel = () => {
+        clearFields();
+        closeModal();
+    };
+
+    const createProject = () => {
+        const input = {
+            name,
+            description,
+            startDate: toIso8601(startDate!),
+            endDate: toIso8601(endDate!)
+        };
+
+        projectService
+            .create(input)
+            .then((data) => {
+                const action: AddProjectAction = {
+                    type: Actions.ADD_PROJECT,
+                    payload: data.data
+                };
+                dispatch(action)
+                clearFields();
+                closeModal();
+                toast.success("Project has been successfully created"!);
+            })
+            .catch((e) => {
+                const err = e as Error;
+                toast.error(err.message);
+            });
+    };
+
     return (
         <Modal show={show} position="center">
             <ModalTitle variant="paragraphLG" weight="medium">
@@ -46,16 +108,16 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
             <Inputs>
                 <Input
                     placeholder="Project Name"
-                    value=""
-                    onChange={() => {}}
+                    value={name}
+                    onChange={onChangeName}
                     shape="rounded"
                     size="lg"
                 />
                 <Input
                     type="textarea"
                     placeholder="Project Description"
-                    value=""
-                    onChange={() => {}}
+                    value={description}
+                    onChange={onChangeDescription}
                     shape="rounded"
                     size="lg"
                 />
@@ -64,14 +126,14 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
                     shape="rounded"
                     placeholder="Start Date"
                     selected={startDate}
-                    onChange={(date) => setStartDate(date)}
+                    onChange={onChangeStartDate}
                 />
-                 <DatePickerV1
+                <DatePickerV1
                     inputSize="lg"
                     shape="rounded"
                     placeholder="End Date"
                     selected={endDate}
-                    onChange={(date) => setEndDate(date)}
+                    onChange={onChangeEndDate}
                 />
             </Inputs>
             <Buttons>
@@ -81,11 +143,11 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
                     shape="rounded"
                     variant="outlined"
                     fullWidth
-                    onClick={() => closeModal()}
+                    onClick={cancel}
                 >
                     Cancel
                 </Button>
-                <Button size="lg" shape="rounded" color="primary" fullWidth>
+                <Button size="lg" shape="rounded" color="primary" fullWidth onClick={createProject}>
                     Save
                 </Button>
             </Buttons>
