@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { NoDataPlaceholder } from "../../components";
-import noProject from "../../../assets/illustrations/no-project.svg";
+import noProject from "../../../assets/illustrations/no-projects.svg";
 import { CreateProjectModal } from "./CreateProjectModal";
 
 const AdminProjectsPage = () => {
