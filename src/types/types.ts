@@ -92,5 +92,5 @@ export interface ProjectContributor {
 }
 
 export interface ProjectWithContributors extends Project {
-    contributors: ProjectContributor[]
+    contributors?: ProjectContributor[]
 }
