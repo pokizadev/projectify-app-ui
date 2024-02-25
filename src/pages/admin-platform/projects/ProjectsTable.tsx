@@ -123,7 +123,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                                         variant="paragraphSM"
                                         weight="medium"
                                     >
-                                        {project.contributers?.length || 0}
+                                        {project.contributors?.length || 0}
                                     </Typography>
                                 </TableBodyCell>
                                 <TableBodyCell>

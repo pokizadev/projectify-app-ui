@@ -1,9 +1,9 @@
-import { AdminUser, TeamMemberUser, TeamMember, TeamMemberStatus, TeamMemberUpdate, Project,  Task,  TaskStatus, TaskUpdate, } from "../../types/types";
+import { AdminUser, TeamMemberUser, TeamMember, TeamMemberStatus, TeamMemberUpdate, Project, ProjectWithContributors, Task,  TaskStatus, TaskUpdate, } from "../../types/types";
 
 export enum Actions {
     INIT_USER = "INIT_USER",
     RESET_STATE = "RESET_STATE",
-    POPULATE_TASKS = "POPULATE_TASKS",
+    ADMIN_POPULATE_TASKS = "ADMIN_POPULATE_TASKS",
     ADMIN_ADD_TASK = "ADMIN_ADD_TASK",
     ADMIN_CHANGE_TASK_STATUS = "ADMIN_CHANGE_TASK_STATUS",
     ADMIN_UPDATE_TASK = "ADMIN_UPDATE_TASK",
@@ -14,7 +14,8 @@ export enum Actions {
     ADMIN_CHANGE_TEAM_MEMBER_STATUS = "ADMIN_CHANGE_TEAM_MEMBER_STATUS",
     ADMIN_UPDATE_TEAM_MEMBER = "ADMIN_UPDATE_TEAM_MEMBER",
 
-    ADD_PROJECT = "ADD_PROJECT"
+    ADD_PROJECT = "ADD_PROJECT",
+    POPULATE_PROJECTS = "POPULATE_PROJECTS"
 }
 
 export interface InitUserAction {
@@ -27,7 +28,7 @@ export interface ResetStateAction {
 }
 
 export interface AdminPopulateTasksAction {
-    type: Actions.POPULATE_TASKS;
+    type: Actions.ADMIN_POPULATE_TASKS;
     payload: Task[];
 }
 
@@ -97,6 +98,11 @@ export type AddProjectAction = {
     payload: Project;
 }
 
+export type PopulateProjectsAction = {
+    type: Actions.POPULATE_PROJECTS;
+    payload: ProjectWithContributors[]
+}
+
 export type ActionType =
     | InitUserAction
     | ResetStateAction
@@ -111,3 +117,4 @@ export type ActionType =
     | AdminChangeTeamMemberStatusAction
     | AdminUpdateTeamMemberAction
     | AddProjectAction
+    | PopulateProjectsAction
