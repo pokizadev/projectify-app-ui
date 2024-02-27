@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useState } from "react";
 import {
     Badge,
     BadgeColors,
@@ -14,16 +15,75 @@ import {
     LinearProgress,
 } from "../../../design-system";
 import { Scrollable } from "../../components";
-import { ProjectWithContributors } from "../../../types";
+import { ProjectActions, ProjectWithContributors } from "../../../types";
 import { formatAsMMMddYYYY, formatDeadline } from "../../../utils";
-
-const TableContainer = styled(Scrollable)`
-    height: calc(100% - 13rem);
-`;
 
 type ProjectsTableProps = {
     data: ProjectWithContributors[];
 };
+
+const renderDeadline = (isoDate: string) => {
+    const formattedDeadline = formatDeadline(isoDate);
+    let className = "";
+    if (formattedDeadline.includes("left")) {
+        className = "red";
+    } else {
+        className = "green";
+    }
+
+    return (
+        <Deadline variant="paragraphSM" weight="medium" className={className}>
+            {formattedDeadline}
+        </Deadline>
+    );
+};
+
+const options: MenuOption[] = [
+    { label: "Edit", iconName: "edit", value: "edit", color: "primary" },
+    {
+        label: "Reactivate",
+        iconName: "play-in-circle",
+        value: "reactivate",
+        color: "primary",
+    },
+    {
+        label: "Complete",
+        iconName: "check-in-circle",
+        value: "complete",
+        color: "primary",
+    },
+    {
+        label: "Archive",
+        iconName: "archive",
+        value: "archive",
+        color: "danger",
+    },
+    {
+        label: "Put On Hold",
+        iconName: "pause-in-circle",
+        value: "onhold",
+        color: "danger",
+    },
+];
+
+const allowedActions = {
+    ACTIVE: [options[0], options[2], options[3], options[4]],
+    ARCHIVED: [options[0], options[1], options[2], options[4]],
+    ONHOLD: [options[0], options[1], options[2], options[3]],
+    COMPLETED: [options[0], options[1], options[3], options[4]],
+};
+
+const columns = ["20%", "10%", "20%", "15%", "15%", "10%", "10%"];
+enum StatusToBadgeColors {
+    ACTIVE = "violet",
+    ARCHIVED = "gray",
+    COMPLETED = "green",
+    ONHOLD = "red",
+}
+
+const TableContainer = styled(Scrollable)`
+    height: calc(100% - 13rem);
+`;
 
 const ProjectDescription = styled(Typography)`
     color: var(--jaguar-500);
@@ -49,31 +109,15 @@ const Deadline = styled(Typography)`
     }
 `;
 
-const renderDeadline = (isoDate: string) => {
-    const formattedDeadline = formatDeadline(isoDate);
-    let className = "";
-    if (formattedDeadline.includes("left")) {
-        className = "red";
-    } else {
-        className = "green";
-    }
-
-    return (
-        <Deadline variant="paragraphSM" weight="medium" className={className}>
-            {formattedDeadline}
-        </Deadline>
-    );
-};
-
-const columns = ["20%", "10%", "20%", "15%", "15%", "10%", "10%"];
-enum StatusToBadgeColors {
-    ACTIVE = "violet",
-    ARCHIVED = "gray",
-    COMPLETED = "green",
-    ONHOLD = "red",
-}
-
 const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
+    const [selectedProjectId, setSelectedProjectId] = useState("");
+
+    const handleOnSelectCellMenu = (
+        projectId: string,
+        value: ProjectActions
+    ) => {
+        setSelectedProjectId(projectId);
+    };
     return (
         <TableContainer>
             <Table>
@@ -153,8 +197,8 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                                 </TableBodyCell>
                                 <TableBodyCell>
                                     <Menu
-                                        options={[]}
-                                        onSelect={(value) => console.log(value)}
+                                        options={allowedActions[project.status]}
+                                        onSelect={(value) => handleOnSelectCellMenu(project.id, value as ProjectActions)}
                                     />
                                 </TableBodyCell>
                             </TableRow>
