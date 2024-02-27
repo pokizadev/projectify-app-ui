@@ -15,8 +15,9 @@ import {
     LinearProgress,
 } from "../../../design-system";
 import { Scrollable } from "../../components";
-import { ProjectActions, ProjectWithContributors } from "../../../types";
+import { ProjectStatus, ProjectWithContributors } from "../../../types";
 import { formatAsMMMddYYYY, formatDeadline } from "../../../utils";
+import { ChangeProjectStatusModal } from "./ChangeProjectStatusModal";
 
 type ProjectsTableProps = {
     data: ProjectWithContributors[];
@@ -38,30 +39,32 @@ const renderDeadline = (isoDate: string) => {
     );
 };
 
+const statuses = ["ACTIVE", "COMPLETED", "ARCHIVED", "ONHOLD"]
+
 const options: MenuOption[] = [
     { label: "Edit", iconName: "edit", value: "edit", color: "primary" },
     {
         label: "Reactivate",
         iconName: "play-in-circle",
-        value: "reactivate",
+        value: statuses[0],
         color: "primary",
     },
     {
         label: "Complete",
         iconName: "check-in-circle",
-        value: "complete",
+        value: statuses[1],
         color: "primary",
     },
     {
         label: "Archive",
         iconName: "archive",
-        value: "archive",
+        value: statuses[2],
         color: "danger",
     },
     {
         label: "Put On Hold",
         iconName: "pause-in-circle",
-        value: "onhold",
+        value: statuses[3],
         color: "danger",
     },
 ];
@@ -111,14 +114,21 @@ const Deadline = styled(Typography)`
 
 const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
     const [selectedProjectId, setSelectedProjectId] = useState("");
+    const [changeStatusTo, setChangeStatusTo] = useState<ProjectStatus>();
+    const [showChangeProjectStatusModal, setShowChangeProjectStatusModal] = useState(false)
 
     const handleOnSelectCellMenu = (
         projectId: string,
-        value: ProjectActions
+        value: ProjectStatus
     ) => {
         setSelectedProjectId(projectId);
+        if(statuses.includes(value)) {
+            setShowChangeProjectStatusModal(true);
+            setChangeStatusTo(value)
+        }
     };
     return (
+    <>
         <TableContainer>
             <Table>
                 <TableHead>
@@ -198,7 +208,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                                 <TableBodyCell>
                                     <Menu
                                         options={allowedActions[project.status]}
-                                        onSelect={(value) => handleOnSelectCellMenu(project.id, value as ProjectActions)}
+                                        onSelect={(value) => handleOnSelectCellMenu(project.id, value as ProjectStatus)}
                                     />
                                 </TableBodyCell>
                             </TableRow>
@@ -207,6 +217,13 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                 </TableBody>
             </Table>
         </TableContainer>
+        <ChangeProjectStatusModal
+                show={showChangeProjectStatusModal}
+                changeStatusTo={changeStatusTo!}
+                projectId={selectedProjectId}
+                closeModal={() => setShowChangeProjectStatusModal(false)}
+            />
+        </>
     );
 };
 
