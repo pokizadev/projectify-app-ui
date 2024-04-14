@@ -13,10 +13,7 @@ type GetAllAPIResponse = {
 class ProjectService {
     url: string;
     constructor() {
-        this.url = `${
-            process.env.NODE_ENV === "development"
-                ? process.env.REACT_APP_PROJECTIFY_API_URL_LOCAL
-                : process.env.REACT_APP_PROJECTIFY_API_URL
+        this.url = `${process.env.REACT_APP_PROJECTIFY_API_URL
         }/projects`;
     }
 
