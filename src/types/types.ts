@@ -40,8 +40,7 @@ export type TaskUpdate = {
     title?: string;
     description?: string;
     due?: string;
-    status?: TaskStatus
-
+    status?: TaskStatus;
 };
 
 export enum AdminTeamMemberActions {
@@ -53,6 +52,11 @@ export enum AdminTeamMemberActions {
 
 export type TeamMemberStatus = "ACTIVE" | "INACTIVE" | "DEACTIVATED";
 export type AdminTeamMemberStatusChange = "reactivate" | "deactivate";
+export type ProjectStatusChange =
+    | "reactivate"
+    | "onhold"
+    | "complete"
+    | "archive";
 
 export interface TeamMember {
     id: string;
@@ -71,16 +75,17 @@ export interface TeamMemberUpdate {
     joinDate?: string;
 }
 
-export type ProjectStatus = "ACTIVE" | "ONHOLD" | "ARCHIVED" | 'COMPLETED'
-export type ContributorStatus = "ACTIVE" | "INACTIVE"
+export type ProjectStatus = "ACTIVE" | "ONHOLD" | "ARCHIVED" | "COMPLETED";
+export type ContributorStatus = "ACTIVE" | "INACTIVE";
 
 export interface Project {
     id: string;
     name: string;
     description: string;
     status: ProjectStatus;
+    progress: number;
     startDate: string;
-    endDate: string
+    endDate: string;
 }
 
 export interface ProjectContributor {
@@ -88,9 +93,9 @@ export interface ProjectContributor {
     firstName: string;
     lastName: string;
     joinedAt: string;
-    status: ContributorStatus
+    status: ContributorStatus;
 }
 
 export interface ProjectWithContributors extends Project {
-    contributors?: ProjectContributor[]
+    contributors?: ProjectContributor[];
 }

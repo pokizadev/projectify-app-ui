@@ -1,29 +1,26 @@
-import { Project, ProjectWithContributors } from "../types";
+import { Project, ProjectStatus, ProjectWithContributors } from "../types";
 
-type CreateInput = Omit<Project, "id" | "status">
+type CreateInput = Omit<Project, "id" | "status" | "progress">;
 
 type CreateAPIResponse = {
     data: Project;
-}
+};
 
 type GetAllAPIResponse = {
-    data: ProjectWithContributors[]
-}
+    data: ProjectWithContributors[];
+};
 
 class ProjectService {
     url: string;
     constructor() {
-        this.url = `${
-            process.env.NODE_ENV === "development" 
-            ? process.env.REACT_APP_PROJECTIFY_API_URL_LOCAL 
-            : process.env.REACT_APP_PROJECTIFY_API_URL
-        }/projects`
+        this.url = `${process.env.REACT_APP_PROJECTIFY_API_URL
+        }/projects`;
     }
 
     async create(input: CreateInput): Promise<CreateAPIResponse> {
         try {
-            const rawAuthToken = localStorage.getItem("authToken")
-            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : ""
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
 
             const response = await fetch(`${this.url}/`, {
                 method: "POST",
@@ -32,14 +29,14 @@ class ProjectService {
                     "Content-type": "application/json"
                 },
                 body: JSON.stringify(input)
-            })
-            if(!response.ok) {
-                const data = await response.json()
-                throw new Error(data.message)
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
             }
-            return response.json()
+            return response.json();
         } catch (error) {
-            throw error
+            throw error;
         }
     }
 
@@ -49,8 +46,8 @@ class ProjectService {
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
             const response = await fetch(`${this.url}/`, {
                 headers: {
-                    authorization: `Bearer ${authToken}`,
-                },
+                    authorization: `Bearer ${authToken}`
+                }
             });
             if (!response.ok) {
                 const data = await response.json();
@@ -62,5 +59,30 @@ class ProjectService {
             throw error;
         }
     }
+
+    async changeStatus(projectId: string, status: ProjectStatus) {
+        try {
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+            const response = await fetch(
+                `${this.url}/${projectId}/change-status`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        authorization: `Bearer ${authToken}`,
+                        "Content-type": "application/json"
+                    },
+                    body: JSON.stringify({ status })
+                }
+            );
+
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
 }
-export const projectService = new ProjectService()
+export const projectService = new ProjectService();

@@ -14,7 +14,6 @@ import noProject from "../../../assets/illustrations/no-projects.svg";
 
 
 const AdminProjectsPage = () => {
-    const [isProjectsFetching, setIdProjectsFetching] = useState<string[]>([]);
     const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
     const [isProjectsFetching, setIsProjectsFetching] = useState(true);
     const [statusFilter, setStatusFilter] = useState("");

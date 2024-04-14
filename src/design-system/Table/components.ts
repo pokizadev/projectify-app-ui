@@ -30,7 +30,7 @@ export const TableHeadCellBase = styled.th<BaseCellProps>`
 
 export const TableBody = styled.tbody`
     ${TableRowBase} {
-        height: 8.2rem;
+        height: 6.8rem;
         box-shadow: var(--shadow-xs);
     }
     ${TableRowBase}:not(:last-child) {
