@@ -6,6 +6,7 @@ import {
     TeamMemberUpdate,
     Project,
     ProjectStatus,
+    ProjectUpdate,
     ProjectWithContributors,
     Task,
     TaskStatus,
@@ -29,6 +30,7 @@ export enum Actions {
     ADD_PROJECT = "ADD_PROJECT",
     POPULATE_PROJECTS = "POPULATE_PROJECTS",
     CHANGE_PROJECT_STATUS = "CHANGE_PROJECT_STATUS",
+    UPDATE_PROJECT = "UPDATE_PROJECT",
 }
 
 export interface InitUserAction {
@@ -121,6 +123,14 @@ export type ChangeProjectStatusAction = {
     payload: {id: string; status: ProjectStatus}
 }
 
+export type UpdateProjectAction = {
+    type: Actions.UPDATE_PROJECT;
+    payload: {
+        id: string;
+        data: ProjectUpdate;
+    };
+};
+
 export type ActionType =
     | InitUserAction
     | ResetStateAction
@@ -137,3 +147,4 @@ export type ActionType =
     | AddProjectAction
     | PopulateProjectsAction
     | ChangeProjectStatusAction
+    | UpdateProjectAction
