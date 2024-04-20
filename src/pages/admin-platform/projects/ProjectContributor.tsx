@@ -1,7 +1,7 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-import { Avatar } from '../../../design-system/Avatar';
-import { Typography } from '../../../design-system';
+import React from "react";
+import styled, { css } from "styled-components";
+import { Avatar } from "../../../design-system/Avatar";
+import { Typography } from "../../../design-system";
 
 type ProjectContributorDetails = {
     firstName: string;
@@ -10,7 +10,7 @@ type ProjectContributorDetails = {
     position: string;
 };
 
-type ProjectContributorLayout = 'sideBySide' | 'stack';
+type ProjectContributorLayout = "sideBySide" | "stack";
 
 type ProjectContributorProps = {
     details: ProjectContributorDetails;
@@ -21,12 +21,13 @@ const ProjectContributorBase = styled.div<{ layout: ProjectContributorLayout }>`
     display: flex;
     align-items: center;
     ${(props) =>
-        props.layout === 'sideBySide' &&
+        props.layout === "sideBySide" &&
         css`
+            align-items: center;
             gap: var(--space-12);
         `}
     ${(props) =>
-        props.layout === 'stack' &&
+        props.layout === "stack" &&
         css`
             flex-direction: column;
             gap: var(--space-8);
