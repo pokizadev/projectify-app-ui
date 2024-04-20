@@ -10,10 +10,10 @@ type TeamMemberFiltersProps = {
 };
 
 const Filters = styled(PageFilters)`
-    .search {
+    .search-filter {
         margin-right: auto;
     }
-`
+`;
 
 const statusOptions = [
     { label: "Active", value: "ACTIVE" },
@@ -37,7 +37,7 @@ const TeamMemberFilters: React.FC<TeamMemberFiltersProps> = ({
                 shape="rounded"
                 size="md"
                 headerPlaceholder="By Status"
-                className="filter-by-status"
+                className="status-filter"
             />
             <Input
                 value={searchText}
@@ -45,16 +45,6 @@ const TeamMemberFilters: React.FC<TeamMemberFiltersProps> = ({
                 placeholder="Search..."
                 shape="rounded"
                 size="md"
-                className="search"
-            />
-            <Select
-                value=""
-                onSelect={() => {}}
-                options={[]}
-                shape="rounded"
-                size="md"
-                headerPlaceholder="By Project"
-                className="filter-by-project"
             />
         </Filters>
     );

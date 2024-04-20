@@ -5,6 +5,7 @@ import {
     TeamMemberStatus,
     TeamMemberUpdate,
     Project,
+    ProjectContributors,
     ProjectStatus,
     ProjectUpdate,
     ProjectWithContributors,
@@ -31,6 +32,8 @@ export enum Actions {
     POPULATE_PROJECTS = "POPULATE_PROJECTS",
     CHANGE_PROJECT_STATUS = "CHANGE_PROJECT_STATUS",
     UPDATE_PROJECT = "UPDATE_PROJECT",
+    UPDATE_PROJECT_CONTRIBUTORS_NUMBER = "UPDATE_PROJECT_CONTRIBUTORS_NUMBER",
+    POPULATE_PROJECT_CONTRIBUTORS = "POPULATE_PROJECT_CONTRIBUTORS",
 }
 
 export interface InitUserAction {
@@ -131,6 +134,22 @@ export type UpdateProjectAction = {
     };
 };
 
+export type UpdateProjectContributorsNumberAction = {
+    type: Actions.UPDATE_PROJECT_CONTRIBUTORS_NUMBER;
+    payload: {
+        id: string;
+        data: {
+            operation: "ADD" | "SUBTRACT";
+            quantity: number;
+        };
+    };
+};
+
+export type PopulateProjectContributorsAction = {
+    type: Actions.POPULATE_PROJECT_CONTRIBUTORS;
+    payload: { id: string; data: ProjectContributors };
+};
+
 export type ActionType =
     | InitUserAction
     | ResetStateAction
@@ -148,3 +167,6 @@ export type ActionType =
     | PopulateProjectsAction
     | ChangeProjectStatusAction
     | UpdateProjectAction
+    | UpdateProjectAction
+    | PopulateProjectContributorsAction
+    | UpdateProjectContributorsNumberAction

@@ -1,4 +1,11 @@
-import { Project, ProjectStatus, ProjectUpdate, ProjectWithContributors } from "../types";
+import {
+    Project,
+    ProjectContributor,
+    ProjectContributors,
+    ProjectStatus,
+    ProjectUpdate,
+    ProjectWithContributors
+} from "../types";
 
 type CreateInput = Omit<Project, "id" | "status" | "progress">;
 
@@ -10,11 +17,14 @@ type GetAllAPIResponse = {
     data: ProjectWithContributors[];
 };
 
+type GetContributorsAPIResponse = {
+    data: ProjectContributors;
+};
+
 class ProjectService {
     url: string;
     constructor() {
-        this.url = `${process.env.REACT_APP_PROJECTIFY_API_URL
-        }/projects`;
+        this.url = `${process.env.REACT_APP_PROJECTIFY_API_URL}/projects`;
     }
 
     async create(input: CreateInput): Promise<CreateAPIResponse> {
@@ -85,7 +95,6 @@ class ProjectService {
         }
     }
 
-
     async update(projectId: string, input: ProjectUpdate) {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
@@ -94,15 +103,40 @@ class ProjectService {
                 method: "PATCH",
                 headers: {
                     authorization: `Bearer ${authToken}`,
-                    "Content-Type": "application/json",
+                    "Content-Type": "application/json"
                 },
-                body: JSON.stringify(input),
+                body: JSON.stringify(input)
             });
 
             if (!response.ok) {
                 const data = await response.json();
                 throw new Error(data.message);
             }
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async getContributors(
+        projectId: string
+    ): Promise<GetContributorsAPIResponse> {
+        try {
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+
+            const response = await fetch(
+                `${this.url}/${projectId}/contributors`,
+                {
+                    headers: {
+                        authorization: `Bearer ${authToken}`,
+                    },
+                }
+            );
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+            return response.json();
         } catch (error) {
             throw error;
         }

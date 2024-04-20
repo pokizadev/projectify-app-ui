@@ -92,12 +92,19 @@ export interface ProjectContributor {
     id: string;
     firstName: string;
     lastName: string;
-    joinedAt: string;
-    status: ContributorStatus;
+    position: string;
+    joinedAt?: string;
+    status?: ContributorStatus;
+}
+
+export interface ProjectContributors {
+    assignedContributors: ProjectContributor[];
+    notAssignedContributors: Omit<ProjectContributor, "joinedAt" | "status">[];
 }
 
 export interface ProjectWithContributors extends Project {
-    contributors?: ProjectContributor[];
+    numberOfContributors: number;
+    contributors?: ProjectContributors;
 }
 
 export interface ProjectUpdate {
