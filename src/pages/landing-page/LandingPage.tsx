@@ -1,5 +1,7 @@
+import { HeroPage } from "./sections/hero/Hero";
+
 const LandingPage = () => {
-    return <></>;
+    return <HeroPage />;
 };
 
 export { LandingPage };
