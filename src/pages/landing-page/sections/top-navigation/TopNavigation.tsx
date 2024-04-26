@@ -21,6 +21,8 @@ export const links: LinkItem[] = [
 const TopNavigationContent = styled(Content)`
     display: flex;
     gap: var(--space-50);
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
 `;
 
 const ButtonsWrapper = styled.div`
