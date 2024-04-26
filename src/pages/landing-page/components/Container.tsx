@@ -6,6 +6,6 @@ export const Container = styled.section`
 `;
 
 export const Content = styled.div`
-    width: 61%;
+    max-width: 117rem;
     margin: 0 auto;
 `;

@@ -3,14 +3,21 @@ import styled from "styled-components";
 import { Button } from "../../../design-system";
 
 const LinksWrapper = styled.nav`
+    width: 58%;
     display: flex;
+    justify-content: center;
+    text-align: center;
 `;
 
 const StyledLinks = styled.ul`
     display: flex;
-    gap: var(--space-12);
-    justify-content: space-between;
+    gap: var(--space-44);
+    justify-content: center;
     align-items: center;
+
+    li {
+        list-style-type: none;
+    }
 `;
 
 export type LinkItem = {
@@ -22,6 +29,13 @@ type NavigationLinksProps = {
     links: LinkItem[];
 };
 
+const Link = styled.a`
+    color: var(--jaguar-900);
+    font-size: var(--font-size-16);
+    font-weight: var(--font-weight-500);
+    line-height: var(--line-height-20);
+`;
+
 const NavigationLinks: React.FC<NavigationLinksProps> = ({ links }) => {
     return (
         <LinksWrapper>
@@ -29,12 +43,7 @@ const NavigationLinks: React.FC<NavigationLinksProps> = ({ links }) => {
                 {links.map((link, idx) => {
                     return (
                         <li key={idx}>
-                            <Button
-                                variant="text"
-                                size="md"
-                            >
-                                {link.linkText}
-                            </Button>
+                            <Link>{link.linkText}</Link>
                         </li>
                     );
                 })}
