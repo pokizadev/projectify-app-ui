@@ -1,6 +1,7 @@
 import { Container, Content } from "../../components/Container";
 import { Typography, Button } from "../../../../design-system";
 import styled from "styled-components";
+import background from "../../../../assets/images/bg-effect.jpg";
 import heroImg from "../../../../assets/images/hero.png";
 import date from "../../../../assets/images/date.png";
 import members from "../../../../assets/images/members.png";
@@ -9,10 +10,11 @@ import google from "../../../../assets/images/google.png";
 import { TopNavigation } from "../top-navigation/TopNavigation";
 
 const HeroContainer = styled(Container)`
-    background: linear-gradient(to bottom, #f7f3ff, #fdfcff);
-    border: 10px solid transparent;
-    border-image: linear-gradient(to bottom, #f7f3ff, #fdfcff) 1;
-    border-image-slice: 1;
+    background: url(${background}) center/cover,
+        linear-gradient(to right, #f7f3ff 0%, #fdfcff 100%);
+
+    background-size: cover;
+    background-position: center;
 `;
 
 const HeroContent = styled(Content)`
@@ -28,8 +30,8 @@ const HeadingText = styled(Typography)`
 
 const Description = styled(Typography)`
     color: var(--jaguar-500);
-    margin-bottom: var(--space-30);
     max-width: calc(var(--font-size-64) * 12);
+    margin: var(--space-8) auto var(--space-30) auto;
 `;
 
 const DemoButton = styled(Button)`
