@@ -27,6 +27,12 @@ export type IconName =
     | "x-in-circle"
     | "pause-in-circle"
     | "play-in-circle"
+    | "clipboard"
+    | "users"
+    | "user-friendly"
+    | "time"
+    | "document"
+    | "clock"
 
 export type IconProps = {
     iconName: IconName;
