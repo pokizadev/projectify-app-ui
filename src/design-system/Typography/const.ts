@@ -32,4 +32,9 @@ export const TypographyProps = {
         justify: "justify",
         inherit: "inherit",
     },
+    color: {
+        primary: "primary",
+        jaguarDark: "jaguarDark",
+        jaguarLight: "jaguarLight"
+    }
 };

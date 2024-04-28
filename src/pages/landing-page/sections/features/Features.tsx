@@ -11,7 +11,6 @@ const FeaturesContent = styled(Content)`
 const FeaturesDescription = styled(Typography)`
     margin-top: var(--space-4);
     margin-bottom: var(--space-50);
-    color: var(--jaguar-500);
 `;
 
 const FeaturesCard = styled.div`
@@ -28,7 +27,7 @@ const StyledDiv = styled.div`
     background-image: url(${background2});
     width: 100%;
     height: 45rem;
-    margin-top: -30rem;
+    margin-top: -17%;
 `;
 const Features = () => {
     return (
@@ -41,6 +40,7 @@ const Features = () => {
                     variant="paragraphSM"
                     weight="medium"
                     align="center"
+                    color="jaguarLight"
                 >
                     Our solution provides simple yet effective project
                     management.

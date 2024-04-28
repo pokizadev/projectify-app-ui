@@ -36,17 +36,6 @@
     --line-height-96: 9.6rem;
 }
 
-.display-lg,
-.display-sm,
-.heading-1,
-.heading-2,
-.heading-3,
-.heading-4,
-.heading-5,
-.heading-6 {
-    color: var(--black-900);
-}
-
 .display-lg {
     font-size: var(--font-size-80);
     line-height: var(--line-height-96);
@@ -85,18 +74,6 @@
 .heading-6 {
     font-size: var(--font-size-24);
     line-height: var(--line-height-32);
-}
-
-.paragraph-lg,
-.paragraph-md,
-.paragraph-sm,
-.subtitle-lg,
-.subtitle-md,
-.subtitle-sm,
-.button-lowercase,
-.button-uppercase,
-.overline {
-    color: var(--jaguar-900); /* Replace 'blue' with your desired color */
 }
 
 .paragraph-lg {
@@ -165,4 +142,16 @@
 }
 .text-align-inherit {
     text-align: inherit;
+}
+
+.primary-color {
+    color: var(--primary-500);
+}
+
+.jaguar-dark {
+    color: var(--jaguar-900);
+}
+
+.jaguar-light {
+    color: var(--jaguar-500)
 }

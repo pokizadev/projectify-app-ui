@@ -31,3 +31,9 @@ export const alignClassNames = {
     justify: "text-align-justify",
     inherit: "text-align-inherit",
 };
+
+export const colorClassNames = {
+    primary: "primary-color",
+    jaguarDark: "jaguar-dark",
+    jaguarLight: "jaguar-light"
+}

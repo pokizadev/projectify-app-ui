@@ -39,9 +39,7 @@ const FeatureTitle = styled(Typography)`
     margin-bottom: var(--space-8);
 `;
 
-const FeatureDescription = styled(Typography)`
-    color: var(--jaguar-500);
-`;
+
 const FeatureItem: React.FC<FeatureItemProps> = ({
     backgroundColor,
     iconBackground,
@@ -62,9 +60,9 @@ const FeatureItem: React.FC<FeatureItemProps> = ({
                 <FeatureTitle variant="paragraphLG" weight="semibold">
                     {title}
                 </FeatureTitle>
-                <FeatureDescription variant="paragraphSM" weight="medium">
+                <Typography variant="paragraphSM" weight="medium" color="jaguarLight">
                     {description}
-                </FeatureDescription>
+                </Typography>
             </TextWrapper>
         </FeatureCard>
     );
