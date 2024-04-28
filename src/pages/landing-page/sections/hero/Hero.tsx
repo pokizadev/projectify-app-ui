@@ -24,12 +24,10 @@ const HeroContent = styled(Content)`
 `;
 
 const HeadingText = styled(Typography)`
-    color: var(--jaguar-900);
     margin-bottom: var(--space-16);
 `;
 
 const Description = styled(Typography)`
-    color: var(--jaguar-500);
     max-width: calc(var(--font-size-64) * 12);
     margin: var(--space-8) auto var(--space-30) auto;
 `;
@@ -86,7 +84,7 @@ const HeroPage = () => {
                 <HeadingText variant="h1" align="center">
                     Unleash the Power of Projectify
                 </HeadingText>
-                <Description variant="paragraphMD" align="center">
+                <Description variant="paragraphMD" align="center" color="jaguarLight">
                     Projectify is your all-in-one solution, crafted to simplify
                     your project management journey and supercharge your
                     success.

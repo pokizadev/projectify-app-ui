@@ -5,6 +5,7 @@ import {
     variantClassNames,
     weightClassNames,
     alignClassNames,
+    colorClassNames
 } from "./classnames";
 
 type TypographyVariant =
@@ -27,10 +28,13 @@ type TypographyWeight = "normal" | "medium" | "semibold" | "bold";
 
 type TypographyAlign = "center" | "left" | "right" | "justify" | "inherit";
 
+type TypographyColor = "primary" | "jaguarDark" | "jaguarLight"
+
 type TypographyProps = {
     variant: TypographyVariant;
     weight?: TypographyWeight;
     align?: TypographyAlign;
+    color?: TypographyColor;
     className?: string;
     children: React.ReactNode;
 };
@@ -39,6 +43,7 @@ export const Typography: React.FC<TypographyProps> = ({
     variant,
     weight,
     align,
+    color,
     className,
     children,
 }) => {
@@ -48,8 +53,10 @@ export const Typography: React.FC<TypographyProps> = ({
 
     const alignClassName = align !== undefined ? alignClassNames[align] : "";
 
+    const colorClassName = color !== undefined ? colorClassNames[color] : "jaguarDark"
+
     const finalClassName =
-        trimWhiteSpaces(`${variantClassName} ${weightClassName} ${alignClassName} ${
+        trimWhiteSpaces(`${variantClassName} ${weightClassName} ${alignClassName} ${colorClassName} ${
             className || ""
         }`);
 
