@@ -1,6 +1,7 @@
 import { Companies } from "./sections/companies/Companies";
 import { Features } from "./sections/features/Features";
 import { HeroPage } from "./sections/hero/Hero";
+import { Pricing } from "./sections/pricing/Pricing";
 
 const LandingPage = () => {
     return (
@@ -8,6 +9,7 @@ const LandingPage = () => {
             <HeroPage />
             <Companies />
             <Features />
+            <Pricing />
         </>
     );
 };
