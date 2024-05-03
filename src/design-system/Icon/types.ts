@@ -33,6 +33,11 @@ export type IconName =
     | "time"
     | "document"
     | "clock"
+    | "starter-plan"
+    | "professional-plan"
+    | "enterprice-plan"
+    | "green-checkmark"
+    | "yellow-checkmark"
 
 export type IconProps = {
     iconName: IconName;
