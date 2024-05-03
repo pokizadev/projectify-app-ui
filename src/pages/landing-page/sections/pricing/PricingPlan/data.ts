@@ -3,7 +3,7 @@ import { PlanProps } from "./types";
 export const plans: PlanProps[] = [
     {
         backgroundColor: "var(--white)",
-        fontColor: "var(--jaguar-900)",
+        fontColor: "jaguarDark",
         subtitle: "For Individuals",
         iconBackground: "var(--primary-50)",
         iconBackgroundBorder: "var(--primary-100)",
@@ -16,7 +16,7 @@ export const plans: PlanProps[] = [
         users: "10",
         storage: "10GB",
         others: ["Email Support"],
-        buttonColor: "var(--primaary-500)",
+        buttonColor: "var(--primary-500)",
         buttonTextColor: "var(--white)"
     },
     {
@@ -48,7 +48,7 @@ export const plans: PlanProps[] = [
         title: "Enterprise",
         price: "$99.99",
 
-        checkMark: "yellow-checkmark",
+        checkMark: "green-checkmark",
         projects: "Unlimited",
         users: "Scalable",
         storage: "Scalable",
@@ -58,7 +58,7 @@ export const plans: PlanProps[] = [
             "Single Sign-On (SSO)",
             "Custom Integrations"
         ],
-        buttonColor: "var(--primaary-500)",
+        buttonColor: "var(--primary-500)",
         buttonTextColor: "var(--white)"
     }
 ];

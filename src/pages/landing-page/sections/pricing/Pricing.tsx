@@ -2,6 +2,10 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Container, Content } from "../../components/Container";
 import { Typography, Switch } from "../../../../design-system";
+import { plans } from "./PricingPlan/data";
+import { PlanItem } from "./PricingPlan/Plan";
+import background2 from "../../../../assets/images/bg-effect-2.png"
+import background3 from "../../../../assets/images/bg-effect-3.png"
 
 const PricingContainer = styled(Container)`
     background-color: var(--jaguar-25);
@@ -21,6 +25,13 @@ const ToggleWrapper = styled.div`
     align-items: center;
     justify-content: center;
     gap: var(--space-24);
+`;
+
+const PricePlansWrapper = styled.div`
+    display: flex;
+    overflow-x: auto;
+    justify-content: space-between;
+    gap: var(--space-20);
 `;
 
 const Pricing = () => {
@@ -60,6 +71,31 @@ const Pricing = () => {
                         </Typography>
                     </ToggleWrapper>
                 </PricingHeader>
+                <PricePlansWrapper>
+                    {plans.map((plan, idx) => {
+                        return(
+                            <PlanItem
+                                key={idx}
+                                backgroundColor={plan.backgroundColor}
+                                fontColor={plan.fontColor}
+                                subtitle={plan.subtitle}
+                                iconBackground={plan.iconBackground}
+                                iconBackgroundBorder={plan.iconBackgroundBorder}
+                                iconName={plan.iconName}
+                                title={plan.title}
+                                price={plan.price}
+
+                                checkMark={plan.checkMark}
+                                projects={plan.projects}
+                                users={plan.users}
+                                storage={plan.storage}
+                                others={plan.others}
+                                buttonColor={plan.buttonColor}
+                                buttonTextColor={plan.buttonTextColor}
+                            />
+                        )
+                    })}
+                </PricePlansWrapper>
             </Content>
         </PricingContainer>
     );
