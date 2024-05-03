@@ -9,7 +9,7 @@ export type PlanProps = {
     iconName: IconName;
     title: string;
     price: string;
-    
+
     checkMark: IconName;
     projects: string;
     users: string;
