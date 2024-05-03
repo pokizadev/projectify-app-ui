@@ -49,7 +49,7 @@ const Companies = () => {
         <Container>
             <CompaniesContent>
                 {companies.map((company, idx) => (
-                    <div>
+                    <div key={idx}>
                         <CompanyLogo src={company.imgUrl} alt={company.text} />
                     </div>
                 ))}
