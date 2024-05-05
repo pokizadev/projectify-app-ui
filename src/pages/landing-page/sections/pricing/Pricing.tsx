@@ -4,8 +4,6 @@ import { Container, Content } from "../../components/Container";
 import { Typography, Switch } from "../../../../design-system";
 import { plans } from "./PricingPlan/data";
 import { PlanItem } from "./PricingPlan/Plan";
-import background2 from "../../../../assets/images/bg-effect-2.png"
-import background3 from "../../../../assets/images/bg-effect-3.png"
 
 const PricingContainer = styled(Container)`
     background-color: var(--jaguar-25);

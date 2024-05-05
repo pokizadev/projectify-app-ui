@@ -11,8 +11,8 @@ type AvatarProps = {
     size?: AvatarSize;
     shape?: AvatarShape;
     className?: string;
-    firstName: string;
-    lastName: string;
+    firstName?: string;
+    lastName?: string;
     imageUrl?: string;
     onClick?: () => void;
 };
