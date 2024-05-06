@@ -19,30 +19,43 @@ const TestimonialsContent = styled(Content)`
 const Title = styled(Typography)`
     margin-bottom: var(--space-50);
 `;
-
-const AvatarsWrapper = styled.div`
-    display: flex;
+const TestimonialsWrapper = styled.div`
     text-align: center;
-    justify-content: center;
-    gap: var(--space-50);
+`
+const Testimonial = styled.div`
+    display: inline-block;
+    vertical-align: middle;
 `;
 
-const Testimonial = styled.div``;
+const AvatarContainer = styled.div`
+    display: flex;
+    align-items: center;
+    flex-shrink: 0; /* Prevent avatar from shrinking */
+    
+`;
 
-const AvatarImage = styled.img<{ $active: boolean }>`
+const AvatarImage = styled.img<{ $active: boolean, $last: boolean}>`
+
     width: ${(props) => (props.$active ? "20rem" : "12rem")};
     height: ${(props) => (props.$active ? "20rem" : "12rem")};
     border-radius: 50%;
     object-fit: cover;
     opacity: ${(props) => (props.$active ? "1" : "0.5")};
-    margin-top: auto;
+    margin-right: ${(props) => (props.$last ? "0" : "var(--space-50)")};
+
 `;
 
-const InfoWrapper = styled.div`
-    display: flex;
+const InfoWrapper = styled.div<{ $active: boolean }>`
+    display: ${(props) => (props.$active ? "flex" : "none")};
     flex-direction: column;
+    gap: var(--space-2);
+    text-align: center;
+    justify-content: center;
 `;
 
+const Description = styled(Typography)`
+    width: 60%;
+`
 const Testimonials = () => {
     const [currentIndex, setCurrentIndex] = useState(1);
 
@@ -64,22 +77,46 @@ const Testimonials = () => {
                 <Title variant="h5" weight="bold" align="center">
                     Trust Our Clients
                 </Title>
-                <div>
-                    <AvatarsWrapper>
-                        {testimonials.map((testimonial, idx) => {
-                            return (
-                                <Testimonial>
+                <TestimonialsWrapper>
+                    {testimonials.map((testimonial, idx) => {
+                        return (
+                            <Testimonial key={idx}>
+                                <AvatarContainer>
                                     <AvatarImage
-                                        key={idx}
+                                      $last={idx === testimonials.length - 1}
                                         $active={idx === currentIndex}
                                         src={testimonial.image}
-                                    ></AvatarImage>
-                                    <InfoWrapper></InfoWrapper>
-                                </Testimonial>
-                            );
-                        })}
-                    </AvatarsWrapper>
-                </div>
+                                    />
+                                </AvatarContainer>
+                            </Testimonial>
+                        );
+                    })}
+                    {testimonials.map((testimonial, idx) => {
+                        return (
+                           <InfoWrapper $active={idx === currentIndex}>
+                                    <Typography variant="h6" weight="semibold">
+                                        {testimonial.name}
+                                    </Typography>
+                                    <Typography
+                                        variant="subtitleLG"
+                                        weight="semibold"
+                                        color="jaguarLight"
+                                    >
+                                        {testimonial.position}
+                                    </Typography>
+                                    <Description
+                                        variant="paragraphMD"
+                                        weight="medium"
+                                        color="jaguarLight"
+                                        align="center"
+
+                                    >
+                                        {testimonial.description}
+                                    </Description>
+                                </InfoWrapper> 
+                        )
+                    })}
+                </TestimonialsWrapper>
             </TestimonialsContent>
         </Container>
     );

@@ -16,7 +16,7 @@ export const testimonials = [
         id: 2,
         image: testimonial2,
         name: "Jason Mammoa",
-        title: "Project Manager at Google",
+        position: "Project Manager at Google",
         rating: Array(5).fill(null),
         description:
             "I rely on Projectify App to streamline our development process. Its robust tools and seamless integration with our existing systems have significantly increased our team's productivity."
@@ -25,7 +25,7 @@ export const testimonials = [
         id: 3,
         image: testimonial3,
         name: "Emily Carter",
-        title: "Marketing Director at Amazon",
+        position: "Marketing Director at Amazon",
         rating: Array(4).fill(null),
         description:
             "Projectify App has become my go-to tool for orchestrating complex campaigns with ease. Its comprehensive features and real-time collaboration capabilities have revolutionized how our team operates."
