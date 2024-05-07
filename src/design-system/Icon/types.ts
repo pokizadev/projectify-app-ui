@@ -38,6 +38,7 @@ export type IconName =
     | "enterprice-plan"
     | "green-checkmark"
     | "yellow-checkmark"
+    | "star"
 
 export type IconProps = {
     iconName: IconName;
