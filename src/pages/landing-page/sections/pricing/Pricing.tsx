@@ -8,6 +8,10 @@ import { PlanItem } from "./PricingPlan/Plan";
 const PricingContainer = styled(Container)`
     background-color: var(--jaguar-25);
 `;
+
+const PricingContent = styled(Content)`
+    padding-top: 0;
+`
 const PricingHeader = styled.div`
     display: flex;
     flex-direction: column;
@@ -37,7 +41,7 @@ const Pricing = () => {
 
     return (
         <PricingContainer>
-            <Content>
+            <PricingContent>
                 <PricingHeader>
                     <Typography
                         variant="subtitleLG"
@@ -94,7 +98,7 @@ const Pricing = () => {
                         )
                     })}
                 </PricePlansWrapper>
-            </Content>
+            </PricingContent>
         </PricingContainer>
     );
 };

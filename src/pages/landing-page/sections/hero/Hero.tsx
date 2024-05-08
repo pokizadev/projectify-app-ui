@@ -1,7 +1,7 @@
 import { Container, Content } from "../../components/Container";
 import { Typography, Button } from "../../../../design-system";
 import styled from "styled-components";
-import background from "../../../../assets/images/bg-effect.jpg";
+import background from "../../../../assets/images/background1.png";
 import heroImg from "../../../../assets/images/hero.png";
 import date from "../../../../assets/images/date.png";
 import members from "../../../../assets/images/members.png";
@@ -10,17 +10,20 @@ import google from "../../../../assets/images/google.png";
 import { TopNavigation } from "../top-navigation/TopNavigation";
 
 const HeroContainer = styled(Container)`
-    background: url(${background}) center/cover,
-        linear-gradient(to right, #f7f3ff 0%, #fdfcff 100%);
-        
-    background-position: center;
-    background-size: cover;
+    background: linear-gradient(to right, var(--primary-25), var(--primary-12));
+`;
+
+const StyledDiv = styled.div`
+    background-image: url(${background});
+      
 `;
 
 const HeroContent = styled(Content)`
     display: flex;
     flex-direction: column;
     text-align: center;
+    padding-top: 0;
+    padding-bottom: 0;
 `;
 
 const HeadingText = styled(Typography)`
@@ -79,6 +82,7 @@ const GoogleImage = styled.img`
 const HeroPage = () => {
     return (
         <HeroContainer>
+            <StyledDiv>
             <TopNavigation />
             <HeroContent>
                 <HeadingText variant="h1" align="center">
@@ -111,6 +115,7 @@ const HeroPage = () => {
                     <GoogleImage src={google} alt="" />
                 </HeroImgWrapper>
             </HeroContent>
+            </StyledDiv>
         </HeroContainer>
     );
 };

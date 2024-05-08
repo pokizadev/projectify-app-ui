@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import background3 from "../../../../assets/images/bg-effect-3.png";
+import background3 from "../../../../assets/images/background3.png";
 import { Container, Content } from "../../components/Container";
 import { Typography, Icon } from "../../../../design-system";
 import { testimonials } from "./data";
@@ -9,12 +9,7 @@ const StyledDiv = styled.div`
     background-image: url(${background3});
     width: 100%;
     height: 45rem;
-    margin-bottom: -17%;
-`;
-
-const TestimonialsContent = styled(Content)`
-    padding-top: var(--space-100);
-    padding-bottom: var(--space-100);
+    margin-bottom: -25%;
 `;
 
 const Title = styled(Typography)`
@@ -160,7 +155,7 @@ const Testimonials = () => {
     return (
         <Container>
             <StyledDiv />
-            <TestimonialsContent>
+            <Content>
                 <Title variant="h5" weight="bold" align="center">
                     Trust Our Clients
                 </Title>
@@ -180,7 +175,7 @@ const Testimonials = () => {
                     })}
                     {testimonials.map((testimonial, idx) => {
                         return (
-                            <InfoWrapper $active={idx === currentIndex}>
+                            <InfoWrapper key={idx} $active={idx === currentIndex}>
                                 <Typography variant="h6" weight="semibold">
                                     {testimonial.name}
                                 </Typography>
@@ -224,7 +219,7 @@ const Testimonials = () => {
                         <NextIcon iconName="arrow-right" />
                     </NextButton>
                 </TestimonialsWrapper>
-            </TestimonialsContent>
+            </Content>
         </Container>
     );
 };
