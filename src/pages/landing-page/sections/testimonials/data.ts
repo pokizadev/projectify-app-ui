@@ -7,10 +7,10 @@ export const testimonials = [
         id: 1,
         image: testimonial1,
         name: "Peter Parker",
-        title: "Senior Software Engineer at Microsoft",
+        position: "Senior Software Engineer at Microsoft",
         rating: Array(5).fill(null),
         description:
-            "Projectify App is a game-changer for project management. Its user-friendly interface and intuitive features make handling multiple projects a breeze."
+            "Projectify App is a game-changer for project management. Its user-friendly interface and intuitive features make handling multiple projects a breeze. Highly Recommended to try it!"
     },
     {
         id: 2,

@@ -23,7 +23,6 @@ const Title = styled(Typography)`
 const TestimonialsWrapper = styled.div`
     text-align: center;
     position: relative;
-
 `;
 const Testimonial = styled.div`
     display: inline-block;
@@ -96,14 +95,15 @@ const PrevButton = styled.button`
     background-color: var(--white);
     transition: all 0.3s linear;
     cursor: pointer;
+    fill: var(--primary-500);
 
     &:hover,
     &:focus {
         border: none;
         background-color: var(--primary-500);
 
-        svg path {
-            stroke: var(--white) !important;
+        svg {
+            fill: var(--white);
         }
     }
 `;
@@ -125,26 +125,23 @@ const NextButton = styled.button`
     background-color: var(--white);
     transition: all 0.3s linear;
     cursor: pointer;
-
-
-    svg path {
-        stroke: var(--primary-500) !important;
-    }
+    fill: var(--primary-500);
 
     &:hover,
     &:focus {
         border: none;
         background-color: var(--primary-500);
-    }
 
+        svg {
+            fill: var(--white);
+        }
+    }
 `;
 
 const NextIcon = styled(Icon)`
     width: 3.6rem;
     height: 3.6rem;
-
 `;
-
 
 const Testimonials = () => {
     const [currentIndex, setCurrentIndex] = useState(1);
@@ -220,10 +217,10 @@ const Testimonials = () => {
                             </InfoWrapper>
                         );
                     })}
-                    <PrevButton onClick={() => setCurrentIndex(currentIndex - 1)}>
+                    <PrevButton onClick={handlePrev}>
                         <PrevIcon iconName="arrow-left" />
                     </PrevButton>
-                    <NextButton onClick={() => setCurrentIndex(currentIndex + 1)}>
+                    <NextButton onClick={handleNext}>
                         <NextIcon iconName="arrow-right" />
                     </NextButton>
                 </TestimonialsWrapper>
