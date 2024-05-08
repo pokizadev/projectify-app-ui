@@ -12,9 +12,9 @@ import { TopNavigation } from "../top-navigation/TopNavigation";
 const HeroContainer = styled(Container)`
     background: url(${background}) center/cover,
         linear-gradient(to right, #f7f3ff 0%, #fdfcff 100%);
-
-    background-size: cover;
+        
     background-position: center;
+    background-size: cover;
 `;
 
 const HeroContent = styled(Content)`
@@ -84,7 +84,11 @@ const HeroPage = () => {
                 <HeadingText variant="h1" align="center">
                     Unleash the Power of Projectify
                 </HeadingText>
-                <Description variant="paragraphMD" align="center" color="jaguarLight">
+                <Description
+                    variant="paragraphMD"
+                    align="center"
+                    color="jaguarLight"
+                >
                     Projectify is your all-in-one solution, crafted to simplify
                     your project management journey and supercharge your
                     success.
