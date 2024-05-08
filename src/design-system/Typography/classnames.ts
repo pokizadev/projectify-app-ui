@@ -35,5 +35,6 @@ export const alignClassNames = {
 export const colorClassNames = {
     primary: "primary-color",
     jaguarDark: "jaguar-dark",
-    jaguarLight: "jaguar-light"
+    jaguarLight: "jaguar-light",
+    white: "white"
 }

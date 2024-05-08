@@ -153,5 +153,9 @@
 }
 
 .jaguar-light {
-    color: var(--jaguar-500)
+    color: var(--jaguar-500);
+}
+
+.white {
+    color: var(--white);
 }

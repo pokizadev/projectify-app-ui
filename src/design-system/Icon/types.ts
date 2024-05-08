@@ -41,6 +41,9 @@ export type IconName =
     | "star"
     | "arrow-left"
     | "arrow-right"
+    | "user"
+    | "email"
+    | "building"
 
 export type IconProps = {
     iconName: IconName;

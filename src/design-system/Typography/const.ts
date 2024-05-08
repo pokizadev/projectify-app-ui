@@ -35,6 +35,7 @@ export const TypographyProps = {
     color: {
         primary: "primary",
         jaguarDark: "jaguarDark",
-        jaguarLight: "jaguarLight"
+        jaguarLight: "jaguarLight",
+        white: "white"
     }
 };

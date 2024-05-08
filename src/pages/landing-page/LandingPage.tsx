@@ -1,4 +1,5 @@
 import { Companies } from "./sections/companies/Companies";
+import { Contact } from "./sections/contact/Contact";
 import { Features } from "./sections/features/Features";
 import { HeroPage } from "./sections/hero/Hero";
 import { Pricing } from "./sections/pricing/Pricing";
@@ -12,6 +13,7 @@ const LandingPage = () => {
             <Features />
             <Pricing />
             <Testimonials />
+            <Contact/>
         </>
     );
 };

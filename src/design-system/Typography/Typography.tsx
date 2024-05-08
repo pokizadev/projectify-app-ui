@@ -28,7 +28,7 @@ type TypographyWeight = "normal" | "medium" | "semibold" | "bold";
 
 type TypographyAlign = "center" | "left" | "right" | "justify" | "inherit";
 
-type TypographyColor = "primary" | "jaguarDark" | "jaguarLight"
+type TypographyColor = "primary" | "jaguarDark" | "jaguarLight" | "white"
 
 type TypographyProps = {
     variant: TypographyVariant;

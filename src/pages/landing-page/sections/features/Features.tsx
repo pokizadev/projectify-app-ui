@@ -6,8 +6,9 @@ import { Typography, Button } from "../../../../design-system";
 import background2 from "../../../../assets/images/bg-effect-2.png";
 
 const FeaturesContent = styled(Content)`
-    padding-top: var(--space-100);
-`;
+    padding-bottom: 0;
+`
+
 const FeaturesDescription = styled(Typography)`
     margin-top: var(--space-4);
     margin-bottom: var(--space-50);
