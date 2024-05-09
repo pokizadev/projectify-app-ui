@@ -5,9 +5,18 @@ import { features } from "./FeatureItem/data";
 import { Typography, Button } from "../../../../design-system";
 import background2 from "../../../../assets/images/bg-effect-2.png";
 
+const FeaturesContainer = styled(Container)`
+    background-image: url(${background2});
+
+    background-position: bottom;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+`;
+
 const FeaturesContent = styled(Content)`
-    padding-bottom: 0;
-`
+    padding-bottom: 18rem;
+`;
 
 const FeaturesDescription = styled(Typography)`
     margin-top: var(--space-4);
@@ -24,15 +33,10 @@ const FeaturesCard = styled.div`
 const FeaturesButton = styled(Button)`
     margin: 0 auto;
 `;
-const StyledDiv = styled.div`
-    background-image: url(${background2});
-    width: 100%;
-    height: 45rem;
-    margin-top: -17%;
-`;
+
 const Features = () => {
     return (
-        <Container>
+        <FeaturesContainer>
             <FeaturesContent>
                 <Typography variant="h5" weight="bold" align="center">
                     Get the best for your team
@@ -72,8 +76,7 @@ const Features = () => {
                     Try a demo
                 </FeaturesButton>
             </FeaturesContent>
-            <StyledDiv />
-        </Container>
+        </FeaturesContainer>
     );
 };
 

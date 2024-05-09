@@ -15,6 +15,8 @@ const HeroContainer = styled(Container)`
 
 const StyledDiv = styled.div`
     background-image: url(${background});
+    background-size: cover;
+    background-position: center;
       
 `;
 
