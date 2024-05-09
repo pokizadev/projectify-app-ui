@@ -51,6 +51,7 @@ const Form = styled.form`
 
 const StyledInput = styled(Input)<InputProps>`
     background-color: transparent;
+    width: 83%;
 
     .input {
         width: 100%;
@@ -70,6 +71,7 @@ const StyledInput = styled(Input)<InputProps>`
 `;
 
 const RequestButton = styled(Button)`
+    width: 83%;
     background-color: var(--sunglow-300);
     border-radius: var(--space-16);
     margin-top: var(--space-10);
