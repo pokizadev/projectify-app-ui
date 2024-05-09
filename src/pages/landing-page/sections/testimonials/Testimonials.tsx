@@ -5,12 +5,16 @@ import { Typography, Icon } from "../../../../design-system";
 import { testimonials } from "./data";
 import { useState } from "react";
 
-const StyledDiv = styled.div`
+const TestimonialsContainer = styled(Container)`
     background-image: url(${background3});
-    width: 100%;
-    height: 45rem;
-    margin-bottom: -25%;
-`;
+    background-position: top;
+    background-size: contain;
+    background-repeat: no-repeat;
+`
+
+const TestimonialsContent = styled(Content)`
+    padding-top: 12rem;
+`
 
 const Title = styled(Typography)`
     margin-bottom: var(--space-50);
@@ -153,9 +157,8 @@ const Testimonials = () => {
     };
 
     return (
-        <Container>
-            <StyledDiv />
-            <Content>
+        <TestimonialsContainer>
+            <TestimonialsContent>
                 <Title variant="h5" weight="bold" align="center">
                     Trust Our Clients
                 </Title>
@@ -219,8 +222,8 @@ const Testimonials = () => {
                         <NextIcon iconName="arrow-right" />
                     </NextButton>
                 </TestimonialsWrapper>
-            </Content>
-        </Container>
+            </TestimonialsContent>
+        </TestimonialsContainer>
     );
 };
 

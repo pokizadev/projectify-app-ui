@@ -26,7 +26,7 @@ export const testimonials = [
         image: testimonial3,
         name: "Emily Carter",
         position: "Marketing Director at Amazon",
-        rating: Array(4).fill(null),
+        rating: Array(5).fill(null),
         description:
             "Projectify App has become my go-to tool for orchestrating complex campaigns with ease. Its comprehensive features and real-time collaboration capabilities have revolutionized how our team operates."
     }
