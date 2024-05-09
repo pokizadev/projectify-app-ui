@@ -44,6 +44,12 @@ export type IconName =
     | "user"
     | "email"
     | "building"
+    | "phone"
+    | "email-purple"
+    | "map"
+    | "facebook"
+    | "twitter"
+    | "instagram"
 
 export type IconProps = {
     iconName: IconName;
