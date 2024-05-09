@@ -17,7 +17,8 @@ export const plans: PlanProps[] = [
         storage: "10GB",
         others: ["Email Support"],
         buttonColor: "var(--primary-500)",
-        buttonTextColor: "var(--white)"
+        buttonTextColor: "var(--white)",
+        hover: "var(--primary-700)"
     },
     {
         backgroundColor: "var(--primary-500)",
@@ -36,7 +37,8 @@ export const plans: PlanProps[] = [
         others: ["Priority Email Support", "Advanced Analytics"],
 
         buttonColor: "var(--white)",
-        buttonTextColor: "var(--primary-500)"
+        buttonTextColor: "var(--primary-500)",
+        hover: "var(--sunglow-400)"
     },
     {
         backgroundColor: "var(--white)",
@@ -59,6 +61,7 @@ export const plans: PlanProps[] = [
             "Custom Integrations"
         ],
         buttonColor: "var(--primary-500)",
-        buttonTextColor: "var(--white)"
+        buttonTextColor: "var(--white)",
+        hover: "var(--primary-700)"
     }
 ];

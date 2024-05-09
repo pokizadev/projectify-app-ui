@@ -10,14 +10,12 @@ import google from "../../../../assets/images/google.png";
 import { TopNavigation } from "../top-navigation/TopNavigation";
 
 const HeroContainer = styled(Container)`
-    background: linear-gradient(to right, var(--primary-25), var(--primary-12));
-`;
-
-const StyledDiv = styled.div`
+    background-color: linear-gradient(to right, var(--primary-25), var(--primary-12));
     background-image: url(${background});
-    background-size: cover;
-    background-position: center;
-      
+    background-position: top;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: var(--primary-12);
 `;
 
 const HeroContent = styled(Content)`
@@ -84,7 +82,6 @@ const GoogleImage = styled.img`
 const HeroPage = () => {
     return (
         <HeroContainer>
-            <StyledDiv>
             <TopNavigation />
             <HeroContent>
                 <HeadingText variant="h1" align="center">
@@ -117,7 +114,6 @@ const HeroPage = () => {
                     <GoogleImage src={google} alt="" />
                 </HeroImgWrapper>
             </HeroContent>
-            </StyledDiv>
         </HeroContainer>
     );
 };
