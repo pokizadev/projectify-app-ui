@@ -10,7 +10,11 @@ import google from "../../../../assets/images/google.png";
 import { TopNavigation } from "../top-navigation/TopNavigation";
 
 const HeroContainer = styled(Container)`
-    background-color: linear-gradient(to right, var(--primary-25), var(--primary-12));
+    background-color: linear-gradient(
+        to right,
+        var(--primary-25),
+        var(--primary-12)
+    );
     background-image: url(${background});
     background-position: top;
     background-size: contain;
@@ -55,6 +59,11 @@ const DateBadge = styled.img`
     top: 18%;
     left: -3%;
     width: 11%;
+
+    @media (max-width: 82em) {
+        top: 33%;
+        left: 23%;
+    }
 `;
 const MembersImage = styled.img`
     position: absolute;
@@ -62,13 +71,31 @@ const MembersImage = styled.img`
     left: -12%;
     width: 25%;
     height: auto;
+
+    @media (max-width: 93.75em) {
+        left: -8%;
+    }
+
+    @media (max-width: 85em) {
+        left: -4%;
+    }
+
+    @media (max-width: 82em) {
+        bottom: 13%;
+        left: 2%;
+    }
 `;
 
 const StatusBadge = styled.img`
     position: absolute;
     top: 40%;
     right: -4%;
-    width: 12.5%;
+    width: 15%;
+
+    @media (max-width: 85em) {
+        top: 85%;
+        right: 17%;
+    }
 `;
 const GoogleImage = styled.img`
     position: absolute;
@@ -77,6 +104,11 @@ const GoogleImage = styled.img`
     width: 27%;
     max-width: 100%;
     height: auto;
+
+    @media (max-width: 85em) {
+        bottom: 70%;
+        right: 25%;
+    }
 `;
 
 const HeroPage = () => {
