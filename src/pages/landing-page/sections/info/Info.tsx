@@ -6,24 +6,55 @@ const InfoContent = styled(Content)`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-30);
+
+    @media (max-width: 52em) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 `;
 
 const LogoInfo = styled.div`
-    width: 50%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     gap: var(--space-30);
+
+    @media (max-width: 52em) {
+        width: 100%;
+        display: grid;
+        grid-row: 1;
+        grid-column: 1 / 3;
+        grid-template-columns: 1fr 1fr;
+        text-align: end;
+    }
 `;
 
 const ContactInfo = styled.div`
     display: flex;
     flex-direction: column;
-    gap: var(--space-30);
+    gap: var(--space-16);
 `;
 
 const Contact = styled.div`
     display: flex;
     gap: var(--space-8);
+`;
+
+const ContactIcon = styled(Icon)`
+    @media (max-width: 78em) {
+        width: 3.2rem;
+        height: 3.2rem;
+    }
+`;
+
+const Link = styled.a`
+    color: var(--jaguar-900);
+    font-size: var(--space-16);
+    line-height: var(--space-20);
+
+    &:hover,
+    &:focus {
+        color: var(--primary-500);
+    }
 `;
 
 const SocialMediaIcons = styled.div`
@@ -33,6 +64,11 @@ const SocialMediaIcons = styled.div`
 const SocialIcon = styled(Icon)`
     width: 3.2rem;
     height: 3.2rem;
+
+    @media (max-width: 78em) {
+        width: 4rem;
+        height: 4rem;
+    }
 `;
 const Map = styled.div`
     width: 37rem;
@@ -44,6 +80,10 @@ const Map = styled.div`
         height: 20rem;
         border: 0;
         border-radius: 4rem;
+    }
+
+    @media (max-width: 52em) {
+        margin-left: auto;
     }
 `;
 const Info = () => {
@@ -58,22 +98,25 @@ const Info = () => {
                 </LogoInfo>
                 <ContactInfo>
                     <Contact>
-                        <Icon iconName="phone" />
-                        <Typography variant="paragraphSM" weight="normal">
-                            +1 (555) 555-1234
-                        </Typography>
+                        <ContactIcon iconName="phone" />
+                        <Link href="tel:++1 (555) 555-11234" target="_blank">
+                            +1 (555) 555-11234
+                        </Link>
                     </Contact>
                     <Contact>
-                        <Icon iconName="email-purple" />
-                        <Typography variant="paragraphSM" weight="normal">
+                        <ContactIcon iconName="email-purple" />
+                        <Link href="mailto:info@projectify.com" target="_blank">
                             info@projectify.com
-                        </Typography>
+                        </Link>
                     </Contact>
                     <Contact>
-                        <Icon iconName="map" />
-                        <Typography variant="paragraphSM" weight="normal">
+                        <ContactIcon iconName="map" />
+                        <Link
+                            href="https://www.google.com/maps/place/205+Allen+St,+New+York,+NY+10002/@40.7227487,-73.9916556,17z/data=!3m1!4b1!4m6!3m5!1s0x89c2598474c10bcf:0xd62d514f22a03f04!8m2!3d40.7227487!4d-73.9890753!16s%2Fg%2F11c5fx1fvm?entry=ttu"
+                            target="_blank"
+                        >
                             205 Allen St, New York, NY 10002, USA
-                        </Typography>
+                        </Link>
                     </Contact>
                     <SocialMediaIcons>
                         <SocialIcon iconName="facebook" />

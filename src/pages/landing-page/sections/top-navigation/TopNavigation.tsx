@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { Button, Logo } from "../../../../design-system";
 import { Content } from "../../components/Container";
 import { NavigationLinks, LinkItem } from "../../components/NavigationLinks";
+import { useNavigate } from "react-router-dom";
+
 
 export const links: LinkItem[] = [
     {
@@ -22,6 +24,10 @@ const TopNavigationContent = styled(Content)`
     display: flex;
     gap: var(--space-50);
     padding-top: var(--space-20);
+
+    @media (max-width: 52em) {
+        padding-bottom: var(--space-12);
+    }
 `;
 
 const ButtonsWrapper = styled.div`
@@ -31,6 +37,7 @@ const ButtonsWrapper = styled.div`
 `
 
 const TopNavigation = () => {
+    const navigate = useNavigate();
     return (
         <TopNavigationContent>
             <Logo size="sm" layout="horizontal" />
@@ -41,6 +48,9 @@ const TopNavigation = () => {
                     color="primary"
                     size="md"
                     shape="rounded"
+                    onClick={() => {
+                        navigate("admin/sign-up");
+                    }}
                 >
                     Sign Up
                 </Button>

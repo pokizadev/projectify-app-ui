@@ -7,6 +7,13 @@ const LinksWrapper = styled.nav`
     display: flex;
     justify-content: center;
     text-align: center;
+
+    @media (max-width: 78em) {
+        width: 50%;
+    }
+    @media (max-width: 56.25em) {
+        width: 44%;
+    }
 `;
 
 const StyledLinks = styled.ul`
@@ -34,6 +41,11 @@ const Link = styled.a`
     font-size: var(--font-size-16);
     font-weight: var(--font-weight-500);
     line-height: var(--line-height-20);
+
+    &:hover,
+    &:focus {
+        color: var(--primary-500)
+    }
 `;
 
 const NavigationLinks: React.FC<NavigationLinksProps> = ({ links }) => {

@@ -11,6 +11,17 @@
 html {
     font-size: 62.5%; /* it sets base font size to 10px */
 }
+@media (max-width: 78em) {
+    html {
+        font-size: 56.25%; /* 9px */
+    }
+}
+
+@media (max-width: 30em) {
+    html {
+        font-size: 50%; /* 8px */
+    }
+}
 
 body {
     font-family: "Inter", sans-serif;

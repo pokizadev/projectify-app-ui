@@ -16,6 +16,10 @@ const FeaturesContainer = styled(Container)`
 
 const FeaturesContent = styled(Content)`
     padding-bottom: 18rem;
+
+    @media (max-width: 52em) {
+        padding-bottom: var(--space-120);
+    }
 `;
 
 const FeaturesDescription = styled(Typography)`
@@ -28,6 +32,10 @@ const FeaturesCard = styled.div`
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-30);
     margin-bottom: var(--space-50);
+
+    @media (max-width: 52em) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 `;
 
 const FeaturesButton = styled(Button)`

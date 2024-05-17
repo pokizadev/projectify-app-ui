@@ -4,7 +4,7 @@ import { PlanProps } from "./types";
 import { Button, Icon, Typography } from "../../../../../design-system";
 
 const PlanCard = styled.div<{ $backgroundColor: string }>`
-    width: 37rem;
+    width: calc((100% - 4rem) / 3);
     display: flex;
     flex-direction: column;
     background-color: ${(props) => props.$backgroundColor};
@@ -37,6 +37,11 @@ const IconWrapper = styled.div<{ $background: string; $border: string }>`
 const PlanIcon = styled(Icon)`
     width: 6rem;
     height: 6rem;
+
+    @media (max-width: 78em) {
+        width: 7rem;
+        height: 7rem;
+    }
 `;
 
 const Title = styled(Typography)<{ $color: string }>`

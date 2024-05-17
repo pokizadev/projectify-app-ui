@@ -20,6 +20,10 @@ const HeroContainer = styled(Container)`
     background-size: contain;
     background-repeat: no-repeat;
     background-color: var(--primary-12);
+
+    @media (max-width: 52em) {
+        background: none;
+    }
 `;
 
 const HeroContent = styled(Content)`
@@ -28,10 +32,39 @@ const HeroContent = styled(Content)`
     text-align: center;
     padding-top: 0;
     padding-bottom: 0;
+
+    @media (max-width: 52em) {
+        background-color: linear-gradient(
+            to right,
+            var(--primary-25),
+            var(--primary-12)
+        );
+        background-image: url(${background});
+        background-position: top;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-color: var(--primary-12);
+    }
 `;
 
 const HeadingText = styled(Typography)`
     margin-bottom: var(--space-16);
+
+    @media screen and (max-width: 60em) {
+        font-size: var(--font-size-48);
+        line-height: var(--line-height-56);
+    }
+
+    @media screen and (max-width: 52em) {
+        font-size: var(--font-size-40);
+        line-height: var(--line-height-48);
+        margin-top: var(--space-60);
+    }
+
+    @media screen and (max-width: 40em) {
+        font-size: var(--font-size-32);
+        line-height: var(--line-height-40);
+    }
 `;
 
 const Description = styled(Typography)`
@@ -116,7 +149,7 @@ const HeroPage = () => {
         <HeroContainer>
             <TopNavigation />
             <HeroContent>
-                <HeadingText variant="h1" align="center">
+                <HeadingText variant="h1" align="center" weight="semibold">
                     Unleash the Power of Projectify
                 </HeadingText>
                 <Description
