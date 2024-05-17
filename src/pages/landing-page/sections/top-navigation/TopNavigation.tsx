@@ -102,7 +102,7 @@ const TopNavigation = () => {
                 iconName="burger"
                 onClick={() => setShowMobileNav(true)}
             />
-            {showMobileNav ? <MobileNavigation links={mobileLinks}/> : ""}
+            {showMobileNav ? <MobileNavigation links={mobileLinks} closeNav={() => setShowMobileNav(false)}/> : ""}
         </TopNavigationContent>
     );
 };

@@ -73,9 +73,10 @@ export type LinkItem = {
 
 type NavigationLinksProps = {
     links: LinkItem[];
+    closeNav: () => void;
 };
 
-const MobileNavigation: React.FC<NavigationLinksProps> = ({links}) => {
+const MobileNavigation: React.FC<NavigationLinksProps> = ({links, closeNav}) => {
     const [showMobileNav, setShowMobileNav] = useState(true);
 
     return (
@@ -83,7 +84,7 @@ const MobileNavigation: React.FC<NavigationLinksProps> = ({links}) => {
             <MobileNavTop>
                 <CloseIcon
                     iconName="x"
-                    onClick={() => setShowMobileNav(false)}
+                    onClick={closeNav}
                 />
             </MobileNavTop>
             <MobileNavLinks>
@@ -91,7 +92,7 @@ const MobileNavigation: React.FC<NavigationLinksProps> = ({links}) => {
                     return (
                         <LinkItem key={idx}>
                             <Icon iconName="chevron-left" />
-                            <Link>{link.linkText}</Link>
+                            <Link href={link.linkTo}>{link.linkText}</Link>
                         </LinkItem>
                     );
                 })}
