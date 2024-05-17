@@ -18,4 +18,5 @@ export type PlanProps = {
 
     buttonColor: string;
     buttonTextColor: string;
+    hover: string
 };

@@ -4,7 +4,7 @@ import { PlanProps } from "./types";
 import { Button, Icon, Typography } from "../../../../../design-system";
 
 const PlanCard = styled.div<{ $backgroundColor: string }>`
-    width: 37rem;
+    width: calc((100% - 4rem) / 3);
     display: flex;
     flex-direction: column;
     background-color: ${(props) => props.$backgroundColor};
@@ -37,6 +37,11 @@ const IconWrapper = styled.div<{ $background: string; $border: string }>`
 const PlanIcon = styled(Icon)`
     width: 6rem;
     height: 6rem;
+
+    @media (max-width: 78em) {
+        width: 7rem;
+        height: 7rem;
+    }
 `;
 
 const Title = styled(Typography)<{ $color: string }>`
@@ -73,10 +78,15 @@ const Value = styled(Typography)<{ $color: string }>`
     color: ${(props) => props.$color};
 `;
 
-const PlanButton = styled(Button)<{ $background: string; $color: string }>`
+const PlanButton = styled(Button)<{ $background: string; $color: string; $hover: string }>`
     margin-top: auto;
     background-color: ${(props) => props.$background};
     color: ${(props) => props.$color};
+
+    &:hover,
+    &:focus {
+        background-color: ${(props) => props.$hover} 
+    }
 `;
 
 const PlanItem: React.FC<PlanProps> = ({
@@ -94,7 +104,8 @@ const PlanItem: React.FC<PlanProps> = ({
     storage,
     others,
     buttonColor,
-    buttonTextColor
+    buttonTextColor,
+    hover
 }) => {
     return (
         <PlanCard $backgroundColor={backgroundColor}>
@@ -200,10 +211,9 @@ const PlanItem: React.FC<PlanProps> = ({
             <PlanButton
                 $background={buttonColor}
                 $color={buttonTextColor}
-                fullWidth={true}
+                $hover={hover}
                 size="lg"
                 shape="circle"
-                color="primary"
             >
                 Try free for 15 days
             </PlanButton>

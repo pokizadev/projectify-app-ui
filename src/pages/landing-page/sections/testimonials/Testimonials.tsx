@@ -13,7 +13,15 @@ const TestimonialsContainer = styled(Container)`
 `
 
 const TestimonialsContent = styled(Content)`
-    padding-top: 12rem;
+    padding-top: var(--space-120);
+
+    @media (max-width: 78em) {
+        padding-top: var(--space-80);
+    }
+
+    @media (max-width: 52em) {
+        padding-top: var(--space-60);
+    }
 `
 
 const Title = styled(Typography)`

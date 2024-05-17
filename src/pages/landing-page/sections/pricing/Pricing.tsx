@@ -94,6 +94,7 @@ const Pricing = () => {
                                 others={plan.others}
                                 buttonColor={plan.buttonColor}
                                 buttonTextColor={plan.buttonTextColor}
+                                hover={plan.hover}
                             />
                         )
                     })}

@@ -27,7 +27,12 @@ const IconWrapper = styled.div<{
 const FeatureIcon = styled(Icon)`
     width: 6rem;
     height: 6rem;
-`
+
+    @media (max-width: 78em) {
+        width: 7rem;
+        height: 7rem;
+    }
+`;
 
 const TextWrapper = styled.div`
     padding: var(--space-24);
@@ -38,7 +43,6 @@ const TextWrapper = styled.div`
 const FeatureTitle = styled(Typography)`
     margin-bottom: var(--space-8);
 `;
-
 
 const FeatureItem: React.FC<FeatureItemProps> = ({
     backgroundColor,
@@ -60,7 +64,11 @@ const FeatureItem: React.FC<FeatureItemProps> = ({
                 <FeatureTitle variant="paragraphLG" weight="semibold">
                     {title}
                 </FeatureTitle>
-                <Typography variant="paragraphSM" weight="medium" color="jaguarLight">
+                <Typography
+                    variant="paragraphSM"
+                    weight="medium"
+                    color="jaguarLight"
+                >
                     {description}
                 </Typography>
             </TextWrapper>
