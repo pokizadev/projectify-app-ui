@@ -31,6 +31,12 @@ const FooterContent = styled(Content)`
     padding-top: var(--space-20);
     padding-bottom: var(--space-20);
     justify-content: space-between;
+
+    @media (max-width: 50em) {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-12);
+    }
 `
 
 const Footer = () => {

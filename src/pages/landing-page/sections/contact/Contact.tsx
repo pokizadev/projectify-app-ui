@@ -31,6 +31,18 @@ const ContactTitle = styled(Typography)`
 `;
 const ContactWrapper = styled.div`
     display: flex;
+
+    @media (max-width: 45em) {
+        flex-direction: column;
+        padding-left: var(--space-80);
+        padding-right: var(--space-80);
+        margin: 0 auto;
+        }
+
+    @media (max-width: 28em) {
+        padding-left: 0;
+        padding-right: 0;
+    }
 `;
 const ImageWrapper = styled.div`
     width: 50%;
@@ -40,6 +52,12 @@ const ImageWrapper = styled.div`
         width: 100%;
         height: auto;
     }
+
+    @media (max-width: 45em) {
+        width: 100%;
+        padding: 0;
+        margin-bottom: var(--space-32);
+    }
 `;
 
 const Form = styled.form`
@@ -47,6 +65,12 @@ const Form = styled.form`
     display: flex;
     flex-direction: column;
     gap: var(--space-24);
+
+    @media (max-width: 45em) {
+        width: 100%;
+
+
+    }
 `;
 
 const StyledInput = styled(Input)<InputProps>`
@@ -68,6 +92,10 @@ const StyledInput = styled(Input)<InputProps>`
         font-size: 2rem;
         color: var(--jaguar-200);
     }
+
+    @media (max-width: 45em) {
+        width: 100%;
+    }
 `;
 
 const RequestButton = styled(Button)`
@@ -75,6 +103,10 @@ const RequestButton = styled(Button)`
     background-color: var(--sunglow-300);
     border-radius: var(--space-16);
     margin-top: var(--space-10);
+
+    @media (max-width: 45em) {
+        width: 100%
+    }
 `;
 
 const Contact = () => {

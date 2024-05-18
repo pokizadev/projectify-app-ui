@@ -45,7 +45,7 @@ export const mobileLinks = [
 const TopNavigationContent = styled(Content)`
     display: flex;
     gap: var(--space-50);
-    padding-top: var(--space-20);
+    padding-top: var(--space-12);
 
     @media (max-width: 52em) {
         padding-bottom: var(--space-12);

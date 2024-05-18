@@ -17,6 +17,14 @@ const MobileNavContainer = styled.section<{ show: boolean }>`
     transition: transform ease-in-out 0.3s;
     transform: ${(props) =>
         props.show ? "translateX(0)" : "translateX(120%)"};
+
+    @media (max-width: 40em) {
+        width: 40vh;
+    }
+
+    @media (max-width: 25em) {
+        width: 30vh;
+    }
 `;
 
 const MobileNavTop = styled.div`
@@ -65,7 +73,7 @@ const MobileNavButtons = styled.div`
     padding-top: var(--space-40);
     padding-left: var(--space-20);
     padding-right: var(--space-20);
-`
+`;
 export type LinkItem = {
     linkText: string;
     linkTo: string;
@@ -76,16 +84,16 @@ type NavigationLinksProps = {
     closeNav: () => void;
 };
 
-const MobileNavigation: React.FC<NavigationLinksProps> = ({links, closeNav}) => {
+const MobileNavigation: React.FC<NavigationLinksProps> = ({
+    links,
+    closeNav
+}) => {
     const [showMobileNav, setShowMobileNav] = useState(true);
 
     return (
         <MobileNavContainer show={showMobileNav}>
             <MobileNavTop>
-                <CloseIcon
-                    iconName="x"
-                    onClick={closeNav}
-                />
+                <CloseIcon iconName="x" onClick={closeNav} />
             </MobileNavTop>
             <MobileNavLinks>
                 {links.map((link, idx) => {
@@ -98,8 +106,12 @@ const MobileNavigation: React.FC<NavigationLinksProps> = ({links, closeNav}) => 
                 })}
             </MobileNavLinks>
             <MobileNavButtons>
-                <Button color="secondary" size="sm" shape="circle">Create Account</Button>
-                <Button color="secondary" size="sm" shape="circle">Log In</Button>
+                <Button color="secondary" size="sm" shape="circle">
+                    Create Account
+                </Button>
+                <Button color="secondary" size="sm" shape="circle">
+                    Log In
+                </Button>
             </MobileNavButtons>
         </MobileNavContainer>
     );

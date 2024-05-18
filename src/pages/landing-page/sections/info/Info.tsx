@@ -10,6 +10,12 @@ const InfoContent = styled(Content)`
     @media (max-width: 52em) {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    @media (max-width: 35em) {
+        display: flex;
+        flex-direction: column;
+    }
+
 `;
 
 const LogoInfo = styled.div`
@@ -24,7 +30,16 @@ const LogoInfo = styled.div`
         grid-row: 1;
         grid-column: 1 / 3;
         grid-template-columns: 1fr 1fr;
-        text-align: end;
+        text-align: right;
+    }
+
+    @media (max-width: 52em) {
+        text-align: left;
+    }
+
+    @media (max-width: 35em) {
+        display: flex;
+        flex-direction: column;
     }
 `;
 
@@ -76,7 +91,7 @@ const Map = styled.div`
     border-radius: var(--border-radius-40);
 
     iframe {
-        width: 37rem;
+        width: 100%;
         height: 20rem;
         border: 0;
         border-radius: 4rem;
@@ -84,6 +99,13 @@ const Map = styled.div`
 
     @media (max-width: 52em) {
         margin-left: auto;
+    }
+
+    @media (max-width: 44em) {
+        width: 90%;
+    }
+    @media (max-width: 35em) {
+        width: 100%;
     }
 `;
 const Info = () => {
