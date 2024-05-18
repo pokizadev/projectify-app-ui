@@ -10,6 +10,11 @@ const PlanCard = styled.div<{ $backgroundColor: string }>`
     background-color: ${(props) => props.$backgroundColor};
     border-radius: var(--space-40);
     padding: var(--space-30);
+
+    @media (max-width: 52em) {
+        width: 37rem;
+        min-width: 28rem;
+    }
 `;
 
 const Header = styled.div`

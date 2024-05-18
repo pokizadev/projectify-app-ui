@@ -33,15 +33,23 @@ export const companies: Company[] = [
 
 const CompaniesContent = styled(Content)`
     display: flex;
+    gap: var(--space-30);
     justify-content: space-between;
     text-align: center;
     padding: var(--space-36) var(--space-32);
 
 `
 
+const LogoWrapper = styled.div`
+    max-width: 11.6rem;
+    height: max-content;
+`; 
+
 const CompanyLogo = styled.img`
     width: 100%;
     height: auto;
+
+
 `;
 
 const Companies = () => {
@@ -49,9 +57,9 @@ const Companies = () => {
         <Container>
             <CompaniesContent>
                 {companies.map((company, idx) => (
-                    <div key={idx}>
+                    <LogoWrapper key={idx}>
                         <CompanyLogo src={company.imgUrl} alt={company.text} />
-                    </div>
+                    </LogoWrapper>
                 ))}
             </CompaniesContent>
         </Container>

@@ -27,4 +27,9 @@ export const Content = styled.div`
         padding-top: var(--space-60);
         padding-bottom: var(--space-60);
     }
+
+    @media (max-width: 45em) {
+        padding-top: var(--space-40);
+        padding-bottom: var(--space-40);
+    }
 `;

@@ -10,7 +10,7 @@ const TestimonialsContainer = styled(Container)`
     background-position: top;
     background-size: contain;
     background-repeat: no-repeat;
-`
+`;
 
 const TestimonialsContent = styled(Content)`
     padding-top: var(--space-120);
@@ -22,7 +22,7 @@ const TestimonialsContent = styled(Content)`
     @media (max-width: 52em) {
         padding-top: var(--space-60);
     }
-`
+`;
 
 const Title = styled(Typography)`
     margin-bottom: var(--space-50);
@@ -50,6 +50,11 @@ const AvatarImage = styled.img<{ $active: boolean; $last: boolean }>`
     opacity: ${(props) => (props.$active ? "1" : "0.5")};
     margin-right: ${(props) => (props.$last ? "0" : "var(--space-50)")};
     margin-bottom: var(--space-20);
+
+    @media (max-width: 25em) {
+        display: ${(props) => (props.$active ? "" : "none")};
+        margin: 0 auto;
+    }
 `;
 
 const InfoWrapper = styled.div<{ $active: boolean }>`
@@ -58,6 +63,12 @@ const InfoWrapper = styled.div<{ $active: boolean }>`
     gap: var(--space-4);
     text-align: center;
     justify-content: center;
+`;
+
+const Name = styled(Typography)`
+    @media (max-width: 25em) {
+        margin-top: var(--space-20);
+    }
 `;
 
 const Description = styled(Typography)`
@@ -113,11 +124,22 @@ const PrevButton = styled.button`
             fill: var(--white);
         }
     }
+
+    @media (max-width: 30em) {
+        width: 6rem;
+        height: 6rem;
+        border-radius: var(--border-radius-16);
+    }
 `;
 
 const PrevIcon = styled(Icon)`
     width: 3.6rem;
     height: 3.6rem;
+
+    @media (max-width: 30em) {
+        width: 3rem;
+        height: 3rem;
+    }
 `;
 
 const NextButton = styled.button`
@@ -143,11 +165,22 @@ const NextButton = styled.button`
             fill: var(--white);
         }
     }
+
+    @media (max-width: 30em) {
+        width: 6rem;
+        height: 6rem;
+        border-radius: var(--border-radius-16);
+    }
 `;
 
 const NextIcon = styled(Icon)`
     width: 3.6rem;
     height: 3.6rem;
+
+    @media (max-width: 30em) {
+        width: 3rem;
+        height: 3rem;
+    }
 `;
 
 const Testimonials = () => {
@@ -186,10 +219,13 @@ const Testimonials = () => {
                     })}
                     {testimonials.map((testimonial, idx) => {
                         return (
-                            <InfoWrapper key={idx} $active={idx === currentIndex}>
-                                <Typography variant="h6" weight="semibold">
+                            <InfoWrapper
+                                key={idx}
+                                $active={idx === currentIndex}
+                            >
+                                <Name variant="h6" weight="semibold">
                                     {testimonial.name}
-                                </Typography>
+                                </Name>
                                 <Typography
                                     variant="subtitleLG"
                                     weight="semibold"

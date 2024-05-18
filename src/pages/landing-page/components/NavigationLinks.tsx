@@ -14,6 +14,10 @@ const LinksWrapper = styled.nav`
     @media (max-width: 56.25em) {
         width: 44%;
     }
+
+    @media (max-width: 50em) {
+        display: none;
+    }
 `;
 
 const StyledLinks = styled.ul`
@@ -55,7 +59,7 @@ const NavigationLinks: React.FC<NavigationLinksProps> = ({ links }) => {
                 {links.map((link, idx) => {
                     return (
                         <li key={idx}>
-                            <Link>{link.linkText}</Link>
+                            <Link href={link.linkTo}>{link.linkText}</Link>
                         </li>
                     );
                 })}

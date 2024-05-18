@@ -6,6 +6,11 @@ const LinksWrapper = styled.div`
     display: flex;
     justify-content: flex-end;
     text-align: center;
+
+    @media (max-width: 50em) {
+        justify-content: center;
+        width: 100%;
+    }
 `;
 
 const StyledLinks = styled.ul`

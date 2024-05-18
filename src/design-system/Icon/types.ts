@@ -50,6 +50,8 @@ export type IconName =
     | "facebook"
     | "twitter"
     | "instagram"
+    | "burger"
+    | "chevron-left"
 
 export type IconProps = {
     iconName: IconName;

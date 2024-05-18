@@ -36,6 +36,10 @@ const FeaturesCard = styled.div`
     @media (max-width: 52em) {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    @media (max-width: 25em) {
+        grid-template-columns: repeat(1, 1fr);
+    }
 `;
 
 const FeaturesButton = styled(Button)`
