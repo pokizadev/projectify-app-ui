@@ -85,21 +85,24 @@ export type LinkItem = {
 type NavigationLinksProps = {
     links: LinkItem[];
     closeNav: () => void;
+    handleLoginClick: () => void;
 };
 
 const MobileNavigation: React.FC<NavigationLinksProps> = ({
     links,
-    closeNav
+    closeNav,
+    handleLoginClick
 }) => {
     const [showMobileNav, setShowMobileNav] = useState(true);
-    const [showSelectRoleModal, setShowSelectRoleModal] = useState(false)
+    const [showSelectRoleModal, setShowSelectRoleModal] = useState(false);
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const handleLinkClick = (linkTo: string) => {
         window.location.href = linkTo;
         closeNav();
     };
+
 
     return (
         <MobileNavContainer show={showMobileNav}>
@@ -110,8 +113,14 @@ const MobileNavigation: React.FC<NavigationLinksProps> = ({
                 {links.map((link, idx) => {
                     return (
                         <LinkItem key={idx}>
-                            <Icon iconName="chevron-left" onClick={() => handleLinkClick(link.linkTo)}/>
-                            <Link href={link.linkTo} onClick={closeNav}>
+                            <Icon
+                                iconName="chevron-left"
+                                onClick={() => handleLinkClick(link.linkTo)}
+                            />
+                            <Link
+                                href={link.linkTo}
+                                onClick={() => handleLinkClick(link.linkTo)}
+                            >
                                 {link.linkText}
                             </Link>
                         </LinkItem>
@@ -119,19 +128,31 @@ const MobileNavigation: React.FC<NavigationLinksProps> = ({
                 })}
             </MobileNavLinks>
             <MobileNavButtons>
-                <Button color="secondary" size="sm" shape="circle"  onClick={() => {
+                <Button
+                    color="secondary"
+                    size="sm"
+                    shape="circle"
+                    onClick={() => {
                         navigate("admin/sign-up");
-                    }} >
+                    }}
+                >
                     Create Account
                 </Button>
-                <Button color="secondary" size="sm" shape="circle"  onClick={() => setShowSelectRoleModal(true)}>
+                <Button
+                    color="secondary"
+                    size="sm"
+                    shape="circle"
+                    onClick={handleLoginClick}
+                >
                     Log In
                 </Button>
 
-                <SelectRoleModal
-                show={showSelectRoleModal}
-                closeModal={() => setShowSelectRoleModal(false)}
-            />
+                {showSelectRoleModal && (
+                    <SelectRoleModal
+                        show={showSelectRoleModal}
+                        closeModal={() => setShowSelectRoleModal(false)}
+                    />
+                )}
             </MobileNavButtons>
         </MobileNavContainer>
     );
