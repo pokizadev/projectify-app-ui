@@ -49,7 +49,7 @@ const FeaturesButton = styled(Button)`
 const Features = () => {
     return (
         <FeaturesContainer>
-            <FeaturesContent>
+            <FeaturesContent id="services">
                 <Typography variant="h5" weight="bold" align="center">
                     Get the best for your team
                 </Typography>

@@ -34,3 +34,13 @@
     border-radius: 0;
     width: 40rem;
 }
+
+.close-btn {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    margin-left: auto;
+    margin-bottom: var(--space-12);
+}

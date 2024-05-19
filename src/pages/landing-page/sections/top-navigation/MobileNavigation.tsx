@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { Icon, Button } from "../../../../design-system";
+import { SelectRoleModal } from "./SelectRoleModal";
 
 const MobileNavContainer = styled.section<{ show: boolean }>`
     width: 60vh;
@@ -28,7 +31,7 @@ const MobileNavContainer = styled.section<{ show: boolean }>`
 `;
 
 const MobileNavTop = styled.div`
-    height: 7rem;
+    height: 6rem;
     border-bottom: 1px solid var(--primary-100);
     margin-top: 0.4rem;
 
@@ -89,6 +92,14 @@ const MobileNavigation: React.FC<NavigationLinksProps> = ({
     closeNav
 }) => {
     const [showMobileNav, setShowMobileNav] = useState(true);
+    const [showSelectRoleModal, setShowSelectRoleModal] = useState(false)
+
+    const navigate = useNavigate()
+
+    const handleLinkClick = (linkTo: string) => {
+        window.location.href = linkTo;
+        closeNav();
+    };
 
     return (
         <MobileNavContainer show={showMobileNav}>
@@ -99,19 +110,28 @@ const MobileNavigation: React.FC<NavigationLinksProps> = ({
                 {links.map((link, idx) => {
                     return (
                         <LinkItem key={idx}>
-                            <Icon iconName="chevron-left" />
-                            <Link href={link.linkTo}>{link.linkText}</Link>
+                            <Icon iconName="chevron-left" onClick={() => handleLinkClick(link.linkTo)}/>
+                            <Link href={link.linkTo} onClick={closeNav}>
+                                {link.linkText}
+                            </Link>
                         </LinkItem>
                     );
                 })}
             </MobileNavLinks>
             <MobileNavButtons>
-                <Button color="secondary" size="sm" shape="circle">
+                <Button color="secondary" size="sm" shape="circle"  onClick={() => {
+                        navigate("admin/sign-up");
+                    }} >
                     Create Account
                 </Button>
-                <Button color="secondary" size="sm" shape="circle">
+                <Button color="secondary" size="sm" shape="circle"  onClick={() => setShowSelectRoleModal(true)}>
                     Log In
                 </Button>
+
+                <SelectRoleModal
+                show={showSelectRoleModal}
+                closeModal={() => setShowSelectRoleModal(false)}
+            />
             </MobileNavButtons>
         </MobileNavContainer>
     );

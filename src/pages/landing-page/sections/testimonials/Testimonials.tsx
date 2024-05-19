@@ -199,7 +199,7 @@ const Testimonials = () => {
 
     return (
         <TestimonialsContainer>
-            <TestimonialsContent>
+            <TestimonialsContent id="testimonials">
                 <Title variant="h5" weight="bold" align="center">
                     Trust Our Clients
                 </Title>

@@ -111,7 +111,7 @@ const Map = styled.div`
 const Info = () => {
     return (
         <Container>
-            <InfoContent>
+            <InfoContent id="contact">
                 <LogoInfo>
                     <Logo layout="horizontal" size="sm" />
                     <Typography variant="paragraphSM" weight="bold">
@@ -131,7 +131,7 @@ const Info = () => {
                             info@projectify.com
                         </Link>
                     </Contact>
-                    <Contact>
+                    <Contact id="map">
                         <ContactIcon iconName="map" />
                         <Link
                             href="https://www.google.com/maps/place/205+Allen+St,+New+York,+NY+10002/@40.7227487,-73.9916556,17z/data=!3m1!4b1!4m6!3m5!1s0x89c2598474c10bcf:0xd62d514f22a03f04!8m2!3d40.7227487!4d-73.9890753!16s%2Fg%2F11c5fx1fvm?entry=ttu"
