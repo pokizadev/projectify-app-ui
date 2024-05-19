@@ -89,7 +89,7 @@ const StyledInput = styled(Input)<InputProps>`
     }
 
     .input::placeholder {
-        font-size: 2rem;
+        font-size: 1.6rem;
         color: var(--jaguar-200);
     }
 
@@ -110,9 +110,10 @@ const RequestButton = styled(Button)`
 `;
 
 const Contact = () => {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [company, setCompany] = useState("");
+    // const [name, setName] = useState("");
+    // const [email, setEmail] = useState("");
+    // const [company, setCompany] = useState("");
+
     return (
         <ContactContainer>
             <StyledDiv>
@@ -133,27 +134,20 @@ const Contact = () => {
                             <StyledInput
                                 icon={userIcon}
                                 type="text"
-                                placeholder="Name"
-                                onChange={() => {}}
-                                value={name}
+                                placeholder="Name"  
                             />
 
                             <StyledInput
                                 icon={emailIcon}
                                 type="email"
                                 placeholder="Email"
-                                onChange={() => {}}
-                                value={email}
                             />
                             <StyledInput
                                 icon={buildingIcon}
                                 type="text"
                                 placeholder="Company"
-                                onChange={() => {}}
-                                value={company}
                             />
                             <RequestButton size="lg">
-                                {" "}
                                 Request a Demo
                             </RequestButton>
                         </Form>

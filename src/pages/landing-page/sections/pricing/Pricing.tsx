@@ -41,7 +41,7 @@ const Pricing = () => {
 
     return (
         <PricingContainer>
-            <PricingContent>
+            <PricingContent id="plans">
                 <PricingHeader>
                     <Typography
                         variant="subtitleLG"

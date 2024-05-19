@@ -6,27 +6,39 @@ import { Button, Icon, Logo } from "../../../../design-system";
 import { Content } from "../../components/Container";
 import { NavigationLinks, LinkItem } from "../../components/NavigationLinks";
 import { MobileNavigation } from "./MobileNavigation";
+import { SelectRoleModal } from "./SelectRoleModal";
 
 export const links: LinkItem[] = [
     {
         linkText: "About",
-        linkTo: ""
+        linkTo: "#services"
     },
     {
         linkText: "Testimonials",
-        linkTo: ""
+        linkTo: "#testimonials"
     },
     {
         linkText: "Contact",
-        linkTo: ""
+        linkTo: "#contact"
     }
 ];
 
 export const mobileLinks = [
-    ... links,
     {
-        linkText: "Blog",
-        linkTo: ""
+        linkText: "Services",
+        linkTo: "#services"
+    },
+    {
+        linkText: "Plans",
+        linkTo: "#plans"
+    },
+    {
+        linkText: "Testimonials",
+        linkTo: "#testimonials"
+    },
+    {
+        linkText: "Contact",
+        linkTo: "#contact"
     },
     {
         linkText: "FAQ",
@@ -40,7 +52,7 @@ export const mobileLinks = [
         linkText: "Privacy Policy",
         linkTo: ""
     }
-]
+];
 
 const TopNavigationContent = styled(Content)`
     display: flex;
@@ -71,11 +83,11 @@ const BurgerIcon = styled(Icon)`
         height: 3rem;
         margin-left: auto;
         margin-top: 0.6rem;
-        
     }
 `;
 
 const TopNavigation = () => {
+    const [showSelectRoleModal, setShowSelectRoleModal] = useState(false);
     const [showMobileNav, setShowMobileNav] = useState(false);
     const navigate = useNavigate();
     return (
@@ -94,15 +106,33 @@ const TopNavigation = () => {
                 >
                     Sign Up
                 </Button>
-                <Button color="primary" size="md" shape="rounded">
+                <Button
+                    color="primary"
+                    size="md"
+                    shape="rounded"
+                    onClick={() => setShowSelectRoleModal(true)}
+                >
                     Login
                 </Button>
             </ButtonsWrapper>
-            <BurgerIcon 
+            <BurgerIcon
                 iconName="burger"
                 onClick={() => setShowMobileNav(true)}
             />
-            {showMobileNav ? <MobileNavigation links={mobileLinks} closeNav={() => setShowMobileNav(false)}/> : ""}
+
+            <SelectRoleModal
+                show={showSelectRoleModal}
+                closeModal={() => setShowSelectRoleModal(false)}
+            />
+
+            {showMobileNav ? (
+                <MobileNavigation
+                    links={mobileLinks}
+                    closeNav={() => setShowMobileNav(false)}
+                />
+            ) : (
+                ""
+            )}
         </TopNavigationContent>
     );
 };
