@@ -29,6 +29,10 @@ const AuthForm = styled.section<{ $switchLayout?: boolean }>`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 45em) {
+        padding-top: var(--space-20);
+    }
 `;
 
 const AuthContent = styled.div`
@@ -37,6 +41,10 @@ const AuthContent = styled.div`
     align-items: center;
     gap: var(--space-50);
     flex-basis: 47rem;
+
+    @media (max-width: 45em) {
+        gap: var(--space-40);
+    }
 `;
 
 const AuthImageWrapper = styled.section<{ $switchLayout?: boolean }>`

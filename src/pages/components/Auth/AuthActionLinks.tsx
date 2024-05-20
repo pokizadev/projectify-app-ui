@@ -12,6 +12,11 @@ const ActionLinkWrapper = styled.div`
     display: flex;
     align-items: center;
     gap: var(--space-8);
+
+    @media (max-width: 45em) {
+        flex-direction: column;
+        gap: var(--space-4);
+    }
 `;
 
 const HintTextTypography = styled(Typography)`
