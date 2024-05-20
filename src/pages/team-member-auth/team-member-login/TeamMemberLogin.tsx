@@ -1,14 +1,21 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { AuthWrapper } from "../../components";
+import { AuthWrapper, AuthActionLink } from "../../components";
 import { Button, Input } from "../../../design-system";
 
-import teamWork from "../../../assets/images/teamWork.jpg";
+import puzzle from "../../../assets/images/puzzle.jpg";
 
 const TeamMemberLoginForm = styled.form`
     width: 100%;
     display: grid;
     gap: var(--space-20);
+`;
+
+const ActionLinks = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+    align-items: center;
 `;
 
 const TeamMemberLogin = () => {
@@ -29,7 +36,7 @@ const TeamMemberLogin = () => {
     };
 
     return (
-        <AuthWrapper imageUrl={teamWork} pageTitle="Projectify App">
+        <AuthWrapper imageUrl={puzzle} pageTitle="Projectify App">
             <TeamMemberLoginForm onSubmit={confirmLogin} noValidate>
                 <Input
                     type="email"
@@ -52,6 +59,18 @@ const TeamMemberLogin = () => {
                     Login
                 </Button>
             </TeamMemberLoginForm>
+
+            <ActionLinks>
+                <AuthActionLink
+                    linkText="Forgot Password?"
+                    linkTo="../team-member/forgot-password"
+                />
+                <AuthActionLink
+                    hintText="Have not created password yet?"
+                    linkText="Create Password"
+                    linkTo="../team-member/create-password"
+                />
+            </ActionLinks>
         </AuthWrapper>
     );
 };

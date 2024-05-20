@@ -5,13 +5,20 @@ import { Button, Input } from "../../../design-system";
 import { AuthActionLink, AuthWrapper } from "../../components";
 import { adminService } from "../../../api";
 
-import peopleDiscussing from "../../../assets/images/frame-1.png";
+import peoplePuzzle from "../../../assets/images/signup.jpg";
 
 const SignupForm = styled.form`
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-20);
+
+    .input {
+        @media (max-width: 30em) {
+            height: 3rem;
+            font-size: var(--font-size-12);
+        }
+    }
 `;
 
 const StyledInput = styled(Input)`
@@ -19,6 +26,11 @@ const StyledInput = styled(Input)`
 `;
 const StyledButton = styled(Button)`
     grid-column: 1 / 3;
+
+    @media (max-width: 30em) {
+        height: 3rem;
+        font-size: var(--font-size-12);
+    }
 `;
 
 const AdminSignup = () => {
@@ -103,7 +115,7 @@ const AdminSignup = () => {
 
     return (
         <AuthWrapper
-            imageUrl={peopleDiscussing}
+            imageUrl={peoplePuzzle}
             pageTitle="Projectify"
             switchLayout
         >

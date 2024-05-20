@@ -9,7 +9,7 @@ import { Button, Input } from "../../../design-system";
 import { adminService } from "../../../api";
 import { AuthActionLink } from "../../components/Auth/AuthActionLinks";
 
-import meeting from "../../../assets/images/meeting.jpg";
+import meetingRoom from "../../../assets/images/login.jpg";
 
 const LoginForm = styled.form`
     width: 100%;
@@ -67,7 +67,7 @@ const AdminLogin = () => {
     };
 
     return (
-        <AuthWrapper imageUrl={meeting} pageTitle="Projectify">
+        <AuthWrapper imageUrl={meetingRoom} pageTitle="Projectify" switchLayout>
             <LoginForm onSubmit={login} noValidate>
                 <Input
                     type="email"
