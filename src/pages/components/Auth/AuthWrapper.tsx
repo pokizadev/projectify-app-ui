@@ -14,6 +14,11 @@ const Wrapper = styled.main`
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 100vh;
+
+    @media (max-width: 62.5em) {
+        display: flex;
+        flex-direction: column;
+    }
 `;
 
 const AuthForm = styled.section<{ $switchLayout?: boolean }>`
@@ -38,6 +43,14 @@ const AuthImageWrapper = styled.section<{ $switchLayout?: boolean }>`
     grid-row: 1 / 2;
     grid-column: ${(props) => (props.$switchLayout ? "1 / 2" : "2 / 3")};
     padding: var(--space-50);
+
+    @media (max-width: 62.5em) {
+        padding: 0 var(--space-100) var(--space-80) var(--space-100);
+    }
+
+    @media (max-width: 45em) {
+        padding: 0 var(--space-50) var(--space-50) var(--space-50);
+    }
 `;
 
 const AuthImage = styled.img.attrs({

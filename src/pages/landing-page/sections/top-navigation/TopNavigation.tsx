@@ -89,7 +89,14 @@ const BurgerIcon = styled(Icon)`
 const TopNavigation = () => {
     const [showSelectRoleModal, setShowSelectRoleModal] = useState(false);
     const [showMobileNav, setShowMobileNav] = useState(false);
+
+    const handleLoginClick = () => {
+        setShowSelectRoleModal(true);
+        setShowMobileNav(false);
+    };
+
     const navigate = useNavigate();
+    
     return (
         <TopNavigationContent>
             <Logo size="sm" layout="horizontal" />
@@ -129,6 +136,8 @@ const TopNavigation = () => {
                 <MobileNavigation
                     links={mobileLinks}
                     closeNav={() => setShowMobileNav(false)}
+                    handleLoginClick={handleLoginClick}
+                    
                 />
             ) : (
                 ""

@@ -22,6 +22,7 @@ const Buttons = styled.div`
 `;
 
 const SelectRoleModal: React.FC<SelectRoleModalProps> =({show, closeModal}) => {
+
     const navigate = useNavigate();
     return (
         <StyledModal
@@ -40,9 +41,7 @@ const SelectRoleModal: React.FC<SelectRoleModalProps> =({show, closeModal}) => {
                     shape="rounded"
                     variant="outlined"
                     fullWidth
-                    onClick={() => {
-                        navigate("admin/login");
-                    }}
+                    onClick={() => navigate("admin/login")}
                 >
                     Admin
                 </Button>
@@ -52,9 +51,7 @@ const SelectRoleModal: React.FC<SelectRoleModalProps> =({show, closeModal}) => {
                     shape="rounded"
                     variant="outlined"
                     fullWidth
-                    onClick={() => {
-                        navigate("team-member/login");
-                    }}
+                    onClick={() => navigate("team-member/login")}
                 >
                     Team Member
                 </Button>

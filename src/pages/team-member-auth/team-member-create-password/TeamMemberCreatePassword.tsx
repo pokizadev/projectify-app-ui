@@ -6,7 +6,7 @@ import { AuthWrapper, AuthActionLink } from "../../components";
 import { teamMemberService } from "../../../api";
 import toast from "react-hot-toast";
 
-import teamWork from "../../../assets/images/teamWork.jpg";
+import welcome from "../../../assets/images/welcome5.jpg";
 
 const TeamMemberCreatePasswordForm = styled.form`
     width: 100%;
@@ -63,7 +63,7 @@ const TeamMemberCreatePassword = () => {
     };
 
     return (
-        <AuthWrapper imageUrl={teamWork} pageTitle="Projectify App">
+        <AuthWrapper imageUrl={welcome} pageTitle="Projectify App">
             <TeamMemberCreatePasswordForm onSubmit={createPassword}>
                 <StyledInput
                     type="email"
